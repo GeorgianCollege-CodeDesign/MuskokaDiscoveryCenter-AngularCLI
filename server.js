@@ -17,7 +17,6 @@ const globals = require('./server/config/globals');
 
 const app = express();
 
-// Connect to the database
 // connect to the database
 mongoose.connect(globals.dbRemote);
 const db = mongoose.connection;
