@@ -12,4 +12,4 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Install Angular-CLI tools
 Please install angular cli tools globally before doing anything. Run this npm code before :
 
-npm install -g @angular/cli
+`npm install -g @angular/cli`
