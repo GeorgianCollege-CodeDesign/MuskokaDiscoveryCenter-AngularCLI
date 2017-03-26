@@ -140,6 +140,9 @@ router.post('/campers', (req, res) => {
     }
     // new camper successfully created
     res.status(201); // Created
+    res.json({
+      message: "New Camper created."
+    })
   });
 });
 
@@ -161,7 +164,7 @@ router.put('/campers/:camper_id', (req, res) => {
   });
 
 
-  Camper.update({ _id: req.params._id }, camper, function(err) {
+  Camper.update({ _id: req.params.camper_id }, camper, function(err) {
     if (err) {
       console.log(err);
       res.status(409); // Conflict
@@ -171,6 +174,9 @@ router.put('/campers/:camper_id', (req, res) => {
       return;
     }
     res.status(200); // Okay
+    res.json({
+      message: "Camper updated"
+    });
   });
 });
 
@@ -178,10 +184,10 @@ router.put('/campers/:camper_id', (req, res) => {
  * DELETE: delete the existing camper with the given ID
  * */
 router.delete('/campers/:camper_id', (req, res) => {
-  Camper.remove({ _id: req.params._id }, function(err) {
+  Camper.remove({ _id: req.params.camper_id }, function(err) {
     if (err) {
       console.log(err);
-      res.status(400); // Bad reques
+      res.status(400); // Bad request
       res.json({
         message: "Camper couldn't deleted."
       });
@@ -189,6 +195,9 @@ router.delete('/campers/:camper_id', (req, res) => {
     }
     // no error so show updated games list
     res.status(200); // Okay
+    res.json({
+      message: "Camper deleted"
+    });
   });
 });
 

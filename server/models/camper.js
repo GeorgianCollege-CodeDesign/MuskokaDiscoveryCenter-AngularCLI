@@ -36,7 +36,7 @@ let camperSchema = new mongoose.Schema({
   camperAge: {
     type: Number,
     required: 'Camper\'s age is Required',
-    min: 1990
+    min: 1
   },
   camperNotes : String,
   camperPickupList : [
