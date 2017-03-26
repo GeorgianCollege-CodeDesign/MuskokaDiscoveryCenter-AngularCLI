@@ -7,6 +7,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const Account = require('../models/account');
+const Camper = require('../models/camper');
 
 // middleware to use for all requests
 router.use((req, res, next) =>{
@@ -81,33 +82,114 @@ router.post('/register', function(req, res) {
  * */
 router.get('/campers', (req, res) => {
 
+  Camper.find((err, campers) => {
+    if (err) {
+      console.log(err);
+      res.status(404);
+      res.json({
+        message: "Camper not found."
+      });
+      return;
+    }
+    // return all the campers if there is no error
+    res.json(campers);
+  });
 });
 
 /**
  * GET: get specific camper with the given ID
  * */
 router.get('/campers/:camper_id', (req, res) => {
-
+  Camper.findById(req.params.camper_id, (err, camper) => {
+    if (err) {
+      console.log(err);
+      res.status(404); // Not found
+      res.json({
+        message: "Camper not found."
+      });
+      return;
+    }
+    // return camper if everything is okay
+    res.status(200); // Okay
+    res.json(camper);
+  });
 });
+
 /**
  * POST: create a new camper
  * */
 router.post('/campers', (req, res) => {
-
+  Camper.create({
+    camperFirstName: req.body.camperFirstName,
+    camperLastName: req.body.camperLastName,
+    parentFirstName: req.body.parentFirstName,
+    parentLastName: req.body.parentLastName,
+    parentPhoneNumber: req.body.parentPhoneNumber,
+    paymentType: req.body.paymentType,
+    camperAge: req.body.camperAge,
+    camperNotes: req.body.camperNotes,
+    camperPickupList: req.body.camperPickupList
+  }, (err) => {
+    if (err) {
+      console.log(err);
+      res.status(406); // Not acceptable
+      res.json({
+        message: "Creating a new camper failed."
+      });
+      return;
+    }
+    // new camper successfully created
+    res.status(201); // Created
+  });
 });
 
 /**
  * PUT: update the existing camper with the given ID
  * */
 router.put('/campers/:camper_id', (req, res) => {
+  let camper = new Camper({
+    _id: req.params.camper_id,
+    camperFirstName: req.body.camperFirstName,
+    camperLastName: req.body.camperLastName,
+    parentFirstName: req.body.parentFirstName,
+    parentLastName: req.body.parentLastName,
+    parentPhoneNumber: req.body.parentPhoneNumber,
+    paymentType: req.body.paymentType,
+    camperAge: req.body.camperAge,
+    camperNotes: req.body.camperNotes,
+    camperPickupList: req.body.camperPickupList
+  });
 
+
+  Camper.update({ _id: req.params._id }, camper, function(err) {
+    if (err) {
+      console.log(err);
+      res.status(409); // Conflict
+      res.json({
+        message: "Camper info couldn't updated."
+      });
+      return;
+    }
+    res.status(200); // Okay
+  });
 });
 
 /**
  * DELETE: delete the existing camper with the given ID
  * */
 router.delete('/campers/:camper_id', (req, res) => {
-
+  Camper.remove({ _id: req.params._id }, function(err) {
+    if (err) {
+      console.log(err);
+      res.status(400); // Bad reques
+      res.json({
+        message: "Camper couldn't deleted."
+      });
+      return;
+    }
+    // no error so show updated games list
+    res.status(200); // Okay
+  });
 });
 
 
