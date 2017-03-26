@@ -10,6 +10,9 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const session = require('express-session');
+//const localStrategy = require('passport-local').Strategy;
 
 // Get our API routes
 const api = require('./server/routes/api');
@@ -31,6 +34,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
+
+
+// passport config BEFORE controller references
+app.use(session({
+  secret: 'some string value here',
+  resave: true,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// use the Account model to manage users
+let Account = require('./server/models/account');
+passport.use(Account.createStrategy());
+
+// read / write user login info to mongodb
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 // Set our api routes
 app.use('/api', api);
