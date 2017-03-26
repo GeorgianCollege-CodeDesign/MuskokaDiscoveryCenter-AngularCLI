@@ -73,4 +73,79 @@ router.post('/register', function(req, res) {
 });
 
 
+
+/// CAMPER RESTFUL SECTION
+
+/**
+ * GET: get all campers
+ * */
+router.get('/campers', (req, res) => {
+
+});
+
+/**
+ * GET: get specific camper with the given ID
+ * */
+router.get('/campers/:camper_id', (req, res) => {
+
+});
+/**
+ * POST: create a new camper
+ * */
+router.post('/campers', (req, res) => {
+
+});
+
+/**
+ * PUT: update the existing camper with the given ID
+ * */
+router.put('/campers/:camper_id', (req, res) => {
+
+});
+
+/**
+ * DELETE: delete the existing camper with the given ID
+ * */
+router.delete('/campers/:camper_id', (req, res) => {
+
+});
+
+
+/// ADMIN RESTFUL SECTION
+/**
+ * GET: get all the admins
+ * */
+router.get('/admins', (req, res) => {
+
+});
+
+/**
+ * GET: get specific admin with given ID
+ * */
+router.get('/admins/:admin_id', (req, res) => {
+
+});
+
+/**
+ * POST: create a new admin
+ * */
+router.post('/admins', (req, res) => {
+
+});
+
+/**
+ * PUT: update an existing admin with given ID
+ * */
+router.put('/admins/admin_id', (req, res) => {
+
+});
+
+/**
+ * DELETE: delete an existing admin with given ID
+ * */
+router.delete('/admins/admin_id', (req, res) => {
+
+});
+
+
 module.exports = router;
