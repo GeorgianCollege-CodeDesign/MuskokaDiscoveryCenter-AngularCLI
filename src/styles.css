@@ -85,6 +85,11 @@ article {
 
 tr {
   border-bottom: 1px solid #000;
+  height: 50px;
+}
+
+td {
+  text-align: center;
 }
 
 th {
@@ -94,7 +99,6 @@ th {
 tbody tr:first-child {
   padding: 0;
   margin: 0;
-  height: 50px;
   color: #fff;
   background-color: #0c2234;
 }
