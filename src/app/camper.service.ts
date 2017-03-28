@@ -8,9 +8,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CamperService {
 
-  private campersGet = 'api/campers';  // URL to web API
-  private camperGet = 'api/campers/';
-  private camperPut = 'api/campers/';
+  private campersGet = 'https://muskoka-discovery-center.herokuapp.com/api/campers';  // URL to web API
+  private camperGet = 'https://muskoka-discovery-center.herokuapp.com/api/campers/';
+  private camperPut = 'https://muskoka-discovery-center.herokuapp.com/api/campers/';
   constructor(private http: Http) { }
 
   getCampers(): Observable<Camper[]> {
