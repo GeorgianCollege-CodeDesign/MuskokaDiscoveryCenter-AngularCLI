@@ -27,10 +27,9 @@ export class LogInComponent implements OnInit {
   login(): any {
     let body = {
       username: this.username,
-      password: this.password,
-      role: this.role
+      password: this.password
     };
-    console.log()
+    console.log();
     this.accountService.login(body)
       .subscribe(
         data => {
