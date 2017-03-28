@@ -11,17 +11,8 @@ import {Camper} from "./camper";
 
 export class AppComponent {
   title = 'app works!';
-  campers: Camper[];
-  errorMessage: any;
-  constructor(private camperService: CamperService) {
-    //this.getCampers();
+
+  constructor() {
   }
 
-  getCampers() {
-    this.camperService.getCampers()
-      .subscribe(
-        campers => this.campers = campers,
-        error =>  this.errorMessage = <any>error);
-    console.log(this.campers);
-  }
 }
