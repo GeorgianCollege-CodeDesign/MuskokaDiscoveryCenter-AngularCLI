@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     // Load comments
-    this.getCampers()
+    this.getCampers();
   }
 
   getCampers() {

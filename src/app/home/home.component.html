@@ -1,22 +1,24 @@
 <article>
   <section>
     <table>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Phone</th>
-        <th>Edit</th>
-        <th>Delete</th>
-        <th>Details</th>
-      </tr>
-      <tr *ngFor="let camper of campers" >
-        <td>{{ camper.camperFirstName }}</td>
-        <td>{{ camper.camperLastName }}</td>
-        <td>{{ camper.parentPhoneNumber }}</td>
-        <td><a href="">Edit</a></td>
-        <td><a href="">Delete</a></td>
-        <td><a href="">Details</a></td>
-      </tr>
+      <tbody>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone</th>
+          <th>Edit</th>
+          <th>Delete</th>
+          <th>Details</th>
+        </tr>
+        <tr *ngFor="let camper of campers" >
+          <td>{{ camper.camperFirstName }}</td>
+          <td>{{ camper.camperLastName }}</td>
+          <td>{{ camper.parentPhoneNumber }}</td>
+          <td><a href="">Edit</a></td>
+          <td><a href="">Delete</a></td>
+          <td><a href="">Details</a></td>
+        </tr>
+      </tbody>
     </table>
   </section>
 </article>
