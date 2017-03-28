@@ -19,6 +19,7 @@ export class CamperService {
         .map(this.extractData)
         .catch(this.handleError);
   }
+
   getCamper(id: number): Observable<Camper> {
     return this.http.get(this.camperGet + id)
       .map(this.extractData)
@@ -49,7 +50,7 @@ export class CamperService {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.error(errMsg);
+    //console.error(errMsg);
     return Observable.throw(errMsg);
   }
 }

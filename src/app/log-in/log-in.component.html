@@ -2,17 +2,18 @@
   <article class="login">
     <img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="150" />
     <h1>Log In</h1>
-    <form action="" #f="ngForm">
+    <form action="" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
       <div>
         <label for="user">Username</label>
-        <input name="username" id="user" placeholder="Username" type="text" [(ngModel)]="username" #username="ngModel" required />
+        <input name="username" id="user" placeholder="Username" type="text" [(ngModel)]="username"  required />
       </div>
       <div>
         <label for="password">Password</label>
-        <input name="password" id="password" placeholder="Password" type="text" [(ngModel)]="password" #password="ngModel" required/>
+        <input name="password" id="password" placeholder="Password" type="text" [(ngModel)]="password"  required/>
       </div>
       <div>
-        <button (click)="f.form.valid && login()"
+        <button (click)="login()"
+                class="btn waves-effect waves-light"
                 type="submit" name="action">Login</button>
       </div>
     </form>
