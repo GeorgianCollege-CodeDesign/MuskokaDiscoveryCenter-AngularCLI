@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  max-width: 1600px;
+}
+
+nav {
+  width: 50%;
+  margin: 0 auto;
+}
+
+nav li {
+  display: inline-block;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
