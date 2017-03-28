@@ -17,7 +17,11 @@ export class HomeComponent {
   errorMessage: any;
 
   constructor(private camperService: CamperService){
-    this.getCampers();
+  }
+
+  ngOnInit() {
+    // Load comments
+    this.getCampers()
   }
 
   getCampers() {
@@ -25,7 +29,6 @@ export class HomeComponent {
       .subscribe(
         campers => this.campers = campers,
         error =>  this.errorMessage = <any>error);
-    console.log(this.campers);
   }
   getCamper(id: number){
     this.camperService.getCamper(id)
