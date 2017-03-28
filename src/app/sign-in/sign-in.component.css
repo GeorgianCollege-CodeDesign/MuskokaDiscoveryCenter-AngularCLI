@@ -1,0 +1,133 @@
+* {margin: 0; padding: 0; border: 0 none; box-sizing: border-box;}
+
+
+.cont-sli {
+  position: relative;
+  height: 100vh;
+  max-height: 100vh;
+  width: auto;
+  min-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+
+/*Split banner*/
+@media (min-width: 550px) {
+  .col-sm-6 {
+    width: 50%;
+  }
+}
+.signout-side {
+  background-image: url("../../assets/img/signout.jpg");
+}
+.signin-side {
+  background-image: url("../../assets/img/signin.jpg");
+}
+
+@media (max-width: 550px) {
+  .signout-side {
+    background-image: url("../../assets/img/signout.jpg");
+    height: 50vh;
+  }
+  .signin-side {
+    background-image: url("../../assets/img/signin.jpg");
+    height: 50vh;
+  }
+}
+
+
+.split-pane {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 50%;
+  font-size: 2em;
+  color: white;
+}
+
+@media(min-width: 550px) {
+  .split-pane {
+    height: 100%;
+  }
+}
+.split-pane > div {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-75%);
+  -ms-transform: translateY(-75%);
+  transform: translateY(-75%);
+  text-align: center;
+}
+.split-pane > div .text-content {
+  line-height: 1.6em;
+  text-shadow : 2px 8px 6px rgba(0, 0, 0, 0.8), 0 -5px 16px rgba(0, 0, 0, 0.7);
+}
+.split-pane > div .text-content .big {
+  font-size: 2.4em;
+}
+.split-pane > div img {
+  height: 1.3em;
+}
+i{
+  margin-top: 20px;
+}
+.split-pane button{
+  background: none;
+  border: 1px solid white;
+  background-color: rgba(0,0,0,0.5);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  width: 15em;
+  padding: 0.7em;
+  font-size: 0.5em;
+  height: 61px;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+
+}
+.split-pane button:hover{
+  text-decoration: none;
+  background-color: white;
+  color: #eb3650;
+  border-color: #eb3650;
+}
+
+#split-pane-or {
+  font-size: 2em;
+  color: white;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 70%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+@media (max-width: 550px) {
+  #split-pane-or, .fa-users, .fa-user {
+    display: none;
+  }
+  .split-pane > div .text-content{
+    font-size: 1.4em;
+  }
+}
+
+
+@media(min-width: 550px) {
+  #split-pane-or {
+    font-size: 3em;
+  }
+
+}
+
+#signin,
+#signout{
+  display: none;
+}
