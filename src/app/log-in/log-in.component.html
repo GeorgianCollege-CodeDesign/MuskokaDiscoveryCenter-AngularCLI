@@ -2,17 +2,18 @@
   <article class="login">
     <img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="150" />
     <h1>Log In</h1>
-    <form action="">
+    <form action="" #f="ngForm">
       <div>
         <label for="user">Username</label>
-        <input name="user" id="user" placeholder="Username" type="text" />
+        <input name="username" id="user" placeholder="Username" type="text" [(ngModel)]="username" #username="ngModel" required />
       </div>
       <div>
         <label for="password">Password</label>
-        <input name="password" id="password" placeholder="Password" type="text" />
+        <input name="password" id="password" placeholder="Password" type="text" [(ngModel)]="password" #password="ngModel" required/>
       </div>
       <div>
-        <button type="button">Log In</button>
+        <button (click)="f.form.valid && login()"
+                type="submit" name="action">Login</button>
       </div>
     </form>
   </article>

@@ -15,7 +15,7 @@ export class LogInComponent implements OnInit {
   username: string;
   password: string;
   role: string;
-  resonpe: JSON;
+  response: JSON;
 
   constructor(
     private accountService: AccountService,
@@ -34,7 +34,7 @@ export class LogInComponent implements OnInit {
     this.accountService.login(body)
       .subscribe(
         data => {
-          this.resonpe = data;
+          this.response = data;
         }, () =>{
           this.router.navigateByUrl('');
         });
