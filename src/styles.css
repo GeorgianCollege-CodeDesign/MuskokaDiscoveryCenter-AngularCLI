@@ -64,7 +64,7 @@ nav ul li {
   width: 19%;
   text-align: center;
   display: inline-block;
-
+  vertical-align: middle;
 }
 
 nav ul li a {
