@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CamperService } from "./camper.service";
-import {Camper} from "./camper";
 
 @Component({
   selector: 'app-root',
