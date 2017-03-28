@@ -9,15 +9,14 @@
         <th>Delete</th>
         <th>Details</th>
       </tr>
-      <!--<tr *ngFor="let camper of campers" >
-        <td>{{ camper | json }}</td>
-        <td>Test</td>
-        <td>Test2</td>
+      <tr *ngFor="let camper of campers" >
+        <td>{{ camper.camperFirstName }}</td>
+        <td>{{ camper.camperLastName }}</td>
+        <td>{{ camper.parentPhoneNumber }}</td>
         <td><a href="">Edit</a></td>
         <td><a href="">Delete</a></td>
         <td><a href="">Details</a></td>
-      </tr>-->
-      <p>{{campers | json}}</p>
+      </tr>
     </table>
   </section>
 </article>
