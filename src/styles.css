@@ -74,6 +74,31 @@ nav ul li a {
   text-decoration: none;
 }
 
+table {
+  width: 80%;
+  margin: 0 auto;
+}
+
+article {
+  margin-top: 100px;
+}
+
+tr {
+  border-bottom: 1px solid #000;
+}
+
+th {
+  background-color: #0c2234;
+}
+
+tbody tr:first-child {
+  padding: 0;
+  margin: 0;
+  height: 50px;
+  color: #fff;
+  background-color: #0c2234;
+}
+
 footer {
   position: absolute;
   bottom: 0;
