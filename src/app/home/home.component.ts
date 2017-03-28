@@ -1,7 +1,7 @@
 /**
  * Created by devon on 2017-03-27.
  */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Camper } from "../camper";
 import { CamperService } from "../camper.service";
 
@@ -10,7 +10,7 @@ import { CamperService } from "../camper.service";
   templateUrl: './home.component.html'
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   title: 'Home Page';
   campers: Camper[];
   camper: Camper;
