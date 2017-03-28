@@ -5,7 +5,7 @@
  */
 
 export class Camper {
-  id: string;
+  _id: string;
   camperFirstName: string;
   camperLastName: string;
   parentFirstName: string;
@@ -17,7 +17,8 @@ export class Camper {
   camperPickupList : [
     {
       firstName: string,
-      lastName: string
+      lastName: string,
+      _id: string
     }
   ]
 }
