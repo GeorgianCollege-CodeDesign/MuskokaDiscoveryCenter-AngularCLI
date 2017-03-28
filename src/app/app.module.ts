@@ -5,14 +5,14 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { LogInComponent } from './log-in/log-in.component';
 import { routing } from './app.routing';
-import { DevonComponent } from './devon/devon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DevonComponent
+    LogInComponent
   ],
   imports: [
     BrowserModule,

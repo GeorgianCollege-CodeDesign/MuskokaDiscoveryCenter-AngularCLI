@@ -1,22 +1,37 @@
-<article>
-  <section>
-    <table>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Phone</th>
-        <th>Edit</th>
-        <th>Delete</th>
-        <th>Details</th>
-      </tr>
-      <tr *ngFor="let camper of campers" >
-        <td>{{ camper.camperFirstName }}</td>
-        <td>{{ camper.camperLastName }}</td>
-        <td>{{ camper.parentPhoneNumber }}</td>
-        <td><a href="">Edit</a></td>
-        <td><a href="">Delete</a></td>
-        <td><a href="">Details</a></td>
-      </tr>
-    </table>
-  </section>
-</article>
+<header>
+  <a href="">Log Out</a>
+  <nav role="navigation">
+    <a href="/" class="muskoka-logo"><img src="../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="140" /></a>
+    <ul>
+      <li><a href="">Sign In</a></li>
+      <li><a href="">Sign Out</a></li>
+      <li><a href="">Register a Child</a></li>
+      <li><a href="">List of Children</a></li>
+      <li><a href="">Admin List</a></li>
+    </ul>
+  </nav>
+</header>
+<main role="main">
+  <article>
+    <section>
+      <table>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone</th>
+          <th>Edit</th>
+          <th>Delete</th>
+          <th>Details</th>
+        </tr>
+        <tr *ngFor="let camper of campers" >
+          <td>{{ camper.camperFirstName }}</td>
+          <td>{{ camper.camperLastName }}</td>
+          <td>{{ camper.parentPhoneNumber }}</td>
+          <td><a href="">Edit</a></td>
+          <td><a href="">Delete</a></td>
+          <td><a href="">Details</a></td>
+        </tr>
+      </table>
+    </section>
+  </article>
+</main>
