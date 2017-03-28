@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { routing } from './app.routing';
+import { CamperDetailsComponent } from './camper-details/camper-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LogInComponent
+    LogInComponent,
+    CamperDetailsComponent
   ],
   imports: [
     BrowserModule,
