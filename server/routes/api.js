@@ -16,6 +16,13 @@ router.use((req, res, next) =>{
   next(); // make sure we go to the next routes and don't stop here
 });
 
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();  // user has logged in already so continue to the next function
+  }
+  res.redirect('/login');
+}
+
 // test API call
 router.get('/', (req, res) => {
   res.status(200);
@@ -183,7 +190,7 @@ router.put('/campers/:camper_id', (req, res) => {
 /**
  * DELETE: delete the existing camper with the given ID
  * */
-router.delete('/campers/:camper_id', (req, res) => {
+router.delete('/campers/:camper_id', isLoggedIn, (req, res) => {
   Camper.remove({ _id: req.params.camper_id }, function(err) {
     if (err) {
       console.log(err);
@@ -208,6 +215,18 @@ router.delete('/campers/:camper_id', (req, res) => {
  * */
 router.get('/admins', (req, res) => {
 
+  Account.find((err, admin) => {
+    if (err) {
+      console.log(err);
+      res.status(404);
+      res.json({
+        message: "Admin not found."
+      });
+      return;
+    }
+    // return all the campers if there is no error
+    res.json(admin);
+  });
 });
 
 /**
@@ -215,27 +234,66 @@ router.get('/admins', (req, res) => {
  * */
 router.get('/admins/:admin_id', (req, res) => {
 
+  Account.findById(req.params.admin_id, (err, admin) => {
+    if (err) {
+      console.log(err);
+      res.status(404); // Not found
+      res.json({
+        message: "Camper not found."
+      });
+      return;
+    }
+    // return camper if everything is okay
+    res.status(200); // Okay
+    res.json(admin);
+  });
 });
 
 /**
  * POST: create a new admin
  * */
 router.post('/admins', (req, res) => {
-
+  Account.register(new Account({ username: req.body.username, role: req.body.role }), req.body.password, function(err, account) {
+    if (err) { // failure
+      console.log(err);
+      res.status(406);
+      res.json({message: "Some Error occurred."});
+    }
+    res.status(201); // Created
+    res.json({
+      id : account._id,
+      accountName: account.username,
+      message: "New account is created"
+    });
+  });
 });
 
 /**
  * PUT: update an existing admin with given ID
  * */
 router.put('/admins/admin_id', (req, res) => {
-
+  // do this part later
 });
 
 /**
  * DELETE: delete an existing admin with given ID
  * */
-router.delete('/admins/admin_id', (req, res) => {
-
+router.delete('/admins/:admin_id', isLoggedIn , (req, res) => {
+  Account.remove({ _id: req.params.admin_id }, function(err) {
+    if (err) {
+      console.log(err);
+      res.status(400); // Bad request
+      res.json({
+        message: "Admin couldn't deleted."
+      });
+      return;
+    }
+    // no error so show updated games list
+    res.status(200); // Okay
+    res.json({
+      message: "Admin deleted"
+    });
+  });
 });
 
 

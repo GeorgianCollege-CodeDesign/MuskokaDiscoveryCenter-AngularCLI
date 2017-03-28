@@ -12,6 +12,7 @@ const plm = require('passport-local-mongoose');
 // create the model schema.  username and password are included automatically
 const accountSchema = new mongoose.Schema({
   // additional data might come here
+  role: String
 });
 
 accountSchema.plugin(plm);
