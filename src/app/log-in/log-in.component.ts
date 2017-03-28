@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from "../account.service";
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 
 
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
-  styleUrls: ['./log-in.component.css']
+  styleUrls: ['./log-in.component.css'],
+  providers: [AccountService]
 })
 
 export class LogInComponent implements OnInit {
@@ -15,11 +16,10 @@ export class LogInComponent implements OnInit {
   username: string;
   password: string;
   role: string;
-  response: JSON;
+  response: string;
 
   constructor(
-    private accountService: AccountService,
-    private router: Router,) { }
+    private accountService: AccountService) { }
 
   ngOnInit() {
   }
@@ -27,16 +27,13 @@ export class LogInComponent implements OnInit {
   login(): any {
     let body = {
       username: this.username,
-      password: this.password,
-      role: this.role
+      password: this.password
     };
-
+    console.log();
     this.accountService.login(body)
       .subscribe(
         data => {
           this.response = data;
-        }, () =>{
-          this.router.navigateByUrl('');
         });
 
   };

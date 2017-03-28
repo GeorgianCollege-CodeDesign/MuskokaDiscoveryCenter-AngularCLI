@@ -7,7 +7,8 @@ import { CamperService } from "../camper.service";
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  providers: [CamperService]
 })
 
 export class HomeComponent implements OnInit {
