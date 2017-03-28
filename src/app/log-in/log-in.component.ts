@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from "../account.service";
-import { Observable } from "rxjs";
-import { Router } from "@angular/router";
-
 
 @Component({
   selector: 'app-log-in',
@@ -15,7 +12,6 @@ export class LogInComponent implements OnInit {
 
   username: string;
   password: string;
-  role: string;
   response: string;
 
   constructor(

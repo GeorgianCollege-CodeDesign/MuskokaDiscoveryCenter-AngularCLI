@@ -2,7 +2,7 @@
   <article class="login">
     <img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="150" />
     <h1>Log In</h1>
-    <form action="" (ngSubmit)="login()">
+    <form action="" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
       <div>
         <label for="user">Username</label>
         <input name="username" id="user" placeholder="Username" type="text" [(ngModel)]="username"  required />
@@ -13,6 +13,7 @@
       </div>
       <div>
         <button (click)="login()"
+                class="btn waves-effect waves-light"
                 type="submit" name="action">Login</button>
       </div>
     </form>
