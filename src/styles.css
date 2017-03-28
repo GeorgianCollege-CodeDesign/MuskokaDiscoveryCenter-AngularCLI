@@ -31,6 +31,7 @@ header > a {
   height: 30px;
   margin: 20px 30px;
   background-color: #ad2e2e;
+  box-shadow: 1px 1px 7px #000;
   float: right;
 }
 
