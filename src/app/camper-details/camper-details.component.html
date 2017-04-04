@@ -1,19 +1,27 @@
 <header>
-  <a href="">Log Out</a>
-  <nav role="navigation">
-    <a href="/" class="muskoka-logo"><img src="../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="140" /></a>
-    <ul>
-      <li><a href="">Sign In</a></li>
-      <li><a href="">Sign Out</a></li>
-      <li><a href="">Register a Child</a></li>
-      <li><a href="">List of Children</a></li>
-      <li><a href="">Admin List</a></li>
-    </ul>
+  <nav id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="/" class="muskoka-logo"><img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="100" /></a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            </button>
+      </div>
+      <div class="collapse navbar-collapse navbar-menubuilder">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="">Home</a></li>
+          <li><a href="">Add Camper</a></li>
+          <li><a href="">Activate  Camper</a></li>
+          <li><a href="../camper-list">List of Camper</a></li>
+          <li><a href="">Admin List</a></li>
+          <li><a class="logout" href="">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
   </nav>
 </header>
 <main role="main">
   <article class="login">
-    <img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="150" />
+    <a href="/" class="muskoka-logo"><img src="../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="140" /></a>
     <h1>Camper Details</h1>
     <form action="">
       <div>
