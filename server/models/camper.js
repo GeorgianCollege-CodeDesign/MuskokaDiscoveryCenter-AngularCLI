@@ -44,7 +44,15 @@ let camperSchema = new mongoose.Schema({
       firstName: String,
       lastName: String
     }
-  ]
+  ],
+  startDate: Date,
+  endDate: Date,
+  absenceDays: [
+    {
+      absenceDay: Date
+    }
+  ],
+  isActive: Boolean
 });
 
 // make this model public
