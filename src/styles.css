@@ -195,7 +195,7 @@ footer a:hover {
 
 
 /* LOG IN PAGE =================================*/
-
+/*
 .login {
   width: 400px;
   max-width: 95%;
@@ -229,6 +229,85 @@ footer a:hover {
   height: 30px;
   border-radius: 10px;
   color: #fff;
+}*/
+
+.background{
+  background: url("assets/img/water.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#login{
+  margin: 0px auto;
+}
+.well{
+  background-color: #fff;
+}
+
+#login img{
+  margin: 10px 10px 0;
+}
+#login .right {
+  text-align: right;
+}
+#login h1 {
+  margin: -1em 35px 20px;
+  font-size: 6em;
+}
+
+#login .login {
+  max-width: 80%;
+	margin: 35px auto;
+}
+
+#login .login-form{
+  padding:0px 25px;
+  margin: 50px 0 100px;
+}
+#login .form-group{
+  width:35%;
+  float:left;
+  margin:1%
+}
+
+#login .form-group.btnn{
+  width:15%;
+  float:left;
+}
+#login i {
+margin-top: 0;
+}
+#login .form-group.btnn button{
+  font-size:14px;
+  padding: 7px
+}
+#login .forget{
+  clear:both
+}
+
+
+@media (max-width: 768px) {
+#login .right {
+  text-align: center;
+}
+#login h1 {
+  text-align: center;
+  margin: 10px;
+  font-size: 4em;
+}
+#login .form-group{
+  width:100%;
+  float:none;
+  margin:1%
+}
+
+#login .form-group.btnn{
+  width:25%;
+  float:none;
+  text-align: center;
+      margin: 0 auto;
+}
 }
 
 /* ================================== end log in page */
@@ -366,3 +445,5 @@ i{
 }*/
 
 /* ==================================  end sign in / sign out page */
+
+

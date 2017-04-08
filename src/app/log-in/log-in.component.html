@@ -1,21 +1,67 @@
-<main role="main">
+<main role="main" class="background">
+
+  <div id="login" class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="login well well-sm">
+          <div class="right">
+            <img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="200">
+          </div>
+          <h1>Log In</h1>
+          <form action="" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate class="login-form">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="username" id="user" class="form-control" placeholder="Username" type="text" [(ngModel)]="username" required
+                />
+
+
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+
+                <input name="password" id="password" class="form-control" placeholder="Password" type="text" [(ngModel)]="password" required/>
+
+
+              </div>
+            </div>
+            <div class="form-group btnn">
+              <button (click)="login()" class="btn btn-primary btn-lg btn-block" type="submit" name="action">Login</button>
+            </div>
+            <div class="forget">
+              <p>Forget your password?</p>
+            </div>
+
+          </form>
+        </div>
+        <!--/.login-->
+      </div>
+      <!--/.span12-->
+    </div>
+    <!--/.row-fluid-->
+  </div>
+  <!--/.container-->
+
+
+
+<!--
   <article class="login">
     <img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="150" />
     <h1>Log In</h1>
     <form action="" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
       <div>
         <label for="user">Username</label>
-        <input name="username" id="user" placeholder="Username" type="text" [(ngModel)]="username"  required />
+        <input name="username" id="user" placeholder="Username" type="text" [(ngModel)]="username" required />
       </div>
       <div>
         <label for="password">Password</label>
-        <input name="password" id="password" placeholder="Password" type="text" [(ngModel)]="password"  required/>
+        <input name="password" id="password" placeholder="Password" type="text" [(ngModel)]="password" required/>
       </div>
       <div>
-        <button (click)="login()"
-                class="btn waves-effect waves-light"
-                type="submit" name="action">Login</button>
+        <button (click)="login()" class="btn waves-effect waves-light" type="submit" name="action">Login</button>
       </div>
     </form>
-  </article>
+  </article>-->
 </main>
