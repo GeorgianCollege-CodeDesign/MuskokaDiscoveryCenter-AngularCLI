@@ -297,4 +297,24 @@ router.delete('/admins/:admin_id', isLoggedIn , (req, res) => {
 });
 
 
+router.get('/camper/:firstName/:lastName', (req, res) => {
+  let firstName = req.params.firstName;
+  let lastName = req.params.lastName;
+
+  Camper.find({
+    camperFirstName: firstName,
+    camperLastName: lastName
+  }, (err, camper) => {
+    if (err){
+      res.status(501);
+      res.json(err);
+      return;
+    }
+    res.status(200);
+    res.json(camper);
+  });
+
+
+});
+
 module.exports = router;
