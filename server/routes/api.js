@@ -135,7 +135,11 @@ router.post('/campers', (req, res) => {
     paymentType: req.body.paymentType,
     camperAge: req.body.camperAge,
     camperNotes: req.body.camperNotes,
-    camperPickupList: req.body.camperPickupList
+    camperPickupList: req.body.camperPickupList,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    absenceDays: req.body.absenceDays,
+    isActive: req.body.isActive
   }, (err) => {
     if (err) {
       console.log(err);
@@ -167,7 +171,11 @@ router.put('/campers/:camper_id', (req, res) => {
     paymentType: req.body.paymentType,
     camperAge: req.body.camperAge,
     camperNotes: req.body.camperNotes,
-    camperPickupList: req.body.camperPickupList
+    camperPickupList: req.body.camperPickupList,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    absenceDays: req.body.absenceDays,
+    isActive: req.body.isActive
   });
 
 
@@ -253,7 +261,15 @@ router.get('/admins/:admin_id', (req, res) => {
  * POST: create a new admin
  * */
 router.post('/admins', (req, res) => {
-  Account.register(new Account({ username: req.body.username, role: req.body.role }), req.body.password, function(err, account) {
+  Account.register(new Account(
+    {
+      username: req.body.username,
+      role: req.body.role,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email
+    }
+    ), req.body.password, function(err, account) {
     if (err) { // failure
       console.log(err);
       res.status(406);
@@ -273,6 +289,20 @@ router.post('/admins', (req, res) => {
  * */
 router.put('/admins/admin_id', (req, res) => {
   // do this part later
+  Account.update({_id: req.session.passport.user}, {
+    role: req.body.role,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email
+  },function(err) {
+    if (err) {
+      res.status(501);
+      res.json(err);
+      return;
+    }
+    res.status(200);
+    // maybe send something back
+  });
 });
 
 /**
