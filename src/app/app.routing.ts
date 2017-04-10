@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { CamperDetailsComponent } from './camper-details/camper-details.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { CamperRegisterComponent } from './camper-register/camper-register.component';
 
 const appRoutes: Routes = [
   // add component pathing
@@ -16,6 +17,7 @@ const appRoutes: Routes = [
   { path: 'log-in', component: LogInComponent },
   { path: 'camper-details', component: CamperDetailsComponent },
   {path: 'camper-list', component: HomeComponent },
+  {path: 'camper-register', component: CamperRegisterComponent },
   // default redirect
   { path: '', component: SignInComponent, pathMatch: 'full' }
 ];
