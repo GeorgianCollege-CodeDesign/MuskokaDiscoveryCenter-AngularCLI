@@ -39,7 +39,7 @@ app.use(express.static(distDir));
 
 // passport config BEFORE controller references
 app.use(session({
-  secret: 'some string value here',
+  secret: '58d830b1f515b32b56610320',
   resave: true,
   saveUninitialized: false
 }));

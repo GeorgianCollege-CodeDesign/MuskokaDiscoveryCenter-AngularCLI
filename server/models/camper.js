@@ -32,11 +32,11 @@ let camperSchema = new mongoose.Schema({
     },
     required: [true, 'User phone number required']
   },
-  paymentType : String,
+  paymentDays : Number,
   camperAge: {
     type: Number,
     required: 'Camper\'s age is Required',
-    min: 1
+    min: 2
   },
   camperNotes : String,
   camperPickupList : [
@@ -52,7 +52,14 @@ let camperSchema = new mongoose.Schema({
       absenceDay: Date
     }
   ],
-  isActive: Boolean
+  isActive: Boolean,
+  pickupHistory: [
+    {
+      date: Date,
+      pickUp: String,
+      dropOff: String
+    }
+  ]
 });
 
 // make this model public
