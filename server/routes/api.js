@@ -3,6 +3,7 @@
  * Project: muskoka-discovery-center.
  * @author: Esat IBIS <esat.taha.ibis@gmail.com>
  */
+
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
@@ -126,7 +127,7 @@ router.get('/campers/:camper_id', (req, res) => {
 /**
  * GET: get all the active campers
  **/
-router.get('/campers/active-campers', (req, res) => {
+router.get('/active-campers', (req, res) => {
   Camper.find((err, campers) => {
     if (err) {
       console.log(err);
@@ -136,9 +137,15 @@ router.get('/campers/active-campers', (req, res) => {
       });
       return;
     }
-    console.log()
-    for (let i = 0; campers.lenght; i++) {
-
+    let returnArray = [];
+    console.log(campers);
+    for (let key in campers) {
+      if (campers.hasOwnProperty(key))
+      {
+        let camper = campers[key];
+        console.log(camper);
+        // TODO : Add date check if camper is active in present or future if it is add that camper to the returnArray list
+      }
     }
   });
 });
