@@ -8,20 +8,19 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CamperService {
 
-  private campersGet = 'https://muskoka-discovery-center.herokuapp.com/api/campers';  // URL to web API
-  private camperGet = 'https://muskoka-discovery-center.herokuapp.com/api/campers/';
-  private camperPut = 'https://muskoka-discovery-center.herokuapp.com/api/campers/';
+  private camper = 'api/campers';  // URL to web API
+
 
   constructor(private http: Http) { }
 
   getCampers(): Observable<Camper[]> {
-    return this.http.get(this.campersGet)
+    return this.http.get(this.camper)
         .map(this.extractData)
         .catch(this.handleError);
   }
 
   getCamper(id: number): Observable<Camper> {
-    return this.http.get(this.camperGet + id)
+    return this.http.get(`${this.camper}/${id}`)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -31,7 +30,7 @@ export class CamperService {
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
-    return this.http.put(`${this.camperPut}/${body['id']}`, body, options) // ...using put request
+    return this.http.put(`${this.camper}/${body['id']}`, body, options) // ...using put request
       .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
       .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if
   }
