@@ -3,11 +3,13 @@
  * Project: muskoka-discovery-center.
  * @author: Esat IBIS <esat.taha.ibis@gmail.com>
  */
+
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const Account = require('../models/account');
 const Camper = require('../models/camper');
+const DailyAttendance = require('../models/daily-attandance');
 
 // middleware to use for all requests
 router.use((req, res, next) =>{
@@ -35,7 +37,7 @@ router.get('/', (req, res) => {
  * */
 router.post('/login', (req, res) => {
 
-  passport.authenticate('local', function(err, user, info){
+  passport.authenticate('local', (err, user, info) => {
 
     // If Passport throws/catches an error
     if (err) {
@@ -62,7 +64,7 @@ router.post('/login', (req, res) => {
 /**
  * POST: register information
  * */
-router.post('/register', function(req, res) {
+router.post('/register', (req, res) =>{
   // use the Account model to create a new user with passport
   //console.log(req);
   Account.register(new Account({ username: req.body.username }), req.body.password, function(err, account) {
@@ -122,6 +124,46 @@ router.get('/campers/:camper_id', (req, res) => {
   });
 });
 
+
+/**
+ * GET: get all the active campers
+ **/
+router.get('/active-campers', (req, res) => {
+  Camper.find((err, campers) => {
+    if (err) {
+      console.log(err);
+      res.status(404);
+      res.json({
+        message: "Camper not found."
+      });
+      return;
+    }
+    let returnArray = [];
+    console.log(campers);
+    for (let key in campers) {
+      if (campers.hasOwnProperty(key))
+      {
+        let camper = campers[key];
+        let startDate = new Date(camper.startDate).getTime();
+        let endDate = new Date(camper.endDate).getTime();
+        let today = new Date().getTime();
+        console.log(`first: ${today - startDate} - second:  ${endDate - today} - today ${endDate}`);
+        // check if the end date is passed. if it's not push that camper to the active list
+        if ((endDate - today) > 0) {
+          returnArray.push(camper);
+        }
+      }
+    }
+    if (returnArray.length > 0)
+      res.json(returnArray).status(200);
+    else {
+      res.json({
+        message: 'No active camper found.'
+      });
+    }
+  });
+});
+
 /**
  * POST: create a new camper
  * */
@@ -132,14 +174,15 @@ router.post('/campers', (req, res) => {
     parentFirstName: req.body.parentFirstName,
     parentLastName: req.body.parentLastName,
     parentPhoneNumber: req.body.parentPhoneNumber,
-    paymentType: req.body.paymentType,
+    paymentDays: req.body.paymentType,
     camperAge: req.body.camperAge,
     camperNotes: req.body.camperNotes,
     camperPickupList: req.body.camperPickupList,
     startDate: req.body.startDate,
     endDate: req.body.endDate,
     absenceDays: req.body.absenceDays,
-    isActive: req.body.isActive
+    isActive: req.body.isActive,
+    pickupHistory: req.body.pickupHistory
   }, (err) => {
     if (err) {
       console.log(err);
@@ -168,14 +211,15 @@ router.put('/campers/:camper_id', (req, res) => {
     parentFirstName: req.body.parentFirstName,
     parentLastName: req.body.parentLastName,
     parentPhoneNumber: req.body.parentPhoneNumber,
-    paymentType: req.body.paymentType,
+    paymentDays: req.body.paymentDays,
     camperAge: req.body.camperAge,
     camperNotes: req.body.camperNotes,
     camperPickupList: req.body.camperPickupList,
     startDate: req.body.startDate,
     endDate: req.body.endDate,
     absenceDays: req.body.absenceDays,
-    isActive: req.body.isActive
+    isActive: req.body.isActive,
+    pickupHistory: req.body.pickupHistory
   });
 
 
@@ -197,8 +241,10 @@ router.put('/campers/:camper_id', (req, res) => {
 
 /**
  * DELETE: delete the existing camper with the given ID
+ * FIXME: uncomment the isLoggedIn in prod
  * */
-router.delete('/campers/:camper_id', isLoggedIn, (req, res) => {
+router.delete('/campers/:camper_id', /*isLoggedIn,*/ (req, res) => {
+  console.log('This is camper delete.');
   Camper.remove({ _id: req.params.camper_id }, function(err) {
     if (err) {
       console.log(err);
@@ -346,5 +392,68 @@ router.get('/camper/:firstName/:lastName', (req, res) => {
 
 
 });
+
+
+
+// CAMPER sign in and sign out
+
+/**
+ * POST: get the camper ID and update the sign in date and signer
+ * write the signed in camper in daily attendance document.
+ * */
+router.post('/camper-sign-in/:camper_id', (req, res) => {
+  let camperGuardian = req.body.camperParent;
+  let todayDate = new Date().toISOString().slice(0,10); // Format YYYY-MM-DD
+
+  Camper.findOneAndUpdate({_id: req.params.camper_id}, {
+    $push: {
+      pickupHistory: {
+        date: todayDate,
+        dropOff: camperGuardian,
+        pickUp: null
+      }
+    }
+  }, {new: true, safe: true, upsert: true},
+    (err, camper) => {
+    if (err){
+      return res.json(err).status(501);
+    }
+
+    DailyAttendance.findOneAndUpdate({date: todayDate}, {
+        date: todayDate,
+        $push: {
+          camper: camper
+        }
+    }, {new: true, safe: true, upsert: true},
+      (err, dailyAttendance) => {
+        if (err) {
+          return res.json(err).status(501);
+        }
+
+        res.json(dailyAttendance).status(200);
+      });
+  })
+
+});
+
+/**
+ * GET: get all the campers who signed in today
+ * */
+router.get('/daily-campers', (req, res) => {
+  DailyAttendance.find((err, dailyAttendance) =>{
+    if (err){
+      return res.json(err).status(501);
+    }
+    res.json(dailyAttendance).status(200);
+  })
+});
+
+/**
+ * POST: get the camper ID and update the sign out date and signer
+ * */
+router.post('/camper-sign-out/:camper_id', (req, res) => {
+
+});
+
 
 module.exports = router;
