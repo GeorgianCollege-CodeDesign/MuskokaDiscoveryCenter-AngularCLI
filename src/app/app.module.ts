@@ -10,6 +10,7 @@ import { routing } from './app.routing';
 import { CamperDetailsComponent } from './camper-details/camper-details.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { CamperRegisterComponent } from './camper-register/camper-register.component';
+import { CamperEditComponent } from './camper-edit/camper-edit.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CamperRegisterComponent } from './camper-register/camper-register.compo
     LogInComponent,
     CamperDetailsComponent,
     SignInComponent,
-    CamperRegisterComponent
+    CamperRegisterComponent,
+    CamperEditComponent
   ],
   imports: [
     BrowserModule,
