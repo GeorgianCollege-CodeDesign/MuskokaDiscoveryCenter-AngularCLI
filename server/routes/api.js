@@ -143,9 +143,22 @@ router.get('/active-campers', (req, res) => {
       if (campers.hasOwnProperty(key))
       {
         let camper = campers[key];
-        console.log(camper);
+        let startDate = new Date(camper.startDate).getTime();
+        let endDate = new Date(camper.endDate).getTime();
+        let today = new Date().getTime();
+        console.log(`first: ${today - startDate} - second:  ${endDate - today} - today ${endDate}`);
         // TODO : Add date check if camper is active in present or future if it is add that camper to the returnArray list
+        if ((endDate - today) > 0) {
+          returnArray.push(camper);
+        }
       }
+    }
+    if (returnArray.length > 0)
+      res.json(returnArray).status(200);
+    else {
+      res.json({
+        message: 'No active camper found.'
+      });
     }
   });
 });
