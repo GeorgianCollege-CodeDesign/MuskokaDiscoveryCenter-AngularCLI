@@ -403,7 +403,7 @@ router.get('/camper/:firstName/:lastName', (req, res) => {
  * */
 router.post('/camper-sign-in/:camper_id', (req, res) => {
   let camperGuardian = req.body.camperParent;
-  let todayDate = new Date().toISOString().slice(0,10); // Format YYYY-MM-DD
+  let todayDate = new Date().getTime(); // Format YYYY-MM-DD
 
   Camper.findOneAndUpdate({_id: req.params.camper_id}, {
     $push: {
@@ -413,7 +413,7 @@ router.post('/camper-sign-in/:camper_id', (req, res) => {
         pickUp: null
       }
     }
-  }, {new: true, safe: true, upsert: true},
+  }, { new: true, safe: true, upsert: true },
     (err, camper) => {
     if (err){
       return res.json(err).status(501);
@@ -432,7 +432,7 @@ router.post('/camper-sign-in/:camper_id', (req, res) => {
 
         res.json(dailyAttendance).status(200);
       });
-  })
+  });
 
 });
 
@@ -452,7 +452,41 @@ router.get('/daily-campers', (req, res) => {
  * POST: get the camper ID and update the sign out date and signer
  * */
 router.post('/camper-sign-out/:camper_id', (req, res) => {
+  let todayDate = new Date().getTime(); // Format YYYY-MM-DD
+  let camperParent = req.body.camperParent;
+  Camper.findOne({ _id: req.params.camper_id},
+    (err, camper) => {
+      if (err){
+        return res.json(err).status(501);
+      }
+      console.log(camper.pickupHistory[0].date);
+      console.log(camper.pickupHistory.length);
+      for (let  i = 0; i < camper.pickupHistory.length; i++) {
+        console.log(camper.pickupHistory[i]);
+        if ((todayDate - camper.pickupHistory[i].date) < 86400000){
+          camper.pickupHistory[i].pickUp = camperParent;
+        }
+      }
+      camper.save((err)=> {
+          if(err) {
+            console.error('Can not save the camper');
+          }
+      });
+      //res.json(camper).status(200);
+      DailyAttendance.findOneAndUpdate({date: todayDate}, {
+          date: todayDate,
+          $push: {
+            camper: camper
+          }
+        }, {new: true, safe: true, upsert: true},
+        (err, dailyAttendance) => {
+          if (err) {
+            return res.json(err).status(501);
+          }
 
+          res.json(dailyAttendance).status(200);
+        });
+    });
 });
 
 
