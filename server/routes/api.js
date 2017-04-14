@@ -9,6 +9,7 @@ const router = express.Router();
 const passport = require('passport');
 const Account = require('../models/account');
 const Camper = require('../models/camper');
+const DailyAttendance = require('../models/daily-attandance');
 
 // middleware to use for all requests
 router.use((req, res, next) =>{
@@ -147,7 +148,7 @@ router.get('/active-campers', (req, res) => {
         let endDate = new Date(camper.endDate).getTime();
         let today = new Date().getTime();
         console.log(`first: ${today - startDate} - second:  ${endDate - today} - today ${endDate}`);
-        // TODO : Add date check if camper is active in present or future if it is add that camper to the returnArray list
+        // check if the end date is passed. if it's not push that camper to the active list
         if ((endDate - today) > 0) {
           returnArray.push(camper);
         }
@@ -391,5 +392,68 @@ router.get('/camper/:firstName/:lastName', (req, res) => {
 
 
 });
+
+
+
+// CAMPER sign in and sign out
+
+/**
+ * POST: get the camper ID and update the sign in date and signer
+ * write the signed in camper in daily attendance document.
+ * */
+router.post('/camper-sign-in/:camper_id', (req, res) => {
+  let camperGuardian = req.body.camperParent;
+  let todayDate = new Date().toISOString().slice(0,10); // Format YYYY-MM-DD
+
+  Camper.findOneAndUpdate({_id: req.params.camper_id}, {
+    $push: {
+      pickupHistory: {
+        date: todayDate,
+        dropOff: camperGuardian,
+        pickUp: null
+      }
+    }
+  }, {new: true, safe: true, upsert: true},
+    (err, camper) => {
+    if (err){
+      return res.json(err).status(501);
+    }
+
+    DailyAttendance.findOneAndUpdate({date: todayDate}, {
+        date: todayDate,
+        $push: {
+          camper: camper
+        }
+    }, {new: true, safe: true, upsert: true},
+      (err, dailyAttendance) => {
+        if (err) {
+          return res.json(err).status(501);
+        }
+
+        res.json(dailyAttendance).status(200);
+      });
+  })
+
+});
+
+/**
+ * GET: get all the campers who signed in today
+ * */
+router.get('/daily-campers', (req, res) => {
+  DailyAttendance.find((err, dailyAttendance) =>{
+    if (err){
+      return res.json(err).status(501);
+    }
+    res.json(dailyAttendance).status(200);
+  })
+});
+
+/**
+ * POST: get the camper ID and update the sign out date and signer
+ * */
+router.post('/camper-sign-out/:camper_id', (req, res) => {
+
+});
+
 
 module.exports = router;
