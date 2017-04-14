@@ -35,9 +35,9 @@
           <td>{{ camper.camperFirstName }}</td>
           <td>{{ camper.camperLastName }}</td>
           <td>{{ camper.parentPhoneNumber }}</td>
-          <td><a href="">Edit</a></td>
-          <td><a href="">Delete</a></td>
-          <td><a href="">Details</a></td>
+          <td><a href="/camper-register/{{ camper._id }}">Edit</a></td>
+          <td><a href="/delete/ {{ camper._id }}">Delete</a></td>
+          <td><a href="/camper-details/{{ camper._id }}">Details</a></td>
         </tr>
       </table>
     </section>

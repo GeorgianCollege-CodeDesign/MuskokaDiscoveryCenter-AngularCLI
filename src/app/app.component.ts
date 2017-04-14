@@ -5,7 +5,7 @@ import { CamperService } from "./camper.service";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [CamperService]
+  providers: [ CamperService ]
 })
 
 export class AppComponent {

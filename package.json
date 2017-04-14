@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "nodemon server.js",
+    "dev": "ng build && nodemon server.js",
     "postinstall": "ng build"
   },
   "private": true,

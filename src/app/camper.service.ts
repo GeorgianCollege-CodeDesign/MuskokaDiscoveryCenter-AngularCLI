@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CamperService {
 
-  private camper = 'api/campers';  // URL to web API
+  private camper = '/api/campers';  // URL to web API
 
 
   constructor(private http: Http) { }

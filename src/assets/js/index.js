@@ -15,9 +15,9 @@
         return false;
     });
 
-    $('.scroll').on('click', function(e){		
+    $('.scroll').on('click', function(e){
 		e.preventDefault()
-    
+
   $('html, body').animate({
       scrollTop : $(this.hash).offset().top
     }, 1500);
@@ -35,4 +35,8 @@ $('#kidin').on('click', function () {
    $('#signout').hide();
    $('#signin').fadeIn();
 });
+
+ $('.confirmation').on('click', function() {
+   return confirm('Are you sure you want to delete this item?');
+ });
 
