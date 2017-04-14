@@ -45,17 +45,17 @@ let camperSchema = new mongoose.Schema({
       lastName: String
     }
   ],
-  startDate: Date,
-  endDate: Date,
+  startDate: Number,
+  endDate: Number,
   absenceDays: [
     {
-      absenceDay: Date
+      absenceDay: Number
     }
   ],
   isActive: Boolean,
   pickupHistory: [
     {
-      date: Date,
+      date: Number,
       pickUp: String,
       dropOff: String
     }
