@@ -69,9 +69,9 @@
   </form>
   <div class="button-container">
     <button class="regi-button" type="button"><span>Submit</span></button>
-    <button class="regi-button" (click)="addCamper()" *ngIf="!_id">Add</button>
-    <button class="regi-button" (click)="updateCamper()" *ngIf="_id">Update</button>
-    <button class="regi-button" (click)="clearForm()">Reset</button>
+    <button class="regi-button" (click)="addCamper()" *ngIf="!_id"><span>Add</span></button>
+    <button class="regi-button" (click)="updateCamper()" *ngIf="_id"><span>Update</span></button>
+    <button class="regi-button" (click)="clearForm()"><span>Reset</span></button>
     <input type="hidden" name="_id" id="_id" [(ngModel)]="_id" />
   </div>
 </div>
