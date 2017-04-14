@@ -10,14 +10,16 @@ import { LogInComponent } from './log-in/log-in.component';
 import { CamperDetailsComponent } from './camper-details/camper-details.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { CamperRegisterComponent } from './camper-register/camper-register.component';
+import {CamperEditComponent} from "./camper-edit/camper-edit.component";
 
 const appRoutes: Routes = [
   // add component pathing
   { path: 'home', component: SignInComponent },
   { path: 'log-in', component: LogInComponent },
-  { path: 'camper-details', component: CamperDetailsComponent },
-  {path: 'camper-list', component: HomeComponent },
-  {path: 'camper-register', component: CamperRegisterComponent },
+  { path: 'camper-details/:id', component: CamperDetailsComponent },
+  { path: 'camper-edit/:id', component: CamperEditComponent },
+  { path: 'camper-list', component: HomeComponent },
+  { path: 'camper-register', component: CamperRegisterComponent },
   // default redirect
   { path: '', component: SignInComponent, pathMatch: 'full' }
 ];

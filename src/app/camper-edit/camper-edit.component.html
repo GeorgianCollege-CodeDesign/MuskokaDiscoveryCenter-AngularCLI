@@ -1,10 +1,10 @@
 <header>
-    <nav id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+  <nav id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
         <a href="/" class="muskoka-logo"><img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="100" /></a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-            </button>
+        </button>
       </div>
       <div class="collapse navbar-collapse navbar-menubuilder">
         <ul class="nav navbar-nav navbar-right">
@@ -26,13 +26,13 @@
 
 <div class="register">
   <form>
-    <h1>Register New Camper</h1>
+    <h1>Edit Camper</h1>
 
 
     <div class="form-group">
       <input type="text" required="required" id="parent-first-name" [(ngModel)]="parentFirstName" />
       <label class="control-label" for="parent-first-name">Parent/Guardian First Name</label><i class="bar">
-      </i>
+    </i>
     </div>
 
     <div class="form-group">
@@ -40,7 +40,7 @@
       <label class="control-label" for="parent-last-name">Parent/Guardian Last Name</label><i class="bar">
     </i>
     </div>
-      <div class="form-group">
+    <div class="form-group">
       <input type="text" required="required" id="camper-first-name" [(ngModel)]="camperFirstName" />
       <label class="control-label" for="camper-first-name">Camper's First Name</label><i class="bar"></i>
     </div>
@@ -68,7 +68,8 @@
   </form>
   <div class="button-container">
     <button class="regi-button" type="button"><span>Submit</span></button>
-    <button class="regi-button" (click)="addCamper()">Add</button>
+    <button class="regi-button" (click)="updateCamper()">Update</button>
     <button class="regi-button" (click)="clearForm()">Reset</button>
+    <input type="hidden" name="_id" id="_id" [(ngModel)]="_id" />
   </div>
 </div>
