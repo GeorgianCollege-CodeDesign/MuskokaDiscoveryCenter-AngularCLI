@@ -4,21 +4,21 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { CamperListComponent } from './camper-list/camper-list.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { routing } from './app.routing';
 import { CamperDetailsComponent } from './camper-details/camper-details.component';
-import { SignInComponent } from './sign-in/sign-in.component';
+import { HomeComponent } from './home/home.component';
 import { CamperRegisterComponent } from './camper-register/camper-register.component';
 import { CamperEditComponent } from './camper-edit/camper-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    CamperListComponent,
     LogInComponent,
     CamperDetailsComponent,
-    SignInComponent,
+    HomeComponent,
     CamperRegisterComponent,
     CamperEditComponent
   ],

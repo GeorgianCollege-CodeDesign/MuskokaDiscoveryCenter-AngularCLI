@@ -432,7 +432,7 @@ router.get('/camper/:firstName/:lastName', (req, res) => {
  * POST: get the camper ID and update the sign in date and signer
  * write the signed in camper in daily attendance document.
  * */
-router.post('/camper-sign-in/:camper_id', (req, res) => {
+router.post('/camper-home/:camper_id', (req, res) => {
   let camperGuardian = req.body.camperParent;
   let todayDate = new Date().getTime(); // Format YYYY-MM-DD
 

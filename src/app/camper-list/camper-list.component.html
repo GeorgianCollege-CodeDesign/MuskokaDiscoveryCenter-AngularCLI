@@ -1,0 +1,46 @@
+<header>
+  <nav id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="/" class="muskoka-logo"><img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="100" /></a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            </button>
+      </div>
+      <div class="collapse navbar-collapse navbar-menubuilder">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="">Home</a></li>
+          <li><a href="../camper-register">Add Camper</a></li>
+          <li><a href="">Activate  Camper</a></li>
+          <li><a href="../camper-list">List of Camper</a></li>
+          <li><a href="">Admin List</a></li>
+          <li><a class="logout" href="">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<main role="main">
+  <article>
+    <section>
+      <table>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone</th>
+          <th>Edit</th>
+          <th>Delete</th>
+          <th>Details</th>
+        </tr>
+        <tr *ngFor="let camper of campers" >
+          <td>{{ camper.camperFirstName }}</td>
+          <td>{{ camper.camperLastName }}</td>
+          <td>{{ camper.parentPhoneNumber }}</td>
+          <td><a href="/camper-edit/{{ camper._id }}">Edit</a></td>
+          <td><a href="/delete/ {{ camper._id }}">Delete</a></td>
+          <td><a href="/camper-details/{{ camper._id }}">Details</a></td>
+        </tr>
+      </table>
+    </section>
+  </article>
+</main>
+
