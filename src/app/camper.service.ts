@@ -25,12 +25,12 @@ export class CamperService {
       .catch(this.handleError);
   }
 
-  putCamper(body: Object): any {
+  putCamper(body: Object, _id: string): any {
     let bodyString = JSON.stringify(body); // Stringify payload
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
-    return this.http.put(`${this.camper}/${body['id']}`, body, options) // ...using put request
+    return this.http.put(`${this.camper}/${_id}`, body, options) // ...using put request
       .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
       .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if
   }
