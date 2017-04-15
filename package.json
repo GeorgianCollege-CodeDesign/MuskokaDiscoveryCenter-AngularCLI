@@ -14,9 +14,9 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "1.0.0-rc.2",
     "@angular/common": "^2.4.0",
     "@angular/compiler": "^2.4.0",
-    "@angular/cli": "1.0.0-rc.2",
     "@angular/core": "^2.4.0",
     "@angular/forms": "^2.4.0",
     "@angular/http": "^2.4.0",
@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^2.4.0",
     "@angular/router": "^3.4.0",
     "body-parser": "^1.17.0",
+    "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
     "express": "^4.15.0",
     "express-session": "^1.15.1",

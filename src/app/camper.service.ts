@@ -34,18 +34,17 @@ export class CamperService {
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
     return this.http.post(this._camper, body, options) // ...using put request
-      .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+      .map(CamperService.extractData)
+      .catch(CamperService.handleError);
   }
 
   putCamper(body: Object, _id: string): any {
-    //let bodyString = JSON.stringify(body); // Stringify payload
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
     return this.http.put(`${this._camper}/${_id}`, body, options) // ...using put request
-      .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+      .map(CamperService.extractData)
+      .catch(CamperService.handleError);
   }
 
   deleteCamper(_id) {
@@ -76,18 +75,19 @@ export class CamperService {
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
     return this.http.post(this._camperSignin, {camperParent: camperParent},  options)
-      .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+      .map(CamperService.extractData)
+      .catch(CamperService.handleError);
   }
 
   camperSignOut(camperParent: string) {
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
     return this.http.post(this._camperSignout, {camperParent: camperParent},  options)
-      .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+      .map(CamperService.extractData)
+      .catch(CamperService.handleError);
   }
 
+  // Utility functions
   private static extractData(res: Response) {
     let body = res.json();
     return body || { };

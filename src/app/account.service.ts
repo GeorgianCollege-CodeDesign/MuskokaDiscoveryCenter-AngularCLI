@@ -6,15 +6,16 @@ import { Account } from './account';
 @Injectable()
 export class AccountService {
 
-  private accountsGet = 'https://muskoka-discovery-center.herokuapp.com/api/admins';
-  private loginPost = 'https://muskoka-discovery-center.herokuapp.com/api/login';
+  private _accounts = '/api/admins';
+  private _login = '/api/login';
+  private _changePassword = '/api/change-password';
 
   constructor( private http: Http ) { }
 
   getAccounts(): Observable<Account[]> {
-    return this.http.get(this.accountsGet)
-      .map(this.extractData)
-      .catch(this.handleError);
+    return this.http.get(this._accounts)
+      .map(AccountService.extractData)
+      .catch(AccountService.handleError);
   }
 
   login(body: Object): any {
@@ -25,17 +26,29 @@ export class AccountService {
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
     //swap the body with bodyString parameter
-    return this.http.post(this.loginPost, bodyString, options) // ...using put request
-      .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if
+    return this.http.post(this._login, bodyString, options) // ...using post request
+      .map(AccountService.extractData)
+      .catch(AccountService.handleError);
   }
 
-  private extractData(res: Response) {
+  changePassword(password: string, passwordConfirm: string){
+    let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+    let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+    //swap the body with bodyString parameter
+    return this.http.post(this._changePassword, {password: password, passwordConfirm: passwordConfirm}, options) // ...using post request
+      .map(AccountService.extractData)
+      .catch(AccountService.handleError);
+  }
+
+  // Utility functions
+  private static extractData(res: Response) {
     let body = res.json();
+    console.log(body);
     return body || { };
   }
 
-  private handleError (error: Response | any) {
+  private static handleError (error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';

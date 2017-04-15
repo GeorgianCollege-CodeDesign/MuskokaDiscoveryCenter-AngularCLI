@@ -20,18 +20,17 @@ export class LogInComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(): any {
+  login() {
     let body = {
       username: this.username,
       password: this.password
     };
-    console.log();
     this.accountService.login(body)
       .subscribe(
         data => {
           this.response = data;
         });
 
-  };
+  }
 
 }

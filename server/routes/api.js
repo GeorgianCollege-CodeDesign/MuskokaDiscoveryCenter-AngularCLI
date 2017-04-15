@@ -22,7 +22,9 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();  // user has logged in already so continue to the next function
   }
-  res.redirect('/login');
+  res.json({
+    message : 'Not authenticated.'
+  }).status(401);
 }
 
 // test API call
@@ -47,12 +49,18 @@ router.post('/login', (req, res) => {
 
     // If a user is found
     if(user){
-      console.log(user);
-      res.status(200);
+      let sess = req.session;
+      sess._id = user._id;
+      console.log(sess);
+
       res.json({
-        "id": user._id,
-        "username" : user.username
-      });
+        id: user._id,
+        username : user.username,
+        role: user.role,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+      }).status(200);
     } else {
       // If user is not found
       res.status(401).json(info);
@@ -62,12 +70,30 @@ router.post('/login', (req, res) => {
 });
 
 /**
+ * POST: password change method
+ * */
+
+router.post('/change-password', (req, res) => {
+  let password = req.body.password;
+  let passwordConfirm = req.body.passwordConfirm;
+  let sess = req.session;
+  console.log(sess);
+  res.json(sess).status(200);
+});
+
+/**
  * POST: register information
  * */
 router.post('/register', (req, res) =>{
   // use the Account model to create a new user with passport
   //console.log(req);
-  Account.register(new Account({ username: req.body.username }), req.body.password, function(err, account) {
+  Account.register(new Account({
+    username: req.body.username,
+    role: req.body.role,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email
+  }), req.body.password, function(err, account) {
     if (err) { // failure
       console.log(err);
       res.status(406);
@@ -150,8 +176,16 @@ router.get('/active-campers', (req, res) => {
         console.log(`first: ${today - startDate} - second:  ${endDate - today} - today ${endDate}`);
         // check if the end date is passed. if it's not push that camper to the active list
         if ((endDate - today) > 0) {
+          camper.isActive = true;
           returnArray.push(camper);
+        } else {
+          camper.isActive = false;
         }
+        camper.save((err)=> {
+          if(err) {
+            console.error('Can not save the camper');
+          }
+        });
       }
     }
     if (returnArray.length > 0)
