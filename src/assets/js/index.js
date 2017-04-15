@@ -15,28 +15,22 @@
         return false;
     });
 
-    $('.scroll').on('click', function(e){
-		e.preventDefault()
+    $('.scroll').on('click', function(e) {
+      e.preventDefault();
 
-  $('html, body').animate({
-      scrollTop : $(this.hash).offset().top
-    }, 1500);
-});
+    $('html, body').animate({
+        scrollTop : $(this.hash).offset().top
+      }, 1500);
+    });
 
-});
-
-
-$('#kidout').on('click', function () {
-   $('#signin').hide();
-   $('#signout').fadeIn();
-});
-
-$('#kidin').on('click', function () {
-   $('#signout').hide();
-   $('#signin').fadeIn();
-});
-
- $('.confirmation').on('click', function() {
-   return confirm('Are you sure you want to delete this item?');
  });
 
+ $('#kidout').on('click', function () {
+   $('#signin').hide();
+   $('#signout').fadeIn();
+ });
+
+ $('#kidin').on('click', function () {
+   $('#signout').hide();
+   $('#signin').fadeIn();
+ });

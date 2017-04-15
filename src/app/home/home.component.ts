@@ -8,7 +8,7 @@ import { CamperService } from "../camper.service";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  providers: [CamperService]
+  providers: [ CamperService ]
 })
 
 export class HomeComponent implements OnInit {
@@ -32,10 +32,19 @@ export class HomeComponent implements OnInit {
         error =>  this.errorMessage = <any>error);
   }
 
-  getCamper(id: number){
+  getCamper(id: number) {
     this.camperService.getCamper(id)
       .subscribe(
         camper => this.camper = camper,
         error =>  this.errorMessage = <any>error);
+  }
+
+  deleteCamper(_id) {
+    if (confirm('Are you sure you want to delete this camper?')) {
+      this.camperService.deleteCamper(_id).
+      subscribe(response => {
+        this.getCampers();
+      });
+    }
   }
 }
