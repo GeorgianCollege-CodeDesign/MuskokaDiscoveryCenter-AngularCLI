@@ -18,6 +18,8 @@ export class CamperRegisterComponent implements OnInit {
   parentPhoneNumber: String;
   paymentDays: Number;
   camperAge: Number;
+  startDate: Number;
+  endDate: Number;
   camperNotes: String;
   camperPickupList: Array<any>;
 
