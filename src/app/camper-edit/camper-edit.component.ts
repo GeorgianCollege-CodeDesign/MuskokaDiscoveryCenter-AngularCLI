@@ -52,5 +52,17 @@ export class CamperEditComponent implements OnInit {
         })
     });
   }
+  clearForm() {
+    this._id = null;
+    this.camperFirstName = null;
+    this.camperLastName = null;
+    this.parentFirstName = null;
+    this.parentLastName = null;
+    this.parentPhoneNumber = null;
+    this.paymentDays = null;
+    this.camperAge = null;
+    this.camperNotes = null;
+    this.camperPickupList = null;
+  }
 
 }
