@@ -30,46 +30,45 @@
 
 
     <div class="form-group">
-      <input type="text" required="required" id="parent-first-name" [(ngModel)]="parentFirstName" />
+      <input type="text" required="required" id="parent-first-name" name="parentFirstName" [(ngModel)]="parentFirstName" />
       <label class="control-label" for="parent-first-name">Parent/Guardian First Name</label><i class="bar">
     </i>
     </div>
 
     <div class="form-group">
-      <input type="text" required="required" id="parent-last-name" [(ngModel)]="parentLastName" />
+      <input type="text" required="required" id="parent-last-name"  name="parentLastName" [(ngModel)]="parentLastName" />
       <label class="control-label" for="parent-last-name">Parent/Guardian Last Name</label><i class="bar">
     </i>
     </div>
     <div class="form-group">
-      <input type="text" required="required" id="camper-first-name" [(ngModel)]="camperFirstName" />
+      <input type="text" required="required" id="camper-first-name" name="camperFirstName" [(ngModel)]="camperFirstName" />
       <label class="control-label" for="camper-first-name">Camper's First Name</label><i class="bar"></i>
     </div>
 
     <div class="form-group">
-      <input type="text" required="required" id="camper-last-name" [(ngModel)]="camperLastName" />
+      <input type="text" required="required" id="camper-last-name" name="camperLastName" [(ngModel)]="camperLastName" />
       <label class="control-label" for="camper-last-name">Camper's Last Name</label><i class="bar"></i>
     </div>
 
     <div class="form-group">
-      <input type="text" required="required" id="parent-phone-number" [(ngModel)]="parentPhoneNumber" />
+      <input type="text" required="required" id="parent-phone-number" name="parentPhoneNumber" [(ngModel)]="parentPhoneNumber" />
       <label class="control-label" for="parent-phone-number">Guardian Phone Number</label><i class="bar"></i>
     </div>
 
     <div class="form-group">
-      <input type="text" required="required" id="camper-age" [(ngModel)]="camperAge" />
+      <input type="text" required="required" id="camper-age" name="camperAge" [(ngModel)]="camperAge" />
       <label class="control-label" for="camper-age">Camper's Age</label><i class="bar"></i>
     </div>
 
     <div class="form-group">
-      <textarea rows="5" required="required" id="camper-notes" [(ngModel)]="camperNotes" ></textarea>
+      <textarea rows="5" required="required" id="camper-notes" name="camperNotes" [(ngModel)]="camperNotes" ></textarea>
       <label class="control-label" for="camper-notes"> Camper's Medical or Other Significant Notes </label><i class="bar"></i>
     </div>
 
   </form>
   <div class="button-container">
-    <button class="regi-button" type="button"><span>Submit</span></button>
-    <button class="regi-button" (click)="updateCamper()"><span>Update</span></button>
-    <button class="regi-button" (click)="clearForm()"><span>Reset</span></button>
+    <button class="regi-button" type="submit" (click)="updateCamper()"><span>Update</span></button>
+    <button class="regi-button"  type="reset" (click)="clearForm()"><span>Reset</span></button>
     <input type="hidden" name="_id" id="_id" [(ngModel)]="_id" />
   </div>
 </div>

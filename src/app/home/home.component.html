@@ -11,7 +11,7 @@
           <li><a href="">Home</a></li>
           <li><a href="../camper-register">Add Camper</a></li>
           <li><a href="">Activate  Camper</a></li>
-          <li><a href="../camper-list">List of Campers</a></li>
+          <li><a href="../camper-list">List of Camper</a></li>
           <li><a href="">Admin List</a></li>
           <li><a class="logout" href="">Log Out</a></li>
         </ul>
@@ -35,11 +35,10 @@
           <td>{{ camper.camperFirstName }}</td>
           <td>{{ camper.camperLastName }}</td>
           <td>{{ camper.parentPhoneNumber }}</td>
-          <td><a href="/camper-register/{{ camper._id }}">Edit</a></td>
-          <td><a class="confirmation" href="" (click)="deleteCamper(camper._id)" >Delete</a></td>
+          <td><a href="/camper-edit/{{ camper._id }}">Edit</a></td>
+          <td><a href="/delete/ {{ camper._id }}">Delete</a></td>
           <td><a href="/camper-details/{{ camper._id }}">Details</a></td>
         </tr>
-        <!--/delete/ {{ camper._id }}-->
       </table>
     </section>
   </article>
