@@ -35,6 +35,12 @@ export class CamperService {
       .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if
   }
 
+  deleteCamper(_id) {
+    return this.http.delete('/api/campers/' + _id).map(response => {
+      response.json();
+    });
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body || { };
