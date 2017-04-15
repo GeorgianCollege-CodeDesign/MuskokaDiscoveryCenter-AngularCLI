@@ -89,7 +89,9 @@ export class CamperService {
 
   // Utility functions
   private static extractData(res: Response) {
+    let status = res.status;
     let body = res.json();
+    body.status = status;
     return body || { };
   }
 

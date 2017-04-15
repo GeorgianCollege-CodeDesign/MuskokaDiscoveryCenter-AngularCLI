@@ -205,15 +205,15 @@ router.post('/campers', (req, res) => {
     parentFirstName: req.body.parentFirstName,
     parentLastName: req.body.parentLastName,
     parentPhoneNumber: req.body.parentPhoneNumber,
-    paymentDays: req.body.paymentType,
+    paymentDays: req.body.paymentDays || 1,
     camperAge: req.body.camperAge,
     camperNotes: req.body.camperNotes,
     camperPickupList: req.body.camperPickupList,
     startDate: req.body.startDate,
     endDate: req.body.endDate,
-    absenceDays: req.body.absenceDays,
-    isActive: req.body.isActive,
-    pickupHistory: req.body.pickupHistory
+    absenceDays: req.body.absenceDays || [],
+    isActive: req.body.isActive || true,
+    pickupHistory: req.body.pickupHistory || []
   }, (err) => {
     if (err) {
       console.log(err);
@@ -483,7 +483,7 @@ router.get('/daily-campers', (req, res) => {
  * POST: get the camper ID and update the sign out date and signer
  * */
 router.post('/camper-sign-out/:camper_id', (req, res) => {
-  let todayDate = new Date().getTime(); // Format YYYY-MM-DD
+  let todayDate = new Date().getTime();
   let camperParent = req.body.camperParent;
   Camper.findOne({ _id: req.params.camper_id},
     (err, camper) => {

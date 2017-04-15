@@ -21,8 +21,8 @@ export class CamperEditComponent implements OnInit {
   camperAge: number = 3;
   camperNotes : string = '';
   camperPickupList : Array<any> = [];
-  startDate: number = 3;
-  endDate: number = 3;
+  startDate: string;
+  endDate: string;
   absenceDays: Array<any> = [];
   isActive: boolean;
 
@@ -38,6 +38,10 @@ export class CamperEditComponent implements OnInit {
       this._id = camperID;
       this.camperService.getCamper(camperID)
         .subscribe(res => {
+
+          let tempStart = new Date(res.startDate);
+          let tempEnd = new Date(res.endDate);
+
           this.camperFirstName = res.camperFirstName;
           this.camperLastName = res.camperLastName;
           this.parentFirstName = res.parentFirstName ;
@@ -47,8 +51,8 @@ export class CamperEditComponent implements OnInit {
           this.camperAge = res.camperAge;
           this.camperNotes = res.camperNotes;
           this.camperPickupList = res.camperPickupList;
-          this.startDate = res.startDate;
-          this.endDate = res.endDate;
+          this.startDate = this.ISOtoYYYYMMDD(tempStart);
+          this.endDate = this.ISOtoYYYYMMDD(tempEnd);
           this.absenceDays = res.absenceDays;
           this.isActive  = res.isActive;
         });
@@ -56,6 +60,10 @@ export class CamperEditComponent implements OnInit {
   }
 
   updateCamper(){
+    let tempStart = new Date(this.startDate+'T20:00:00');
+    let tempEnd = new Date(this.endDate+'T20:00:00');
+    console.log(tempStart);``
+    console.log(tempEnd);
     let camper: Camper = {
       _id: this._id,
       camperFirstName: this.camperFirstName,
@@ -67,8 +75,8 @@ export class CamperEditComponent implements OnInit {
       camperAge: this.camperAge,
       camperNotes : this.camperNotes,
       camperPickupList : this.camperPickupList,
-      startDate: this.startDate,
-      endDate: this.endDate,
+      startDate: tempStart.getTime(),
+      endDate: tempEnd.getTime(),
       absenceDays: this.absenceDays,
       isActive: this.isActive,
       pickupHistory: this.pickupHistory
@@ -81,5 +89,26 @@ export class CamperEditComponent implements OnInit {
       })
   }
 
+  ISOtoYYYYMMDD(date: Date) {
+    let year = date.getFullYear();
+    let month = date.getMonth()+1;
+    let dt = date.getDate();
+    let tempDt;
+    let tempMonth;
+
+    if (dt < 10) {
+      tempDt = '0' + dt;
+    }
+    else{
+      tempDt = dt.toLocaleString();
+    }
+    if (month < 10) {
+      tempMonth = '0' + month;
+    }else {
+      tempMonth = month.toLocaleString()
+    }
+    console.log(year+'-' + tempMonth + '-'+tempDt);
+    return (year+'-' + tempMonth + '-'+tempDt);
+  }
 
 }
