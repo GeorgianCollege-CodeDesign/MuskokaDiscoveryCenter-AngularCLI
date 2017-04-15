@@ -65,6 +65,18 @@
       <label class="control-label" for="camper-notes"> Camper's Medical or Other Significant Notes </label><i class="bar"></i>
     </div>
 
+    <h2>Dates Attending</h2>
+
+    <div class="form-group">
+      <input type="date" name="start-date" id="start-date" [(ngModel)]="startDate" />
+      <label class="control-label" for="start-date">From: </label><i class="bar"></i>
+    </div>
+
+    <div class="form-group">
+      <input type="date" name="end-date" id="end-date" [(ngModel)]="endDate" />
+      <label class="control-label" for="end-date">To: </label><i class="bar"></i>
+    </div>
+
   </form>
   <div class="button-container">
     <button class="regi-button" type="submit" (click)="updateCamper()"><span>Update</span></button>
