@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {CamperService} from "../camper.service";
 import {Camper} from "../camper";
 
@@ -11,7 +11,7 @@ import {Camper} from "../camper";
 
 export class CamperEditComponent implements OnInit {
 
-  _id: string;
+  _id: string = '';
   camperFirstName: string = '';
   camperLastName: string= '';
   parentFirstName: string = '';
@@ -24,10 +24,12 @@ export class CamperEditComponent implements OnInit {
   startDate: number = 3;
   endDate: number = 3;
   absenceDays: Array<any> = [];
+  isActive: boolean;
 
   pickupHistory: Array<any>;  constructor(
     private activatedRoute: ActivatedRoute,
-    private camperService: CamperService) { }
+    private camperService: CamperService,
+    private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -36,7 +38,6 @@ export class CamperEditComponent implements OnInit {
       this._id = camperID;
       this.camperService.getCamper(camperID)
         .subscribe(res => {
-          this._id = res._id;
           this.camperFirstName = res.camperFirstName;
           this.camperLastName = res.camperLastName;
           this.parentFirstName = res.parentFirstName ;
@@ -49,20 +50,36 @@ export class CamperEditComponent implements OnInit {
           this.startDate = res.startDate;
           this.endDate = res.endDate;
           this.absenceDays = res.absenceDays;
-        })
+          this.isActive  = res.isActive;
+        });
     });
   }
-  clearForm() {
-    this._id = null;
-    this.camperFirstName = null;
-    this.camperLastName = null;
-    this.parentFirstName = null;
-    this.parentLastName = null;
-    this.parentPhoneNumber = null;
-    this.paymentDays = null;
-    this.camperAge = null;
-    this.camperNotes = null;
-    this.camperPickupList = null;
+
+  updateCamper(){
+    let camper: Camper = {
+      _id: this._id,
+      camperFirstName: this.camperFirstName,
+      camperLastName: this.camperLastName,
+      parentFirstName: this.parentFirstName,
+      parentLastName: this.parentLastName,
+      parentPhoneNumber : this.parentPhoneNumber,
+      paymentDays: this.paymentDays,
+      camperAge: this.camperAge,
+      camperNotes : this.camperNotes,
+      camperPickupList : this.camperPickupList,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      absenceDays: this.absenceDays,
+      isActive: this.isActive,
+      pickupHistory: this.pickupHistory
+    };
+
+    this.camperService.putCamper(camper, this._id)
+      .subscribe((res) => {
+        console.log(res);
+        this.router.navigate(['./camper-list']);
+      })
   }
+
 
 }
