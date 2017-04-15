@@ -49,18 +49,16 @@ router.post('/login', (req, res) => {
 
     // If a user is found
     if(user){
-      let sess = req.session;
-      sess._id = user._id;
-      console.log(sess);
-
-      res.json({
+      let response = {
         id: user._id,
         username : user.username,
         role: user.role,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email
-      }).status(200);
+      };
+      console.log(response);
+      res.json(response).status(200);
     } else {
       // If user is not found
       res.status(401).json(info);
@@ -72,13 +70,12 @@ router.post('/login', (req, res) => {
 /**
  * POST: password change method
  * */
-
+// FIXME : fix this mess
 router.post('/change-password', (req, res) => {
   let password = req.body.password;
   let passwordConfirm = req.body.passwordConfirm;
-  let sess = req.session;
-  console.log(sess);
-  res.json(sess).status(200);
+  console.log(req.session.passport.user);
+
 });
 
 /**
@@ -367,9 +364,9 @@ router.post('/admins', (req, res) => {
 /**
  * PUT: update an existing admin with given ID
  * */
-router.put('/admins/admin_id', (req, res) => {
+router.put('/admins/:admin_id', (req, res) => {
   // do this part later
-  Account.update({_id: req.session.passport.user}, {
+  Account.update({_id: req.params.admin_id}, {
     role: req.body.role,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -380,7 +377,7 @@ router.put('/admins/admin_id', (req, res) => {
       res.json(err);
       return;
     }
-    res.status(200);
+    res.json({message: `Update of ${req.params.admin_id} is successful`}).status(200);
     // maybe send something back
   });
 });

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from "../account.service";
+import {CamperService} from "../camper.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-log-in',
@@ -15,7 +17,9 @@ export class LogInComponent implements OnInit {
   response: string;
 
   constructor(
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    private camperService: CamperService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -28,7 +32,9 @@ export class LogInComponent implements OnInit {
     this.accountService.login(body)
       .subscribe(
         data => {
-          this.response = data;
+         if(data.status == 200){
+           this.router.navigate(['./']);
+         }
         });
 
   }

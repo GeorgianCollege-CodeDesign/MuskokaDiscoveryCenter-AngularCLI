@@ -43,8 +43,9 @@ export class AccountService {
 
   // Utility functions
   private static extractData(res: Response) {
+    let status = res.status;
     let body = res.json();
-    console.log(body);
+    body.status = status;
     return body || { };
   }
 
