@@ -912,3 +912,114 @@ fieldset {
   outline: none;
 }
 
+/*signout form*/
+.signout {
+  position: relative;
+  margin: 5rem auto;
+  max-width: 60%;
+  border-radius: 1px;
+  background-color: rgba(12, 34, 52, 1);
+  width: 100%;
+   height: 500px;
+  padding: 3rem 5rem 0;
+  
+}
+/*form_ signout*/
+.signout form {
+  background: #fff;
+  max-width: 70%;
+   margin: 0 auto;
+   padding-top: 10px;
+  height: 400px;
+  text-align: center;
+}
+/*dropdwon  select*/
+.signout .dropdown select {
+  border: none;
+  line-height: 1.6;
+  width: 100%;
+  font-size: 1.6rem;
+  box-shadow: none;
+  height: 3rem;
+  color: rgba(12, 34, 52, 1);
+  background: none;
+  
+}
+.signout .dropdown .bar {
+  position: relative;
+  border-bottom: 0.0625rem solid rgba(12, 34, 52, 1);
+  display: block;
+}
+/*dropdown*/
+.dropdown {
+  margin-left: 200px;
+  width: 150px;
+}
+.signout .dropdown .bar::before {
+  bottom: -0.0625rem;
+  position: absolute;
+  content: '';
+  height: 0.125rem;
+  width: 0;
+  left: 50%;
+  -webkit-transition: left 0.28s ease, width 0.28s ease;
+  transition: left 0.28s ease, width 0.28s ease;
+  z-index: 2;
+}
+
+/*submit or cancel button*/
+.out-button {
+  position: relative;
+  background: currentColor;
+  border: 1px solid currentColor;
+  font-size: 1.7rem;
+  cursor: pointer;
+  -webkit-transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
+  transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
+  overflow: hidden;
+  color: #AD2E2E;
+  margin: 3rem 0;
+  width:100px;
+  border-radius: 10px;
+  padding: 1rem 3rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.out-button::before {
+  position: absolute;
+  width: 20vh;
+  height: 20vh;
+  border-radius: 50%;
+  display: block;
+  background: #071017;
+  z-index: 0;
+  opacity: 1;
+  border: 50vh solid #8a2424;
+  top: 50%;
+  left: 50%;
+   content: '';
+  -webkit-transform: translate(-50%, -50%) scale(0);
+          transform: translate(-50%, -50%) scale(0);
+}
+.out-button span {
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+.out-button:focus {
+  outline: none;
+}
+.out-button:active::before, .out-button:focus::before {
+  -webkit-transition: opacity 0.28s ease 0.364s, -webkit-transform 1.12s ease;
+  transition: transform 1.12s ease, opacity 0.28s ease 0.364s, -webkit-transform 1.12s ease;
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 0.28s ease 0.364s, -webkit-transform 1.12s ease;
+  transition: transform 1.12s ease, opacity 0.28s ease 0.364s;
+  opacity: 0;
+}
+
+.out-button:hover {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+  color: #b54242;
+}
