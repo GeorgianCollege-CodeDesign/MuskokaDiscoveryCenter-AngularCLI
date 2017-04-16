@@ -22,9 +22,15 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();  // user has logged in already so continue to the next function
   }
-  res.json({
-    message : 'Not authenticated.'
-  }).status(401);
+  res.status(401).send({message: 'Not Authorized.'});
+}
+
+function isAdmin(req, res, next) {
+  if (req.isAuthenticated()) {
+    if (req.user.passport.role === 'admin')
+      return next();  // user has logged in already so continue to the next function
+  }
+  res.status(401).send({message: 'Not Admin.'});
 }
 
 // test API call
@@ -106,9 +112,9 @@ router.post('/register', (req, res) =>{
 });
 
 
-
-/// CAMPER RESTFUL SECTION
-
+/// ----------------------------------------------------------------------------------------
+/// -------------------------- CAMPER RESTFUL SECTION --------------------------------------
+/// ----------------------------------------------------------------------------------------
 /**
  * GET: get all campers
  * */
@@ -294,138 +300,6 @@ router.delete('/campers/:camper_id', /*isLoggedIn,*/ (req, res) => {
 });
 
 
-/// ADMIN RESTFUL SECTION
-/**
- * GET: get all the admins
- * */
-router.get('/admins', (req, res) => {
-
-  Account.find((err, admin) => {
-    if (err) {
-      console.log(err);
-      res.status(404);
-      res.json({
-        message: "Admin not found."
-      });
-      return;
-    }
-    // return all the campers if there is no error
-    res.json(admin);
-  });
-});
-
-/**
- * GET: get specific admin with given ID
- * */
-router.get('/admins/:admin_id', (req, res) => {
-
-  Account.findById(req.params.admin_id, (err, admin) => {
-    if (err) {
-      console.log(err);
-      res.status(404); // Not found
-      res.json({
-        message: "Camper not found."
-      });
-      return;
-    }
-    // return camper if everything is okay
-    res.status(200); // Okay
-    res.json(admin);
-  });
-});
-
-/**
- * POST: create a new admin
- * */
-router.post('/admins', (req, res) => {
-  Account.register(new Account(
-    {
-      username: req.body.username,
-      role: req.body.role,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email
-    }
-    ), req.body.password, function(err, account) {
-    if (err) { // failure
-      console.log(err);
-      res.status(406);
-      res.json({message: "Some Error occurred."});
-    }
-    res.status(201); // Created
-    res.json({
-      id : account._id,
-      accountName: account.username,
-      message: "New account is created"
-    });
-  });
-});
-
-/**
- * PUT: update an existing admin with given ID
- * */
-router.put('/admins/:admin_id', (req, res) => {
-  // do this part later
-  Account.update({_id: req.params.admin_id}, {
-    role: req.body.role,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email
-  },function(err) {
-    if (err) {
-      res.status(501);
-      res.json(err);
-      return;
-    }
-    res.json({message: `Update of ${req.params.admin_id} is successful`}).status(200);
-    // maybe send something back
-  });
-});
-
-/**
- * DELETE: delete an existing admin with given ID
- * */
-router.delete('/admins/:admin_id'/*, isLoggedIn*/ , (req, res) => {
-  Account.remove({ _id: req.params.admin_id }, function(err) {
-    if (err) {
-      console.log(err);
-      res.status(400); // Bad request
-      res.json({
-        message: "Admin couldn't deleted."
-      });
-      return;
-    }
-    // no error so show updated games list
-    res.status(200); // Okay
-    res.json({
-      message: "Admin deleted"
-    });
-  });
-});
-
-
-router.get('/camper/:firstName/:lastName', (req, res) => {
-  let firstName = req.params.firstName;
-  let lastName = req.params.lastName;
-
-  Camper.find({
-    camperFirstName: firstName,
-    camperLastName: lastName
-  }, (err, camper) => {
-    if (err){
-      res.status(501);
-      res.json(err);
-      return;
-    }
-    res.status(200);
-    res.json(camper);
-  });
-
-
-});
-
-
-
 // CAMPER sign in and sign out
 
 /**
@@ -437,33 +311,33 @@ router.post('/camper-home/:camper_id', (req, res) => {
   let todayDate = new Date().getTime(); // Format YYYY-MM-DD
 
   Camper.findOneAndUpdate({_id: req.params.camper_id}, {
-    $push: {
-      pickupHistory: {
-        date: todayDate,
-        dropOff: camperGuardian,
-        pickUp: null
+      $push: {
+        pickupHistory: {
+          date: todayDate,
+          dropOff: camperGuardian,
+          pickUp: null
+        }
       }
-    }
-  }, { new: true, safe: true, upsert: true },
+    }, { new: true, safe: true, upsert: true },
     (err, camper) => {
-    if (err){
-      return res.json(err).status(501);
-    }
+      if (err){
+        return res.json(err).status(501);
+      }
 
-    DailyAttendance.findOneAndUpdate({date: todayDate}, {
-        date: todayDate,
-        $push: {
-          camper: camper
-        }
-    }, {new: true, safe: true, upsert: true},
-      (err, dailyAttendance) => {
-        if (err) {
-          return res.json(err).status(501);
-        }
+      DailyAttendance.findOneAndUpdate({date: todayDate}, {
+          date: todayDate,
+          $push: {
+            camper: camper
+          }
+        }, {new: true, safe: true, upsert: true},
+        (err, dailyAttendance) => {
+          if (err) {
+            return res.json(err).status(501);
+          }
 
-        res.json(dailyAttendance).status(200);
-      });
-  });
+          res.json(dailyAttendance).status(200);
+        });
+    });
 
 });
 
@@ -513,9 +387,9 @@ router.post('/camper-sign-out/:camper_id', (req, res) => {
         }
       }
       camper.save((err)=> {
-          if(err) {
-            console.error('Can not save the camper');
-          }
+        if(err) {
+          console.error('Can not save the camper');
+        }
       });
       //res.json(camper).status(200);
       DailyAttendance.findOneAndUpdate({date: todayDate}, {
@@ -533,6 +407,142 @@ router.post('/camper-sign-out/:camper_id', (req, res) => {
         });
     });
 });
+
+/**
+ * GET: get the camper with given name and last name
+ * */
+router.get('/camper/:firstName/:lastName', (req, res) => {
+  let firstName = req.params.firstName;
+  let lastName = req.params.lastName;
+
+  Camper.find({
+    camperFirstName: firstName,
+    camperLastName: lastName
+  }, (err, camper) => {
+    if (err){
+      res.status(501);
+      res.json(err);
+      return;
+    }
+    res.status(200);
+    res.json(camper);
+  });
+
+
+});
+
+
+/// --------------------------------------------------------------------------------------------------------
+/// ---------------------------------- ADMIN RESTFUL SECTION -----------------------------------------------
+/// --------------------------------------------------------------------------------------------------------
+/**
+ * GET: get all the admins
+ * */
+router.get('/admins', isAdmin, (req, res) => {
+
+  Account.find((err, admin) => {
+    if (err) {
+      console.log(err);
+      res.status(404);
+      res.json({
+        message: "Admin not found."
+      });
+      return;
+    }
+    // return all the campers if there is no error
+    res.json(admin);
+  });
+});
+
+/**
+ * GET: get specific admin with given ID
+ * */
+router.get('/admins/:admin_id', isAdmin, (req, res) => {
+
+  Account.findById(req.params.admin_id, (err, admin) => {
+    if (err) {
+      console.log(err);
+      res.status(404); // Not found
+      res.json({
+        message: "Camper not found."
+      });
+      return;
+    }
+    // return camper if everything is okay
+    res.status(200); // Okay
+    res.json(admin);
+  });
+});
+
+/**
+ * POST: create a new admin
+ * */
+router.post('/admins', isAdmin, (req, res) => {
+  Account.register(new Account(
+    {
+      username: req.body.username,
+      role: req.body.role,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email
+    }
+    ), req.body.password, function(err, account) {
+    if (err) { // failure
+      console.log(err);
+      res.status(406);
+      res.json({message: "Some Error occurred."});
+    }
+    res.status(201); // Created
+    res.json({
+      id : account._id,
+      accountName: account.username,
+      message: "New account is created"
+    });
+  });
+});
+
+/**
+ * PUT: update an existing admin with given ID
+ * */
+router.put('/admins/:admin_id', isAdmin, (req, res) => {
+  // do this part later
+  Account.update({_id: req.params.admin_id}, {
+    role: req.body.role,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email
+  },function(err) {
+    if (err) {
+      res.status(501);
+      res.json(err);
+      return;
+    }
+    res.json({message: `Update of ${req.params.admin_id} is successful`}).status(200);
+    // maybe send something back
+  });
+});
+
+/**
+ * DELETE: delete an existing admin with given ID
+ * */
+router.delete('/admins/:admin_id', isAdmin, (req, res) => {
+  Account.remove({ _id: req.params.admin_id }, function(err) {
+    if (err) {
+      console.log(err);
+      res.status(400); // Bad request
+      res.json({
+        message: "Admin couldn't deleted."
+      });
+      return;
+    }
+    // no error so show updated games list
+    res.status(200); // Okay
+    res.json({
+      message: "Admin deleted"
+    });
+  });
+});
+
 
 /**
  * @description: Gets a date value and converts it to YYYY-MM-DD format string
