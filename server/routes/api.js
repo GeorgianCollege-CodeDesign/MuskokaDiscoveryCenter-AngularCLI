@@ -385,7 +385,7 @@ router.put('/admins/:admin_id', (req, res) => {
 /**
  * DELETE: delete an existing admin with given ID
  * */
-router.delete('/admins/:admin_id', isLoggedIn , (req, res) => {
+router.delete('/admins/:admin_id'/*, isLoggedIn*/ , (req, res) => {
   Account.remove({ _id: req.params.admin_id }, function(err) {
     if (err) {
       console.log(err);

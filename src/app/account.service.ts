@@ -18,6 +18,25 @@ export class AccountService {
       .catch(AccountService.handleError);
   }
 
+
+  getAccount(_id: string): any {
+    return this.http.get(`${this._accounts}/${_id}`)
+      .map(AccountService.extractData)
+      .catch(AccountService.handleError);
+  }
+
+  updateAccount(body: Object, _id: string): any {
+
+    let bodyString  = JSON.stringify(body); // Stringify payload
+    let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+    let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+    //swap the body with bodyString parameter
+    return this.http.put(`${this._accounts}/${_id}`, bodyString, options) // ...using post request
+      .map(AccountService.extractData)
+      .catch(AccountService.handleError);
+  }
+
   login(body: Object): any {
     // body needs to contain this object template {"username": "your user name here", "password" : "your password here"}
 

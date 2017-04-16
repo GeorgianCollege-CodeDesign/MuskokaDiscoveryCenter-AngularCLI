@@ -11,6 +11,10 @@ import { CamperDetailsComponent } from './camper-details/camper-details.componen
 import { HomeComponent } from './home/home.component';
 import { CamperRegisterComponent } from './camper-register/camper-register.component';
 import { CamperEditComponent } from "./camper-edit/camper-edit.component";
+import { AdminListComponent } from "./admin-list/admin-list.component";
+import { AdminRegisterComponent } from "./admin-register/admin-register.component";
+import { AdminEditComponent } from "./admin-edit/admin-edit.component";
+
 
 const appRoutes: Routes = [
   // add component pathing
@@ -19,6 +23,10 @@ const appRoutes: Routes = [
   { path: 'camper-details/:id', component: CamperDetailsComponent },
   { path: 'camper-edit/:id', component: CamperEditComponent },
   { path: 'camper-register', component: CamperRegisterComponent },
+  { path: 'admin-list', component: AdminListComponent },
+  { path: 'admin-register', component: AdminRegisterComponent },
+  { path: 'admin-edit/:id', component: AdminEditComponent },
+
   // default redirect
   { path: '', component: HomeComponent, pathMatch: 'full' }
 ];

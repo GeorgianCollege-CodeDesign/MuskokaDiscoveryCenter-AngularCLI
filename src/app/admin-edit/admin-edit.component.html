@@ -1,3 +1,66 @@
-<p>
-  admin-edit works!
-</p>
+<header>
+  <nav id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="/" class="muskoka-logo"><img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="100" /></a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse navbar-menubuilder">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="">Home</a></li>
+          <li><a href="../camper-register">Add Camper</a></li>
+          <li><a href="">Activate  Camper</a></li>
+          <li><a href="../camper-list">List of Campers</a></li>
+          <li><a href="../admin-list">Admin List</a></li>
+          <li><a class="logout" href="">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<!--Register Form-->
+
+
+<div class="register">
+  <form>
+    <h1>Edit Staff</h1>
+
+    <div class="form-group">
+      <input type="text" required="required" id="username" name="userName" [(ngModel)]="username" />
+      <label class="control-label" for="username">User Name</label><i class="bar">
+    </i>
+    </div>
+
+    <div class="form-group">
+      <input type="text" required="required" id="firstName" name="firstName" [(ngModel)]="firstName" />
+      <label class="control-label" for="firstName">First Name</label><i class="bar"></i>
+    </div>
+
+    <div class="form-group">
+      <input type="text" required="required" id="lastName" name="lastName" [(ngModel)]="lastName" />
+      <label class="control-label" for="lastName">Last Name</label><i class="bar"></i>
+    </div>
+
+    <div class="form-group">
+      <select type="text" required="required" id="role" name="role" [(ngModel)]="role" >
+        <option [value]="admin" selected>Admin</option>
+        <option [value]="staff">Staff</option>
+      </select>
+      <label class="control-label" for="role">Role:</label><i class="bar"></i>
+    </div>
+
+    <div class="form-group">
+      <input type="text" required="required" id="email" name="email" [(ngModel)]="email" />
+      <label class="control-label" for="email">Email</label><i class="bar"></i>
+    </div>
+
+  </form>
+  <div class="button-container">
+    <button class="regi-button" type="submit" (click)="updateAdmin()"><span>Update</span></button>
+    <a class="regi-button" href="../admin-list"><span>Go Back</span></a>
+    <input type="hidden" name="_id" id="_id" [(ngModel)]="_id" />
+  </div>
+</div>
