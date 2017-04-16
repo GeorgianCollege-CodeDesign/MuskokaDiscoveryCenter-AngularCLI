@@ -21,8 +21,19 @@
 </header>
 <main role="main">
   <article>
-    <section>
-      <table>
+<section class="signin-table">
+    <h1 class="text-center">Sign In</h1>
+  <div class="signin-card">
+  <!--for demo wrap-->
+  <h2>List of children</h2>
+  <div class="search">
+  <input class="search-input" placeholder="Search..."/>
+  <button class="fa fa-search search-button"></button>
+</div>
+
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
@@ -31,6 +42,13 @@
           <th>Delete</th>
           <th>Details</th>
         </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+
         <tr *ngFor="let camper of campers" >
           <td>{{ camper.camperFirstName }}</td>
           <td>{{ camper.camperLastName }}</td>
@@ -39,8 +57,13 @@
           <td><a href="#" (click)="deleteCamper(camper._id)">Delete</a></td>
           <td><a href="/camper-details/{{ camper._id }}">Details</a></td>
         </tr>
-      </table>
-    </section>
+
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div class="blue-space"></div>
+</section>
   </article>
 </main>
 
