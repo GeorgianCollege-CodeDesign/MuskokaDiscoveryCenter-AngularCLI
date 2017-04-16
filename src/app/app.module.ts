@@ -14,7 +14,7 @@ import { CamperEditComponent } from './camper-edit/camper-edit.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
 import { AdminEditComponent } from './admin-edit/admin-edit.component';
 import { AdminRegisterComponent } from './admin-register/admin-register.component';
-import { CamperSignOutComponent } from './camper-sign-out/camper-sign-outcomponent';
+import { CamperSignOutComponent } from './camper-sign-out/camper-sign-out.component';
 import { CamperSignInComponent } from './camper-sign-in/camper-sign-in.component';
 
 @NgModule({

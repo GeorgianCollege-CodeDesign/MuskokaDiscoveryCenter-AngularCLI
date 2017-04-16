@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
     this.camperService.getDailyCampers()
       .subscribe(data => {
         if (data.status === 200){
-          this.camperSignOutList = data[0].camper;
+          this.camperSignOutList = data.camper;
           console.log(data);
           this.camperSignInList = null;
         } else {

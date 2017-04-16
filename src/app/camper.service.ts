@@ -82,7 +82,7 @@ export class CamperService {
   camperSignOut(camperParent: string, _id: string) {
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
-    return this.http.post(`${this._camperSignIn}/${_id}`, {camperParent: camperParent},  options)
+    return this.http.post(`${this._camperSignOut}/${_id}`, {camperParent: camperParent},  options)
       .map(CamperService.extractData)
       .catch(CamperService.handleError);
   }

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CamperService } from '../camper.service';
+import {Router} from "@angular/router";
 
 
 @Component({
   selector: 'app-camper-register',
   templateUrl: './camper-register.component.html',
-  styleUrls: ['./camper-register.component.css']
+  styleUrls: ['./camper-register.component.css'],
+  providers: [ CamperService ]
 })
 
 export class CamperRegisterComponent implements OnInit {
@@ -22,7 +24,8 @@ export class CamperRegisterComponent implements OnInit {
   camperNotes: String;
   camperPickupList: Array<any>;
 
-  constructor(private camperService: CamperService) {
+  constructor(private camperService: CamperService,
+              private router: Router) {
     //this.getCampers();
   };
 
@@ -41,8 +44,8 @@ export class CamperRegisterComponent implements OnInit {
     console.log(this.startDate);
     console.log(new Date(this.startDate));
     //this.paymentDays = this.getBusinessDatesCount(new Date(this.startDate), new Date(this.endDate));
-    let tempStart = new Date(this.startDate);
-    let tempEnd = new Date(this.endDate);
+    let tempStart = new Date(`${this.startDate}T04:00:01`);
+    let tempEnd = new Date(`${this.endDate}T04:00:01`);
 
     let newCamper = {
       camperFirstName: this.camperFirstName,
@@ -60,6 +63,7 @@ export class CamperRegisterComponent implements OnInit {
     this.camperService.createCamper(newCamper)
       .subscribe(data => {
         console.log(data);
+        this.router.navigate(['./camper-list']);
       });
   }
 

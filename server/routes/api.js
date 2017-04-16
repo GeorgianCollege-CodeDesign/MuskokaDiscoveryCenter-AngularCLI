@@ -313,7 +313,7 @@ router.delete('/campers/:camper_id', isLoggedIn, (req, res) => {
  * */
 router.post('/camper-sign-in/:camper_id', isLoggedIn, (req, res) => {
   let camperGuardian = req.body.camperParent;
-  let todayDate = new Date().getTime(); // Format YYYY-MM-DD
+  let todayDate = ISOtoYYYYMMDD(new Date()); // Format YYYY-MM-DD
 
   Camper.findOneAndUpdate({_id: req.params.camper_id}, {
       $push: {
@@ -354,21 +354,35 @@ router.get('/daily-campers', isLoggedIn, (req, res) => {
     if (err){
       return res.json(err).status(501);
     }
-    let resultArray = [];
-    console.log(dailyAttendance);
     for(let i = 0; i < dailyAttendance.length; i++){
-      let day = dailyAttendance[i];
-      let tempDay = ISOtoYYYYMMDD(new Date(day.date));
+      let date =  dailyAttendance[i].date;
+
+      let year = date.getFullYear();
+      let month = date.getMonth() + 1;
+      let dt = date.getDate()+1;
+
+      let tempDt;
+      let tempMonth;
+
+      if (dt < 10) {
+        tempDt = '0' + dt;
+      }
+      else {
+        tempDt = dt.toString();
+      }
+      if (month < 10) {
+        tempMonth = '0' + month;
+      } else {
+        tempMonth = month.toString()
+      }
+      //console.log('ISO YEAR ' + year + '-' + tempMonth + '-' + tempDt);
+      let day = (year + '-' + tempMonth + '-' + tempDt);
       let today = ISOtoYYYYMMDD(new Date());
-      if (tempDay === today){
-        resultArray.push(day);
+      if (day === today){
+        return res.json(dailyAttendance[i]).status(200);
       }
     }
-    console.log(resultArray);
-    if (resultArray.length === 0)
-      res.status(210).send([]);
-    else
-      res.json(resultArray).status(200);
+    res.status(210).send([]);
   })
 });
 
@@ -376,40 +390,50 @@ router.get('/daily-campers', isLoggedIn, (req, res) => {
  * POST: get the camper ID and update the sign out date and signer
  * */
 router.post('/camper-sign-out/:camper_id', isLoggedIn, (req, res) => {
-  let todayDate = new Date().getTime();
+  let todayDate = ISOtoYYYYMMDD(new Date());
   let camperParent = req.body.camperParent;
+
   Camper.findOne({ _id: req.params.camper_id},
     (err, camper) => {
       if (err){
         return res.json(err).status(501);
       }
-      console.log(camper.pickupHistory[0].date);
-      console.log(camper.pickupHistory.length);
       for (let  i = 0; i < camper.pickupHistory.length; i++) {
-        console.log(camper.pickupHistory[i]);
-        if ((todayDate - camper.pickupHistory[i].date) < 86400000){
+        //console.log(camper.pickupHistory[i]);
+        if ((todayDate === camper.pickupHistory[i].date)){
           camper.pickupHistory[i].pickUp = camperParent;
         }
       }
       camper.save((err)=> {
         if(err) {
           console.error('Can not save the camper');
+          return;
         }
+        DailyAttendance.findOne({date: todayDate},
+          (err, dailyAttendance) => {
+            if (err) {
+              return res.json(err).status(501);
+            }
+
+            for(let i = 0; i < dailyAttendance.camper.length; i++) {
+              console.log(dailyAttendance.camper[i]._id);
+              console.log(camper._id);
+
+              if(dailyAttendance.camper[i]._id.toString() === camper._id.toString()){
+                console.log('dSADSADSAD');
+                dailyAttendance.camper[i] = camper;
+                console.log(dailyAttendance.camper[i]);
+              }
+
+            }
+            DailyAttendance.findOneAndUpdate({_id: dailyAttendance._id}, dailyAttendance, (err)=> {
+              if (err)
+                return console.log(err);
+              res.json(dailyAttendance).status(200);
+            });
+          })
       });
       //res.json(camper).status(200);
-      DailyAttendance.findOneAndUpdate({date: todayDate}, {
-          date: todayDate,
-          $push: {
-            camper: camper
-          }
-        }, {new: true, safe: true, upsert: true},
-        (err, dailyAttendance) => {
-          if (err) {
-            return res.json(err).status(501);
-          }
-
-          res.json(dailyAttendance).status(200);
-        });
     });
 });
 
@@ -558,6 +582,7 @@ function ISOtoYYYYMMDD(date) {
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
   let dt = date.getDate();
+
   let tempDt;
   let tempMonth;
 
@@ -565,13 +590,14 @@ function ISOtoYYYYMMDD(date) {
     tempDt = '0' + dt;
   }
   else {
-    tempDt = dt.toLocaleString();
+    tempDt = dt.toString();
   }
   if (month < 10) {
     tempMonth = '0' + month;
   } else {
-    tempMonth = month.toLocaleString()
+    tempMonth = month.toString()
   }
+  //console.log('ISO YEAR ' + year + '-' + tempMonth + '-' + tempDt);
   return (year + '-' + tempMonth + '-' + tempDt);
 }
 

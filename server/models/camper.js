@@ -55,7 +55,7 @@ let camperSchema = new mongoose.Schema({
   isActive: Boolean,
   pickupHistory: [
     {
-      date: Number,
+      date: String,
       pickUp: String,
       dropOff: String
     }
