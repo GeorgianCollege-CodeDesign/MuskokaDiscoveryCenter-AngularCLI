@@ -4,6 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Camper } from "../camper";
 import { CamperService } from "../camper.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'camper-list',
@@ -17,7 +18,8 @@ export class CamperListComponent implements OnInit {
   camper: Camper;
   errorMessage: any;
 
-  constructor(private camperService: CamperService){
+  constructor(private camperService: CamperService,
+              private router: Router){
   }
 
   ngOnInit() {
@@ -44,6 +46,7 @@ export class CamperListComponent implements OnInit {
       this.camperService.deleteCamper(_id).
       subscribe(response => {
         this.getCampers();
+        this.router.navigate(['./camper-list']);
       });
     }
   }

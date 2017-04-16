@@ -22,6 +22,7 @@
 <main role="main">
   <article>
     <section>
+      <a href="../admin-register" class="logout">Register New Admin</a>
       <table>
         <tr>
           <th>First Name</th>
@@ -37,7 +38,7 @@
           <td>{{ staff.username }}</td>
           <td>{{ staff.role }}</td>
           <td><a href="/admin-edit/{{ staff._id }}">Edit</a></td>
-          <td><a href="/delete/ {{ staff._id }}">Delete</a></td>
+          <td><a href="#" (click)="deleteAdmin(staff._id)">Delete</a></td>
         </tr>
       </table>
     </section>

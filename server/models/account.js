@@ -21,7 +21,7 @@ const accountSchema = new mongoose.Schema({
 
 accountSchema.plugin(plm);
 
-accountSchema.methods.setPassword = (password, conformPassword, cb) => {
+accountSchema.methods.updatePassword = (password, conformPassword, cb) => {
   if (!password) {
     return cb(new BadRequestError(options.missingPasswordError));
   }
