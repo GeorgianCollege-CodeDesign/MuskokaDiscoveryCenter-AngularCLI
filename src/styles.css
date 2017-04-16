@@ -143,7 +143,7 @@ nav ul li a {
 }
 
 main {
-  height: 100%;
+  height: auto;
 }
 
 table {
@@ -152,7 +152,7 @@ table {
 }
 
 article {
-  margin-top: 100px;
+  margin: 20px auto;
 }
 
 tr {
@@ -811,6 +811,8 @@ fieldset {
   color: #333;
 }
 .form-group select ~ .control-label,
+.form-group select:focus ~ .control-label,
+.form-group select:valid ~ .control-label,
 .form-group input:focus ~ .control-label,
 .form-group input:valid ~ .control-label,
 .form-group input.form-file ~ .control-label,
