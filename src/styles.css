@@ -321,13 +321,14 @@ margin-top: 0;
 }
 
 
+
 /*Split banner*/
 @media (min-width: 550px) {
   .col-sm-6 {
     width: 50%;
   }
 }
-.signout-side {
+/*.signout-side {
   background-image: url("assets/img/signout.jpg");
 }
 .signin-side {
@@ -343,6 +344,20 @@ margin-top: 0;
     background-image: url("assets/img/signin.jpg");
     height: 50vh;
   }
+}*/
+
+/*.signout-side {
+  background-color: rgba(173, 46, 46, 0.5);
+}
+.signin-side {
+  background-color: rgba(31, 86, 130, 0.5);
+}*/
+
+.signout-side {
+  background-color: rgb(173, 46, 46);
+}
+.signin-side {
+  background-color: rgb(31, 86, 130);
 }
 
 .split-pane {
@@ -358,6 +373,22 @@ margin-top: 0;
   .split-pane {
     height: 100%;
   }
+}
+#banner-logo {
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+  text-align: center;
+  vertical-align: baseline;
+  top: 0.5em;
+}
+@media(min-width: 500px) {
+  #banner-logo {
+    top: 5%;
+  }
+}
+#banner-logo img {
+  height: 10em;
 }
 .split-pane > div {
   position: relative;
