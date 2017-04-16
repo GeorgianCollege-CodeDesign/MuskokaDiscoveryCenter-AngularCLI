@@ -14,6 +14,7 @@ import { CamperEditComponent } from './camper-edit/camper-edit.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
 import { AdminEditComponent } from './admin-edit/admin-edit.component';
 import { AdminRegisterComponent } from './admin-register/admin-register.component';
+import { SignoutFormComponent } from './signout-form/signout-form.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AdminRegisterComponent } from './admin-register/admin-register.componen
     CamperEditComponent,
     AdminListComponent,
     AdminEditComponent,
-    AdminRegisterComponent
+    AdminRegisterComponent,
+    SignoutFormComponent
   ],
   imports: [
     BrowserModule,
