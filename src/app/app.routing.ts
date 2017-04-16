@@ -16,6 +16,7 @@ import { AdminRegisterComponent } from "./admin-register/admin-register.componen
 import { AdminEditComponent } from "./admin-edit/admin-edit.component";
 import { CamperSignOutComponent } from "./camper-sign-out/camper-sign-out.component";
 import { CamperSignInComponent } from "./camper-sign-in/camper-sign-in.component";
+import {CamperActiveComponent} from "./camper-active/camper-active.component";
 
 
 const appRoutes: Routes = [
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
   { path: 'admin-edit/:id', component: AdminEditComponent },
   { path: 'camper-sign-out/:id', component: CamperSignOutComponent },
   { path: 'camper-sign-in/:id', component: CamperSignInComponent },
+  { path: 'camper-active', component: CamperActiveComponent },
 
   // default redirect
   { path: '', component: HomeComponent, pathMatch: 'full' }

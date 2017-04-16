@@ -16,6 +16,7 @@ import { AdminEditComponent } from './admin-edit/admin-edit.component';
 import { AdminRegisterComponent } from './admin-register/admin-register.component';
 import { CamperSignOutComponent } from './camper-sign-out/camper-sign-out.component';
 import { CamperSignInComponent } from './camper-sign-in/camper-sign-in.component';
+import { CamperActiveComponent } from './camper-active/camper-active.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CamperSignInComponent } from './camper-sign-in/camper-sign-in.component
     AdminEditComponent,
     AdminRegisterComponent,
     CamperSignOutComponent,
-    CamperSignInComponent
+    CamperSignInComponent,
+    CamperActiveComponent
   ],
   imports: [
     BrowserModule,
