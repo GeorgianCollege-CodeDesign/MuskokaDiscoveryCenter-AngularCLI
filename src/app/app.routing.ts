@@ -23,6 +23,7 @@ const appRoutes: Routes = [
   // add component pathing
   { path: 'camper-list', component: CamperListComponent },
   { path: 'log-in', component: LogInComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'camper-details/:id', component: CamperDetailsComponent },
   { path: 'camper-edit/:id', component: CamperEditComponent },
   { path: 'camper-register', component: CamperRegisterComponent },
@@ -34,7 +35,7 @@ const appRoutes: Routes = [
   { path: 'camper-active', component: CamperActiveComponent },
 
   // default redirect
-  { path: '', component: HomeComponent, pathMatch: 'full' }
+  { path: '', component: LogInComponent, pathMatch: 'full' }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

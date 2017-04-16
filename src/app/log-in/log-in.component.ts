@@ -33,7 +33,7 @@ export class LogInComponent implements OnInit {
       .subscribe(
         data => {
          if(data.status == 200){
-           this.router.navigate(['./']);
+           this.router.navigate(['./home']);
          }
         });
 
