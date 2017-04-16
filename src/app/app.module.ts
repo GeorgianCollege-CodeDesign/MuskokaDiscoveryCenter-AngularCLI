@@ -11,6 +11,9 @@ import { CamperDetailsComponent } from './camper-details/camper-details.componen
 import { HomeComponent } from './home/home.component';
 import { CamperRegisterComponent } from './camper-register/camper-register.component';
 import { CamperEditComponent } from './camper-edit/camper-edit.component';
+import { AdminListComponent } from './admin-list/admin-list.component';
+import { AdminEditComponent } from './admin-edit/admin-edit.component';
+import { AdminRegisterComponent } from './admin-register/admin-register.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { CamperEditComponent } from './camper-edit/camper-edit.component';
     CamperDetailsComponent,
     HomeComponent,
     CamperRegisterComponent,
-    CamperEditComponent
+    CamperEditComponent,
+    AdminListComponent,
+    AdminEditComponent,
+    AdminRegisterComponent
   ],
   imports: [
     BrowserModule,

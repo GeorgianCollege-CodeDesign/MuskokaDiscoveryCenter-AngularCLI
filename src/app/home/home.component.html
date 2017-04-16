@@ -21,8 +21,8 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="">Home</a></li>
           <li><a href="../camper-register">Add Camper</a></li>
-          <li><a href="">Activate  Camper</a></li>
-          <li><a href="../camper-list">List of Campers</a></li>
+          <li><a href="">Active  Campers</a></li>
+          <li><a href="../camper-list">List of All Campers</a></li>
           <li><a href="">Admin List</a></li>
           <li><a class="logout" href="">Log Out</a></li>
         </ul>
@@ -39,7 +39,7 @@
         <div>Campers</div>
       </div>
       <a class="scroll" href="#signin">
-        <button id="kidin">Sign In</button>
+        <button id="kidin" (click)="getSignInList()">Sign In</button>
       </a>
     </div>
   </div>
@@ -50,7 +50,7 @@
         <div>Campers</div>
       </div>
       <a class="scroll" href="#signout">
-        <button id="kidout">Sign Out</button>
+        <button id="kidout" (click)="getSignOutList()">Sign Out</button>
       </a>
     </div>
   </div>
@@ -61,7 +61,7 @@
 <!--End of header-->
 
 
-<section id="signin" class="signin-table">
+<section id="signin" class="signin-table" *ngIf="camperSignInList">
     <h1 class="text-center">Sign In</h1>
   <div class="signin-card">
   <!--for demo wrap-->
@@ -85,20 +85,13 @@
   <div class="tbl-content">
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
-        <tr>
-          <td>John</td>
-          <td>Boo </td>
-          <td><input type="checkbox" class="checkbox">
-            Present</td>
 
-        </tr>
-        <tr>
-          <td>John</td>
-          <td>Boo </td>
-          <td><input type="checkbox" class="checkbox">
+        <tr *ngFor="let camper of camperSignInList">
+          <td>{{camper.camperFirstName}}</td>
+          <td>{{camper.camperLastName}}</td>
+          <td><input type="checkbox" class="checkbox" (click)="camperSignIn(camper._id)">
             Present</td>
         </tr>
-
 
       </tbody>
     </table>
@@ -110,7 +103,7 @@
 
 
 
-<section id="signout" class="signin-table">
+<section id="signout" class="signin-table" *ngIf="camperSignOutList">
     <h1 class="text-center">Sign out</h1>
   <div class="signin-card">
   <!--for demo wrap-->
@@ -134,21 +127,12 @@
   <div class="tbl-content">
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
-        <tr>
-          <td>John</td>
-          <td>Boo </td>
-          <td><input type="checkbox" class="checkbox">
-            Present</td>
-
-        </tr>
-        <tr>
-          <td>John</td>
-          <td>Boo </td>
-          <td><input type="checkbox" class="checkbox">
+        <tr *ngFor="let camper of camperSignOutList">
+          <td>{{camper.camperFirstName}}</td>
+          <td>{{camper.camperLastName}}</td>
+          <td><input type="checkbox" class="checkbox" (click)="camperSignOut(camper._id)">
             Present</td>
         </tr>
-
-
       </tbody>
     </table>
   </div>

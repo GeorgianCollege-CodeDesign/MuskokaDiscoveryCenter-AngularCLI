@@ -475,7 +475,21 @@ router.get('/daily-campers', (req, res) => {
     if (err){
       return res.json(err).status(501);
     }
-    res.json(dailyAttendance).status(200);
+    let resultArray = [];
+    console.log(dailyAttendance);
+    for(let i = 0; i < dailyAttendance.length; i++){
+      let day = dailyAttendance[i];
+      let tempDay = ISOtoYYYYMMDD(new Date(day.date));
+      let today = ISOtoYYYYMMDD(new Date());
+      if (tempDay === today){
+        resultArray.push(day);
+      }
+    }
+    console.log(resultArray);
+    if (resultArray.length === 0)
+      res.status(210).send([]);
+    else
+      res.json(resultArray).status(200);
   })
 });
 
@@ -520,5 +534,30 @@ router.post('/camper-sign-out/:camper_id', (req, res) => {
     });
 });
 
+/**
+ * @description: Gets a date value and converts it to YYYY-MM-DD format string
+ * @date: date parameter
+ * @return: YYYY-MM-DD format of the given date
+ * */
+function ISOtoYYYYMMDD(date) {
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let dt = date.getDate();
+  let tempDt;
+  let tempMonth;
+
+  if (dt < 10) {
+    tempDt = '0' + dt;
+  }
+  else {
+    tempDt = dt.toLocaleString();
+  }
+  if (month < 10) {
+    tempMonth = '0' + month;
+  } else {
+    tempMonth = month.toLocaleString()
+  }
+  return (year + '-' + tempMonth + '-' + tempDt);
+}
 
 module.exports = router;
