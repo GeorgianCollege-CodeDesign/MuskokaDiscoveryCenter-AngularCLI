@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CamperService} from "../camper.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ export class HomeComponent implements OnInit {
   camperSignInList: Array<any>;
   camperSignOutList: Array<any>;
 
-  constructor(private camperService: CamperService) { }
+  constructor(private camperService: CamperService,
+              private router: Router) { }
 
   ngOnInit() {
     this.camperSignInList = null;
@@ -33,15 +35,15 @@ export class HomeComponent implements OnInit {
   }
 
   camperSignIn(_id: string){
-
+    this.router.navigate([`/camper-sign-in/${_id}`]);
   }
 
   getSignOutList(){
     this.camperService.getDailyCampers()
       .subscribe(data => {
         if (data.status === 200){
-          this.camperSignOutList = data;
-          console.log(this.camperSignOutList);
+          this.camperSignOutList = data[0].camper;
+          console.log(data);
           this.camperSignInList = null;
         } else {
           this.camperSignInList = null;
@@ -51,6 +53,6 @@ export class HomeComponent implements OnInit {
   }
 
   camperSignOut(_id: string) {
-
+    this.router.navigate([`/camper-sign-out/${_id}`]);
   }
 }

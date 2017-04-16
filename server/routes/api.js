@@ -18,19 +18,21 @@ router.use((req, res, next) =>{
   next(); // make sure we go to the next routes and don't stop here
 });
 
+// FIXME: change the commented line to uncomment in prod
 function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
+  //if (req.isAuthenticated())
     return next();  // user has logged in already so continue to the next function
-  }
-  res.status(401).send({message: 'Not Authorized.'});
+  //res.status(401).send({message: 'Not Authorized.'});
 }
 
+// FIXME: change the commented line to uncomment in prod
 function isAdmin(req, res, next) {
   if (req.isAuthenticated()) {
-    if (req.user.passport.role === 'admin')
+    //if (req.user.passport.role === 'admin')
       return next();  // user has logged in already so continue to the next function
   }
-  res.status(401).send({message: 'Not Admin.'});
+  //res.status(401).send({message: 'Not Admin.'});
+  return next();
 }
 
 // test API call
@@ -118,7 +120,7 @@ router.post('/register', (req, res) =>{
 /**
  * GET: get all campers
  * */
-router.get('/campers', (req, res) => {
+router.get('/campers', isLoggedIn, (req, res) => {
 
   Camper.find((err, campers) => {
     if (err) {
@@ -137,7 +139,7 @@ router.get('/campers', (req, res) => {
 /**
  * GET: get specific camper with the given ID
  * */
-router.get('/campers/:camper_id', (req, res) => {
+router.get('/campers/:camper_id', isLoggedIn, (req, res) => {
   Camper.findById(req.params.camper_id, (err, camper) => {
     if (err) {
       console.log(err);
@@ -157,7 +159,7 @@ router.get('/campers/:camper_id', (req, res) => {
 /**
  * GET: get all the active campers
  **/
-router.get('/active-campers', (req, res) => {
+router.get('/active-campers', isLoggedIn, (req, res) => {
   Camper.find((err, campers) => {
     if (err) {
       console.log(err);
@@ -175,7 +177,10 @@ router.get('/active-campers', (req, res) => {
         let camper = campers[key];
         let startDate = new Date(camper.startDate).getTime();
         let endDate = new Date(camper.endDate).getTime();
-        let today = new Date().getTime();
+        let today = new Date();
+        let tempToday = `${ISOtoYYYYMMDD(today)}T04:00:01`;
+        today = new Date(tempToday);
+
         console.log(`first: ${today - startDate} - second:  ${endDate - today} - today ${endDate}`);
         // check if the end date is passed. if it's not push that camper to the active list
         if ((endDate - today) > 0) {
@@ -204,7 +209,7 @@ router.get('/active-campers', (req, res) => {
 /**
  * POST: create a new camper
  * */
-router.post('/campers', (req, res) => {
+router.post('/campers', isLoggedIn, (req, res) => {
   Camper.create({
     camperFirstName: req.body.camperFirstName,
     camperLastName: req.body.camperLastName,
@@ -240,7 +245,7 @@ router.post('/campers', (req, res) => {
 /**
  * PUT: update the existing camper with the given ID
  * */
-router.put('/campers/:camper_id', (req, res) => {
+router.put('/campers/:camper_id', isLoggedIn, (req, res) => {
   let camper = new Camper({
     _id: req.params.camper_id,
     camperFirstName: req.body.camperFirstName,
@@ -280,7 +285,7 @@ router.put('/campers/:camper_id', (req, res) => {
  * DELETE: delete the existing camper with the given ID
  * FIXME: uncomment the isLoggedIn in prod
  * */
-router.delete('/campers/:camper_id', /*isLoggedIn,*/ (req, res) => {
+router.delete('/campers/:camper_id', isLoggedIn, (req, res) => {
   console.log('This is camper delete.');
   Camper.remove({ _id: req.params.camper_id }, function(err) {
     if (err) {
@@ -306,7 +311,7 @@ router.delete('/campers/:camper_id', /*isLoggedIn,*/ (req, res) => {
  * POST: get the camper ID and update the sign in date and signer
  * write the signed in camper in daily attendance document.
  * */
-router.post('/camper-home/:camper_id', (req, res) => {
+router.post('/camper-sign-in/:camper_id', isLoggedIn, (req, res) => {
   let camperGuardian = req.body.camperParent;
   let todayDate = new Date().getTime(); // Format YYYY-MM-DD
 
@@ -344,7 +349,7 @@ router.post('/camper-home/:camper_id', (req, res) => {
 /**
  * GET: get all the campers who signed in today
  * */
-router.get('/daily-campers', (req, res) => {
+router.get('/daily-campers', isLoggedIn, (req, res) => {
   DailyAttendance.find((err, dailyAttendance) =>{
     if (err){
       return res.json(err).status(501);
@@ -370,7 +375,7 @@ router.get('/daily-campers', (req, res) => {
 /**
  * POST: get the camper ID and update the sign out date and signer
  * */
-router.post('/camper-sign-out/:camper_id', (req, res) => {
+router.post('/camper-sign-out/:camper_id', isLoggedIn, (req, res) => {
   let todayDate = new Date().getTime();
   let camperParent = req.body.camperParent;
   Camper.findOne({ _id: req.params.camper_id},
@@ -411,7 +416,7 @@ router.post('/camper-sign-out/:camper_id', (req, res) => {
 /**
  * GET: get the camper with given name and last name
  * */
-router.get('/camper/:firstName/:lastName', (req, res) => {
+router.get('/camper/:firstName/:lastName', isLoggedIn, (req, res) => {
   let firstName = req.params.firstName;
   let lastName = req.params.lastName;
 

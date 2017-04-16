@@ -11,7 +11,7 @@ export class CamperService {
   private _camper = '/api/campers';  // URL to web API
   private _activeCampers = '/api/active-campers';
   private _searchCamper = '/api/camper';
-  private _camperSignIn = '/api/camper-home';
+  private _camperSignIn = '/api/camper-sign-in';
   private _camperSignOut = '/api/camper-sign-out';
   private _dailyCampers = '/api/daily-campers';
 
@@ -71,18 +71,18 @@ export class CamperService {
       .catch(CamperService.handleError);
   }
 
-  camperSignIn(camperParent: string) {
+  camperSignIn(camperParent: string, _id: string) {
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
-    return this.http.post(this._camperSignIn, {camperParent: camperParent},  options)
+    return this.http.post(`${this._camperSignIn}/${_id}`, {camperParent: camperParent},  options)
       .map(CamperService.extractData)
       .catch(CamperService.handleError);
   }
 
-  camperSignOut(camperParent: string) {
+  camperSignOut(camperParent: string, _id: string) {
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
-    return this.http.post(this._camperSignOut, {camperParent: camperParent},  options)
+    return this.http.post(`${this._camperSignIn}/${_id}`, {camperParent: camperParent},  options)
       .map(CamperService.extractData)
       .catch(CamperService.handleError);
   }

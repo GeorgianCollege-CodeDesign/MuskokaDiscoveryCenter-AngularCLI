@@ -11,37 +11,35 @@
           <li><a href="">Home</a></li>
           <li><a href="../camper-register">Add Camper</a></li>
           <li><a href="">Active Campers</a></li>
-          <li><a href="../camper-list">List of Camper</a></li>
-          <li><a href="">Admin List</a></li>
+          <li><a href="../camper-list">List of Campers</a></li>
+          <li><a href="../admin-list">Admin List</a></li>
           <li><a class="logout" href="">Log Out</a></li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
-<main role="main">
-  <article>
-    <section>
-      <a href="../admin-register" class="logout">Register New Admin</a>
-      <table>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>User Name</th>
-          <th>Role</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-        <tr *ngFor="let staff of admins" >
-          <td>{{ staff.firstName }}</td>
-          <td>{{ staff.lastName }}</td>
-          <td>{{ staff.username }}</td>
-          <td>{{ staff.role }}</td>
-          <td><a href="/admin-edit/{{ staff._id }}">Edit</a></td>
-          <td><a href="#" (click)="deleteAdmin(staff._id)">Delete</a></td>
-        </tr>
-      </table>
-    </section>
-  </article>
-</main>
+
+
+<!--Sign in-->
+<div class="signout">
+  <form>
+    <h1>Sign In Camper</h1>
+    <div class="dropdown">
+      <label class="control-label" for="pickUp">Who is dropping off?</label><i class="bar"></i>
+      <select type="text" required="required" id="pickUp" name="pickUp" [(ngModel)]="selectedValue">
+        <option *ngFor="let picker of camperPickupList" [ngValue]="picker.firstName + ' ' + picker.lastName">{{picker.firstName + ' ' + picker.lastName}}</option>
+      </select>
+      <!--<i class="bar"></i>-->
+    </div>
+    <!--<div class="signature">
+      <h4>Signature</h4>
+      <p hidden></p>
+    </div>-->
+    <div class="button-container">
+      <button class="out-button" (click)="signIn()"><span>Submit</span></button>
+      <button class="out-button"><span>Cancel</span></button>
+    </div>
+  </form>
+</div>
 
