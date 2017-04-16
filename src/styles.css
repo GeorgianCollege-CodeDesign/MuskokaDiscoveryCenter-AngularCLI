@@ -382,14 +382,14 @@ margin-top: 0;
   vertical-align: baseline;
   top: 0.5em;
 }
-@media(min-width: 500px) {
-  #banner-logo {
-    top: 5%;
-  }
-}
 #banner-logo img {
-  height: 10em;
-}
+   height: 10em; 
+   } 
+   @media(max-width: 550px) { 
+     #banner-logo { 
+       display: none; 
+       } }
+       
 .split-pane > div {
   position: relative;
   top: 50%;

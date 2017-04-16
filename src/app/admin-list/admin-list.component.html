@@ -21,9 +21,20 @@
 </header>
 <main role="main">
   <article>
-    <section>
-      <a href="../admin-register" class="logout">Register New Admin</a>
-      <table>
+<section id="signin" class="signin-table" *ngIf="camperSignInList">
+  <a href="../admin-register" class="logout">Register New Admin</a>
+    <h1 class="text-center">Sign In</h1>
+  <div class="signin-card">
+  <!--for demo wrap-->
+  <h2>List of children</h2>
+  <div class="search">
+  <input class="search-input" placeholder="Search..."/>
+  <button class="fa fa-search search-button"></button>
+</div>
+
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
@@ -32,6 +43,13 @@
           <th>Edit</th>
           <th>Delete</th>
         </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+
         <tr *ngFor="let staff of admins" >
           <td>{{ staff.firstName }}</td>
           <td>{{ staff.lastName }}</td>
@@ -40,8 +58,13 @@
           <td><a href="/admin-edit/{{ staff._id }}">Edit</a></td>
           <td><a href="#" (click)="deleteAdmin(staff._id)">Delete</a></td>
         </tr>
-      </table>
-    </section>
+
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div class="blue-space"></div>
+</section>
   </article>
 </main>
 
