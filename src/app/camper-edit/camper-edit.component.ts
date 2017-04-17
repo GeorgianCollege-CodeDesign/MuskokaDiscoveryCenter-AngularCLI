@@ -19,7 +19,7 @@ export class CamperEditComponent implements OnInit {
   camperLastName: string= '';
   parentFirstName: string = '';
   parentLastName: string = '';
-  parentPhoneNumber : string = '';
+  parentPhoneNumber: string = '';
   paymentDays: number = 3;
   camperAge: number = 3;
   camperNotes: string = '';
@@ -67,7 +67,7 @@ export class CamperEditComponent implements OnInit {
   updateCamper(){
     let tempStart = new Date(this.startDate+'T20:00:00');
     let tempEnd = new Date(this.endDate+'T20:00:00');
-    console.log(tempStart);``
+    console.log(tempStart);
     console.log(tempEnd);
     let camper: Camper = {
       _id: this._id,
