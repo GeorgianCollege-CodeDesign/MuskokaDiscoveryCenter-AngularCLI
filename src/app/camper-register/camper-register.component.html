@@ -77,6 +77,19 @@
       <label class="control-label" for="end-date">To: </label><i class="bar"></i>
     </div>
 
+    <h2>Pick-Up List</h2>
+    <p>Who is Allowed to Pick Up This Camper</p>
+
+    <div class="form-group">
+      <input type="text" required="required" name="pickup-first-name" id="pickup-first-name" [(ngModel)]="camperPickupList.firstName" />
+      <label class="control-label" for="pickup-first-name">First Name</label><i class="bar"></i>
+    </div>
+
+    <div class="form-group">
+      <input type="text" required="required" name="pickup-last-name" id="pickup-last-name" [(ngModel)]="camperPickupList.lastName" />
+      <label class="control-label" for="pickup-last-name">Last Name</label><i class="bar"></i>
+    </div>
+
   </form>
   <div class="button-container">
     <button class="regi-button" (click)="addCamper()"><span>Add</span></button>
