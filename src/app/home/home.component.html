@@ -23,8 +23,8 @@
           <li><a href="../camper-register">Add Camper</a></li>
           <li><a href="../camper-active">Active Campers</a></li>
           <li><a href="../camper-list">List of All Campers</a></li>
-          <li><a href="../admin-list">Admin List</a></li>
-          <li><a class="logout" href="">Log Out</a></li>
+          <li *ngIf="userInfo && (userInfo.role === 'admin')"><a href="../admin-list">Admin List</a></li>
+          <li><a class="logout" href="#" (click)="logout()">Log Out</a></li>
         </ul>
       </div>
     </div>

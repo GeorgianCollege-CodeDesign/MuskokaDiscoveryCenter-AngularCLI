@@ -11,7 +11,7 @@ import {CookieService} from "angular2-cookie/core";
 })
 export class AdminListComponent implements OnInit {
 
-  userInfo: Object;
+  userInfo: any;
   admins: Array<any>;
 
   constructor(private accountService: AccountService,
@@ -20,13 +20,21 @@ export class AdminListComponent implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.cookieService.getObject('userInfo');
-    this.getAdmins();
+    console.log(this.userInfo);
+    if (!this.userInfo){
+      this.router.navigate(['./']);
+    } else {
+      if (this.userInfo.role !== 'admin'){
+        this.router.navigate(['./home']);
+      } else {
+        this.getAdmins();
+      }
+    }
   }
 
   getAdmins(){
     this.accountService.getAccounts()
       .subscribe(data => {
-        console.log(data);
         this.admins = data;
       });
   }
@@ -40,5 +48,15 @@ export class AdminListComponent implements OnInit {
         this.router.navigate(['./admin-list']);
       });
     }
+  }
+
+  logout(){
+    this.accountService.logOut()
+      .subscribe(data => {
+        if (data.status == 200){
+          this.cookieService.removeAll();
+          this.router.navigate(['./']);
+        }
+      });
   }
 }

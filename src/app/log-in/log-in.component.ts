@@ -16,6 +16,7 @@ export class LogInComponent implements OnInit {
   username: string;
   password: string;
   response: string;
+  userInfo: Object;
 
   constructor(
     private accountService: AccountService,
@@ -24,6 +25,10 @@ export class LogInComponent implements OnInit {
     private cookieService: CookieService) { }
 
   ngOnInit() {
+    this.userInfo = this.cookieService.getObject('userInfo');
+    if (this.userInfo){
+      this.router.navigate(['./home']);
+    }
   }
 
   login() {

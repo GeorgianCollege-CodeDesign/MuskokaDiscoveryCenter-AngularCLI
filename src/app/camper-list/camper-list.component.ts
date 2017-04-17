@@ -6,11 +6,12 @@ import { Camper } from "../camper";
 import { CamperService } from "../camper.service";
 import {Router} from "@angular/router";
 import {CookieService} from "angular2-cookie/core";
+import {AccountService} from "../account.service";
 
 @Component({
   selector: 'camper-list',
   templateUrl: './camper-list.component.html',
-  providers: [ CamperService, CookieService ]
+  providers: [ CamperService, CookieService, AccountService ]
 })
 
 export class CamperListComponent implements OnInit {
@@ -22,13 +23,17 @@ export class CamperListComponent implements OnInit {
 
   constructor(private camperService: CamperService,
               private router: Router,
-              private cookieService: CookieService){
+              private cookieService: CookieService,
+              private accountService: AccountService){
   }
 
   ngOnInit() {
     this.userInfo = this.cookieService.getObject('userInfo');
-    // Load comments
-    this.getCampers();
+    if (!this.userInfo){
+      this.router.navigate(['./']);
+    } else {
+      this.getCampers();
+    }
   }
 
   getCampers() {
@@ -53,5 +58,15 @@ export class CamperListComponent implements OnInit {
         this.router.navigate(['./camper-list']);
       });
     }
+  }
+
+  logout(){
+    this.accountService.logOut()
+      .subscribe(data => {
+        if (data.status == 200){
+          this.cookieService.removeAll();
+          this.router.navigate(['./']);
+        }
+      });
   }
 }
