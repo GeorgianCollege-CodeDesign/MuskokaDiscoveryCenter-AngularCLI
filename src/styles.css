@@ -631,7 +631,8 @@ div.signin-card{
 
 @media only screen and (max-width: 768px) {
     section.signin-table{
-  width: 90%;
+      width: 100%;
+    margin: 0 auto;
 }
 .signin-table .signin-table h1{
   font-size: 30px;
@@ -859,6 +860,29 @@ fieldset {
   max-width: 70%;
   margin: 0 auto;
 }
+}
+
+@media (max-width: 558px){
+.register {
+  max-width: 95%;
+  padding: 3rem 2rem 0;
+  border-radius: 1px;
+}
+.register form{
+  max-width: 90%;
+  margin: 0 auto;
+}
+section.signin-table h1{
+width:90%;
+   font-size: 2em;
+  color: #fff;
+  padding: 50px 0;
+}
+div.signin-card{
+  width: 100%;
+}
+.blue-space {
+  display: none;
 }
 
 
