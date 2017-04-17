@@ -8,10 +8,10 @@
       </div>
       <div class="collapse navbar-collapse navbar-menubuilder">
         <ul class="nav navbar-nav navbar-right">
-          <li><a [routerLink]="['../home']">Home</a></li>
-          <li><a [routerLink]="['../camper-register']">Add Camper</a></li>
-          <li><a [routerLink]="['../camper-active']">Active Campers</a></li>
-          <li><a [routerLink]="['../camper-list']">List of All Campers</a></li>
+          <li><a [routerLink]="['/home']">Home</a></li>
+          <li><a [routerLink]="['/camper-register']">Add Camper</a></li>
+          <li><a [routerLink]="['/camper-active']">Active Campers</a></li>
+          <li><a [routerLink]="['/camper-list']">List of All Campers</a></li>
           <li *ngIf="userInfo && (userInfo.role === 'admin')"><a href="../admin-list">Admin List</a></li>
           <li><a class="logout" href="#" (click)="logout()">Log Out</a></li>
         </ul>
@@ -80,18 +80,22 @@
     <h2>Pick-Up List</h2>
     <p>Who is Allowed to Pick Up This Camper</p>
 
-    <div class="pickup-list" *ngFor="let picker of camperPickupList; let i = index" >
-      <p class="pickup-member">Contact {{ i + 1 }}: </p>
-      <div class="form-group">
-        <input type="text" name="pickup-first-name" id="pickup-first-name" [(ngModel)]="picker.firstName"/>
-        <label class="control-label" for="pickup-first-name">First Name</label><i class="bar"></i>
+    <div class="pickup-list" *ngFor="let pickup of camperPickupList; let i = index" >
+      <div class="form-group col-sm-5">
+        <input type="text" required="required" name="pickup-first-name{{i}}" id="pickup-first-name{{i}}" [(ngModel)]="pickup.firstName" />
+        <label class="control-label" for="pickup-first-name{{i}}">First Name</label><i class="bar"></i>
       </div>
 
-      <div class="form-group">
-        <input type="text" name="pickup-last-name" id="pickup-last-name" [(ngModel)]="picker.lastName" />
-        <label class="control-label" for="pickup-last-name">Last Name</label><i class="bar"></i>
+      <div class="form-group col-sm-5">
+        <input type="text" required="required" name="pickup-last-name{{i}}" id="pickup-last-name{{i}}" [(ngModel)]="pickup.lastName" />
+        <label class="control-label" for="pickup-last-name{{i}}">Last Name</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group col-sm-2">
+        <button type="button" class="btn btn-danger" (click)="removeField(pickup)"><span>delete</span></button>
       </div>
     </div>
+  <button type="button" class="btn btn-success" (click)="addNewField()"><span>Add new</span></button>
 
     <!--<p>Add New Pick Up Contact: </p>-->
     <!--<div class="form-group">-->

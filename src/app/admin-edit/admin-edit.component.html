@@ -8,10 +8,10 @@
       </div>
       <div class="collapse navbar-collapse navbar-menubuilder">
         <ul class="nav navbar-nav navbar-right">
-          <li><a [routerLink]="['../home']">Home</a></li>
-          <li><a [routerLink]="['../camper-register']">Add Camper</a></li>
-          <li><a [routerLink]="['../camper-active']">Active Campers</a></li>
-          <li><a [routerLink]="['../camper-list']">List of All Campers</a></li>
+          <li><a [routerLink]="['/home']">Home</a></li>
+          <li><a [routerLink]="['/camper-register']">Add Camper</a></li>
+          <li><a [routerLink]="['/camper-active']">Active Campers</a></li>
+          <li><a [routerLink]="['/camper-list']">List of All Campers</a></li>
           <li *ngIf="userInfo && (userInfo.role === 'admin')"><a href="../admin-list">Admin List</a></li>
           <li><a class="logout" href="#" (click)="logout()">Log Out</a></li>
         </ul>

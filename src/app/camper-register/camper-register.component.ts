@@ -116,9 +116,9 @@ export class CamperRegisterComponent implements OnInit {
     this.counter++;
   }
 
-  removeLastField(camper){
+  removeField(camper){
     let index = this.camperPickupList.indexOf(camper);
-    this.camperPickupList.splice(index);
+    this.camperPickupList.splice(index,1);
     this.counter--;
   }
 

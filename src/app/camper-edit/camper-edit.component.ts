@@ -124,6 +124,18 @@ export class CamperEditComponent implements OnInit {
     return (year+'-' + tempMonth + '-'+tempDt);
   }
 
+  addNewField() {
+    this.camperPickupList.push({
+      firstName: '',
+      lastName: ''
+    });
+  }
+
+  removeField(camper){
+    let index = this.camperPickupList.indexOf(camper);
+    this.camperPickupList.splice(index,1);
+  }
+
   logout(){
     this.accountService.logOut()
       .subscribe(data => {

@@ -24,13 +24,3 @@
  });
 
  });
-
- $('#kidout').on('click', function () {
-   $('#signin').hide();
-   $('#signout').fadeIn();
- });
-
- $('#kidin').on('click', function () {
-   $('#signout').hide();
-   $('#signin').fadeIn();
- });
