@@ -81,21 +81,23 @@
     <p>Who is Allowed to Pick Up This Camper</p>
 
     <div *ngFor="let pickup of camperPickupList">
-      <h3>Parent/Guardian</h3>
 
-      <div class="form-group">
+      <div class="form-group col-sm-5">
         <input type="text" required="required" name="pickup-first-name{{counter}}" id="pickup-first-name{{counter}}" [(ngModel)]="pickup.firstName" />
         <label class="control-label" for="pickup-first-name{{counter}}">First Name</label><i class="bar"></i>
       </div>
 
-      <div class="form-group">
+      <div class="form-group col-sm-5">
         <input type="text" required="required" name="pickup-last-name{{counter}}" id="pickup-last-name{{counter}}" [(ngModel)]="pickup.lastName" />
         <label class="control-label" for="pickup-last-name{{counter}}">Last Name</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group col-sm-2">
+        <button type="button" class="btn btn-danger" (click)="removeLastField(pickup)"><span>delete</span></button>
       </div>
     </div>
 
     <button type="button" class="btn btn-success" (click)="addNewField()"><span>Add new</span></button>
-    <button type="button" class="btn btn-success" *ngIf="camperPickupList.length" (click)="removeLastField()"><span>delete</span></button>
 
   </form>
   <div class="button-container">
