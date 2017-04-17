@@ -26,6 +26,7 @@ export class CamperRegisterComponent implements OnInit {
   endDate: Date;
   camperNotes: String;
   camperPickupList: Array<any>;
+  counter: number;
 
   constructor(private camperService: CamperService,
               private router: Router,
@@ -42,6 +43,7 @@ export class CamperRegisterComponent implements OnInit {
         firstName: '',
         lastName: ''
       }];
+      this.counter = 1;
     }
   }
 
@@ -111,10 +113,12 @@ export class CamperRegisterComponent implements OnInit {
       firstName: '',
       lastName: ''
     });
+    this.counter++;
   }
 
   removeLastField(){
     this.camperPickupList.pop();
+    this.counter--;
   }
 
   logout(){

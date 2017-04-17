@@ -84,18 +84,18 @@
       <h3>Parent/Guardian</h3>
 
       <div class="form-group">
-        <input type="text" required="required" name="pickup-first-name" id="pickup-first-name" [(ngModel)]="pickup.firstName" />
-        <label class="control-label" for="pickup-first-name">First Name</label><i class="bar"></i>
+        <input type="text" required="required" name="pickup-first-name{{counter}}" id="pickup-first-name{{counter}}" [(ngModel)]="pickup.firstName" />
+        <label class="control-label" for="pickup-first-name{{counter}}">First Name</label><i class="bar"></i>
       </div>
 
       <div class="form-group">
-        <input type="text" required="required" name="pickup-last-name" id="pickup-last-name" [(ngModel)]="pickup.lastName" />
-        <label class="control-label" for="pickup-last-name">Last Name</label><i class="bar"></i>
+        <input type="text" required="required" name="pickup-last-name{{counter}}" id="pickup-last-name{{counter}}" [(ngModel)]="pickup.lastName" />
+        <label class="control-label" for="pickup-last-name{{counter}}">Last Name</label><i class="bar"></i>
       </div>
     </div>
 
     <button type="button" class="btn btn-success" (click)="addNewField()"><span>Add new</span></button>
-    <button type="button" class="btn btn-success" (click)="removeLastField()"><span>delete</span></button>
+    <button type="button" class="btn btn-success" *ngIf="camperPickupList.length" (click)="removeLastField()"><span>delete</span></button>
 
   </form>
   <div class="button-container">
