@@ -230,7 +230,7 @@ footer a:hover {
 }*/
 
 .background{
-  background: url("assets/img/water.jpg") no-repeat center center fixed; 
+  background: url("assets/img/water.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -385,13 +385,13 @@ margin-top: 0;
   top: 0.5em;
 }
 #banner-logo img {
-   height: 10em; 
-   } 
-   @media(max-width: 550px) { 
-     #banner-logo { 
-       display: none; 
+   height: 10em;
+   }
+   @media(max-width: 550px) {
+     #banner-logo {
+       display: none;
        } }
-       
+
 .split-pane > div {
   position: relative;
   top: 50%;
@@ -446,7 +446,8 @@ i{
   text-align: center;
   width: 100%;
   position: absolute;
-  top: 70%;
+  top: 50%;
+  padding-right: 9px;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -951,7 +952,7 @@ div.signin-card{
   width: 100%;
    height: 500px;
   padding: 3rem 5rem 0;
-  
+
 }
 /*form_ signout*/
 .signout form {
@@ -972,7 +973,7 @@ div.signin-card{
   height: 3rem;
   color: rgba(12, 34, 52, 1);
   background: none;
-  
+
 }
 .signout .dropdown .bar {
   position: relative;
@@ -1064,7 +1065,7 @@ div.signin-card{
   background-color:#fff;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   border:1px solid #eee;
-  
+
 }
 #detail h1 {
   text-align: center;
@@ -1078,7 +1079,7 @@ div.signin-card{
   margin: 0 auto;
   padding-bottom: 20px;
   height: 100%;
-  
+
 }
 
 #detail  th{
