@@ -1,23 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import {CamperService} from "../camper.service";
 import {Router} from "@angular/router";
+import {CookieService} from "angular2-cookie/core";
+import {userInfo} from "os";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [ CamperService, CookieService ]
 })
 export class HomeComponent implements OnInit {
 
   camperSignInList: Array<any>;
   camperSignOutList: Array<any>;
+  userInfo: Object;
 
   constructor(private camperService: CamperService,
-              private router: Router) { }
+              private router: Router,
+              private cookieService: CookieService) { }
 
   ngOnInit() {
     this.camperSignInList = null;
     this.camperSignOutList = null;
+    this.userInfo = this.cookieService.getObject('userInfo');
   }
 
   getSignInList(){

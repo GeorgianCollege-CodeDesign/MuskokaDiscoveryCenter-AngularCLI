@@ -5,11 +5,12 @@ import { Component, OnInit } from '@angular/core';
 import { Camper } from "../camper";
 import { CamperService } from "../camper.service";
 import {Router} from "@angular/router";
+import {CookieService} from "angular2-cookie/core";
 
 @Component({
   selector: 'camper-list',
   templateUrl: './camper-list.component.html',
-  providers: [ CamperService ]
+  providers: [ CamperService, CookieService ]
 })
 
 export class CamperListComponent implements OnInit {
@@ -17,12 +18,15 @@ export class CamperListComponent implements OnInit {
   campers: Camper[];
   camper: Camper;
   errorMessage: any;
+  userInfo: Object;
 
   constructor(private camperService: CamperService,
-              private router: Router){
+              private router: Router,
+              private cookieService: CookieService){
   }
 
   ngOnInit() {
+    this.userInfo = this.cookieService.getObject('userInfo');
     // Load comments
     this.getCampers();
   }

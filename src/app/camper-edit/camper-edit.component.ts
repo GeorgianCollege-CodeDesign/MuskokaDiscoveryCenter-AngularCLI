@@ -2,15 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {CamperService} from "../camper.service";
 import {Camper} from "../camper";
+import {CookieService} from "angular2-cookie/core";
 
 @Component({
   selector: 'app-camper-edit',
   templateUrl: './camper-edit.component.html',
-  styleUrls: ['./camper-edit.component.css']
+  styleUrls: ['./camper-edit.component.css'],
+  providers: [ CamperService, CookieService]
 })
 
 export class CamperEditComponent implements OnInit {
 
+  userInfo: Object;
   _id: string = '';
   camperFirstName: string = '';
   camperLastName: string= '';
@@ -29,9 +32,11 @@ export class CamperEditComponent implements OnInit {
   pickupHistory: Array<any>;  constructor(
     private activatedRoute: ActivatedRoute,
     private camperService: CamperService,
-    private router: Router) { }
+    private router: Router,
+    private cookieService: CookieService) { }
 
   ngOnInit() {
+    this.userInfo = this.cookieService.getObject('userInfo');
     this.activatedRoute.params.subscribe((params: Params) => {
       let camperID = params['id'];
       console.log(camperID);

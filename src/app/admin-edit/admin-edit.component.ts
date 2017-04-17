@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {AccountService} from "../account.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import {CookieService} from "angular2-cookie/core";
 
 @Component({
   selector: 'app-admin-edit',
   templateUrl: './admin-edit.component.html',
   styleUrls: ['./admin-edit.component.css'],
-  providers: [ AccountService ]
+  providers: [ AccountService, CookieService ]
 })
 export class AdminEditComponent implements OnInit {
+
+  userInfo: Object;
   _id: string;
   username: string;
   firstName: string;
@@ -21,9 +24,11 @@ export class AdminEditComponent implements OnInit {
 
   constructor(private accountService: AccountService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private cookieService: CookieService) { }
 
   ngOnInit() {
+    this.userInfo = this.cookieService.getObject('userInfo');
 
     this.activatedRoute.params.subscribe((params: Params) => {
       let adminID = params['id'];
