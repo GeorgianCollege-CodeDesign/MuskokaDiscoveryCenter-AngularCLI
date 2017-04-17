@@ -359,7 +359,7 @@ router.get('/daily-campers', isLoggedIn, (req, res) => {
 
       let year = date.getFullYear();
       let month = date.getMonth() + 1;
-      let dt = date.getDate()+1;
+      let dt = date.getDate();
 
       let tempDt;
       let tempMonth;
@@ -378,6 +378,7 @@ router.get('/daily-campers', isLoggedIn, (req, res) => {
       //console.log('ISO YEAR ' + year + '-' + tempMonth + '-' + tempDt);
       let day = (year + '-' + tempMonth + '-' + tempDt);
       let today = ISOtoYYYYMMDD(new Date());
+
       console.log('Day: ' + day);
       console.log('Today: ' + today);
       if (day === today){
