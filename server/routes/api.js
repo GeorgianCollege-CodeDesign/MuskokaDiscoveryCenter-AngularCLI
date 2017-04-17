@@ -601,4 +601,9 @@ function ISOtoYYYYMMDD(date) {
   return (year + '-' + tempMonth + '-' + tempDt);
 }
 
+router.get('/logout', function (req, res) {
+  req.logout();
+  res.json({message: 'Logging out successful.'}).status(200);
+});
+
 module.exports = router;

@@ -11,7 +11,7 @@ import {CookieService} from "angular2-cookie/core";
 })
 export class AdminRegisterComponent implements OnInit {
 
-  userInfo: Object;
+  userInfo: any;
   username: string;
   password: string;
   passwordConfirm: string;
@@ -29,6 +29,12 @@ export class AdminRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.cookieService.getObject('userInfo');
+    if (!this.userInfo && this.userInfo.role !== 'admin'){
+      this.router.navigate(['./']);
+    }
+    if (this.userInfo.role !== 'admin'){
+      this.router.navigate(['./home']);
+    }
   }
 
   createAccount(){
@@ -50,5 +56,15 @@ export class AdminRegisterComponent implements OnInit {
     } else {
       alert('Please match your password.');
     }
+  }
+
+  logout(){
+    this.accountService.logOut()
+      .subscribe(data => {
+        if (data.status == 200){
+          this.cookieService.removeAll();
+          this.router.navigate(['./']);
+        }
+      });
   }
 }

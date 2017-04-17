@@ -9,6 +9,7 @@ export class AccountService {
   private _accounts = '/api/admins';
   private _login = '/api/login';
   private _changePassword = '/api/change-password';
+  private _logOut = '/api//logout';
 
   constructor( private http: Http ) { }
 
@@ -73,6 +74,12 @@ export class AccountService {
 
     //swap the body with bodyString parameter
     return this.http.post(this._changePassword, {password: password, passwordConfirm: passwordConfirm}, options) // ...using post request
+      .map(AccountService.extractData)
+      .catch(AccountService.handleError);
+  }
+
+  logOut(){
+    return this.http.get(this._logOut)
       .map(AccountService.extractData)
       .catch(AccountService.handleError);
   }

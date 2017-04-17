@@ -3,12 +3,13 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {CamperService} from "../camper.service";
 import {Camper} from "../camper";
 import {CookieService} from "angular2-cookie/core";
+import {AccountService} from "../account.service";
 
 @Component({
   selector: 'app-camper-edit',
   templateUrl: './camper-edit.component.html',
   styleUrls: ['./camper-edit.component.css'],
-  providers: [ CamperService, CookieService]
+  providers: [ CamperService, CookieService, AccountService ]
 })
 
 export class CamperEditComponent implements OnInit {
@@ -28,40 +29,47 @@ export class CamperEditComponent implements OnInit {
   endDate: string;
   absenceDays: Array<any> = [];
   isActive: boolean;
+  pickupHistory: Array<any>;
 
-  pickupHistory: Array<any>;  constructor(
+  constructor(
     private activatedRoute: ActivatedRoute,
     private camperService: CamperService,
     private router: Router,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private accountService: AccountService) { }
 
   ngOnInit() {
     this.userInfo = this.cookieService.getObject('userInfo');
-    this.activatedRoute.params.subscribe((params: Params) => {
-      let camperID = params['id'];
-      console.log(camperID);
-      this._id = camperID;
-      this.camperService.getCamper(camperID)
-        .subscribe(res => {
 
-          let tempStart = new Date(res.startDate);
-          let tempEnd = new Date(res.endDate);
+    if (!this.userInfo){
+      this.router.navigate(['./']);
+    } else {
+      this.activatedRoute.params.subscribe((params: Params) => {
+        let camperID = params['id'];
+        console.log(camperID);
+        this._id = camperID;
+        this.camperService.getCamper(camperID)
+          .subscribe(res => {
 
-          this.camperFirstName = res.camperFirstName;
-          this.camperLastName = res.camperLastName;
-          this.parentFirstName = res.parentFirstName ;
-          this.parentLastName = res.parentLastName;
-          this.parentPhoneNumber = res.parentPhoneNumber;
-          this.paymentDays = res.paymentDays;
-          this.camperAge = res.camperAge;
-          this.camperNotes = res.camperNotes;
-          this.camperPickupList = res.camperPickupList;
-          this.startDate = this.ISOtoYYYYMMDD(tempStart);
-          this.endDate = this.ISOtoYYYYMMDD(tempEnd);
-          this.absenceDays = res.absenceDays;
-          this.isActive  = res.isActive;
-        });
-    });
+            let tempStart = new Date(res.startDate);
+            let tempEnd = new Date(res.endDate);
+
+            this.camperFirstName = res.camperFirstName;
+            this.camperLastName = res.camperLastName;
+            this.parentFirstName = res.parentFirstName ;
+            this.parentLastName = res.parentLastName;
+            this.parentPhoneNumber = res.parentPhoneNumber;
+            this.paymentDays = res.paymentDays;
+            this.camperAge = res.camperAge;
+            this.camperNotes = res.camperNotes;
+            this.camperPickupList = res.camperPickupList;
+            this.startDate = this.ISOtoYYYYMMDD(tempStart);
+            this.endDate = this.ISOtoYYYYMMDD(tempEnd);
+            this.absenceDays = res.absenceDays;
+            this.isActive  = res.isActive;
+          });
+      });
+    }
   }
 
   updateCamper(){
@@ -116,4 +124,13 @@ export class CamperEditComponent implements OnInit {
     return (year+'-' + tempMonth + '-'+tempDt);
   }
 
+  logout(){
+    this.accountService.logOut()
+      .subscribe(data => {
+        if (data.status == 200){
+          this.cookieService.removeAll();
+          this.router.navigate(['./']);
+        }
+      });
+  }
 }

@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import {CamperService} from "../camper.service";
 import {Router} from "@angular/router";
 import {CookieService} from "angular2-cookie/core";
+import {AccountService} from "../account.service";
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [ CamperService, CookieService ]
+  providers: [ CamperService, CookieService, AccountService ]
 })
 export class HomeComponent implements OnInit {
 
@@ -18,12 +19,17 @@ export class HomeComponent implements OnInit {
 
   constructor(private camperService: CamperService,
               private router: Router,
-              private cookieService: CookieService) { }
+              private cookieService: CookieService,
+              private accountService: AccountService) { }
 
   ngOnInit() {
     this.camperSignInList = null;
     this.camperSignOutList = null;
     this.userInfo = this.cookieService.getObject('userInfo');
+    console.log(this.userInfo);
+    if (!this.userInfo){
+      this.router.navigate(['./']);
+    }
   }
 
   getSignInList(){
@@ -60,5 +66,15 @@ export class HomeComponent implements OnInit {
 
   camperSignOut(_id: string) {
     this.router.navigate([`/camper-sign-out/${_id}`]);
+  }
+
+  logout(){
+    this.accountService.logOut()
+      .subscribe(data => {
+        if (data.status == 200){
+          this.cookieService.removeAll();
+          this.router.navigate(['./']);
+        }
+      });
   }
 }

@@ -11,7 +11,7 @@ import {CookieService} from "angular2-cookie/core";
 })
 export class AdminEditComponent implements OnInit {
 
-  userInfo: Object;
+  userInfo: any;
   _id: string;
   username: string;
   firstName: string;
@@ -30,19 +30,27 @@ export class AdminEditComponent implements OnInit {
   ngOnInit() {
     this.userInfo = this.cookieService.getObject('userInfo');
 
-    this.activatedRoute.params.subscribe((params: Params) => {
-      let adminID = params['id'];
-      console.log(adminID);
-      this._id = adminID;
-      this.accountService.getAccount(this._id)
-        .subscribe(data => {
-          this.username = data.username;
-          this.firstName = data.firstName;
-          this.lastName = data.lastName;
-          this.role = data.role;
-          this.email = data.email;
+    if (!this.userInfo && this.userInfo.role !== 'admin'){
+      this.router.navigate(['./']);
+    } else {
+      if (this.userInfo.role !== 'admin'){
+        this.router.navigate(['./home']);
+      } else {
+        this.activatedRoute.params.subscribe((params: Params) => {
+          let adminID = params['id'];
+          console.log(adminID);
+          this._id = adminID;
+          this.accountService.getAccount(this._id)
+            .subscribe(data => {
+              this.username = data.username;
+              this.firstName = data.firstName;
+              this.lastName = data.lastName;
+              this.role = data.role;
+              this.email = data.email;
+            });
         });
-    });
+      }
+    }
   }
 
   updateAdmin(){
@@ -62,4 +70,14 @@ export class AdminEditComponent implements OnInit {
       })
   }
 
+
+  logout(){
+    this.accountService.logOut()
+      .subscribe(data => {
+        if (data.status == 200){
+          this.cookieService.removeAll();
+          this.router.navigate(['./']);
+        }
+      });
+  }
 }
