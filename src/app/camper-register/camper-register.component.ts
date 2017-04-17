@@ -25,10 +25,7 @@ export class CamperRegisterComponent implements OnInit {
   startDate: Date;
   endDate: Date;
   camperNotes: String;
-  camperPickupList: Array<any> = [{
-    firstName: '',
-    lastName: ''
-  }];
+  camperPickupList: Array<any>;
 
   constructor(private camperService: CamperService,
               private router: Router,
@@ -40,6 +37,11 @@ export class CamperRegisterComponent implements OnInit {
     this.userInfo = this.cookieService.getObject('userInfo');
     if (!this.userInfo){
       this.router.navigate(['./']);
+    } else {
+      this.camperPickupList = [{
+        firstName: '',
+        lastName: ''
+      }];
     }
   }
 
