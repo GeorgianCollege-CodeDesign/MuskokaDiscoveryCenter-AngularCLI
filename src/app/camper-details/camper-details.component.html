@@ -20,21 +20,42 @@
   </nav>
 </header>
 <main role="main">
-  <article class="login">
-    <a href="/" class="muskoka-logo"><img src="../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="140" /></a>
-    <h1>Camper Details</h1>
-    <form action="">
-      <div>
-        <label for="user">Username</label>
-        <input name="username" id="user" placeholder="Username" type="text" required />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input name="password" id="password" placeholder="Password" type="text" required/>
-      </div>
-      <div>
-        <button type="submit" name="action">Login</button>
-      </div>
-    </form>
+  <article id="details">
+    <section id="detail">
+      
+      <h1>Camper's Detail</h1>
+      <table>
+        <tbody>
+        <tr>
+          <th>Parent/Guardian First Name</th> 
+            <td>{{ camper.parentFirstName }}</td>
+           </tr> 
+        <tr>
+          <th>Parent/Guardian Last Name</th>
+            <td>{{ camper.parentLastName }}</td>    
+        </tr>
+        <tr>
+          <th>Camper's First Name</th>
+            <td>{{ camper.camperFirstName }}</td>   
+        </tr>
+        <tr>
+          <th>Camper's Last Name</th>
+            <td>{{ camper.camperLastName }}</td>
+        </tr>
+        <tr>
+          <th>Guardian Phone Number</th>
+            <td>{{ camper.parentPhoneNumber }}</td>
+        </tr>
+        <tr>
+          <th>Camper's Age</th>
+            <td>{{ camper.camperAge }}</td> 
+        </tr>
+        <tr>
+          <th>Camper's Medical or Other Significant Notes</th>
+            <td>{{ camper.camperNotes }}</td> 
+        </tr>
+        </tbody>
+      </table>
+    </section>
   </article>
 </main>
