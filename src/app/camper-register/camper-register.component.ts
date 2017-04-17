@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CamperService } from '../camper.service';
 import {Router} from "@angular/router";
+import {CookieService} from "angular2-cookie/core";
 
 
 @Component({
   selector: 'app-camper-register',
   templateUrl: './camper-register.component.html',
   styleUrls: ['./camper-register.component.css'],
-  providers: [ CamperService ]
+  providers: [ CamperService, CookieService ]
 })
 
 export class CamperRegisterComponent implements OnInit {
+  userInfo: Object;
   campers: Array<any>;
   camperFirstName: String;
   camperLastName: String;
@@ -25,12 +27,12 @@ export class CamperRegisterComponent implements OnInit {
   camperPickupList: Array<any>;
 
   constructor(private camperService: CamperService,
-              private router: Router) {
-    //this.getCampers();
+              private router: Router,
+              private cookieService: CookieService) {
   };
 
   ngOnInit() {
-
+    this.userInfo = this.cookieService.getObject('userInfo');
   }
 
 

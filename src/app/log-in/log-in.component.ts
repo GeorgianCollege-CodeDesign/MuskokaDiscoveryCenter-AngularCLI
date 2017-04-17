@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from "../account.service";
 import {CamperService} from "../camper.service";
 import {Router} from "@angular/router";
+import {CookieService} from "angular2-cookie/core";
 
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.css'],
-  providers: [AccountService]
+  providers: [ AccountService, CookieService ]
 })
 
 export class LogInComponent implements OnInit {
@@ -19,7 +20,8 @@ export class LogInComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private camperService: CamperService,
-    private router: Router) { }
+    private router: Router,
+    private cookieService: CookieService) { }
 
   ngOnInit() {
   }
@@ -33,10 +35,10 @@ export class LogInComponent implements OnInit {
       .subscribe(
         data => {
          if(data.status == 200){
-           this.router.navigate(['./']);
+           this.cookieService.putObject('userInfo', data);
+           this.router.navigate(['./home']);
          }
         });
-
   }
 
 }
