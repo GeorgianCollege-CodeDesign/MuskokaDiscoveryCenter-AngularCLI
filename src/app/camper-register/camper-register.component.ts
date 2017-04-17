@@ -25,7 +25,10 @@ export class CamperRegisterComponent implements OnInit {
   startDate: Date;
   endDate: Date;
   camperNotes: String;
-  camperPickupList: Array<any>;
+  camperPickupList: Array<any> = [{
+    firstName: '',
+    lastName: ''
+  }];
 
   constructor(private camperService: CamperService,
               private router: Router,
@@ -99,6 +102,17 @@ export class CamperRegisterComponent implements OnInit {
       curDate.setDate(curDate.getDate() + 1);
     }
     return count;
+  }
+
+  addNewField() {
+    this.camperPickupList.push({
+      firstName: '',
+      lastName: ''
+    });
+  }
+
+  removeLastField(){
+    this.camperPickupList.pop();
   }
 
   logout(){

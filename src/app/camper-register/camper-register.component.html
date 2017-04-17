@@ -80,15 +80,22 @@
     <h2>Pick-Up List</h2>
     <p>Who is Allowed to Pick Up This Camper</p>
 
-    <div class="form-group">
-      <input type="text" required="required" name="pickup-first-name" id="pickup-first-name" [(ngModel)]="camperPickupList.firstName" />
-      <label class="control-label" for="pickup-first-name">First Name</label><i class="bar"></i>
+    <div *ngFor="let pickup of camperPickupList">
+      <h3>Parent/Guardian</h3>
+
+      <div class="form-group">
+        <input type="text" required="required" name="pickup-first-name" id="pickup-first-name" [(ngModel)]="pickup.firstName" />
+        <label class="control-label" for="pickup-first-name">First Name</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" required="required" name="pickup-last-name" id="pickup-last-name" [(ngModel)]="pickup.lastName" />
+        <label class="control-label" for="pickup-last-name">Last Name</label><i class="bar"></i>
+      </div>
     </div>
 
-    <div class="form-group">
-      <input type="text" required="required" name="pickup-last-name" id="pickup-last-name" [(ngModel)]="camperPickupList.lastName" />
-      <label class="control-label" for="pickup-last-name">Last Name</label><i class="bar"></i>
-    </div>
+    <button type="button" class="btn btn-success" (click)="addNewField()"><span>Add new</span></button>
+    <button type="button" class="btn btn-success" (click)="removeLastField()"><span>delete</span></button>
 
   </form>
   <div class="button-container">

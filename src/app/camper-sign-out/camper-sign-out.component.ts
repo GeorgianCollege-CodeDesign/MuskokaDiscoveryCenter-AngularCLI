@@ -64,4 +64,7 @@ export class CamperSignOutComponent implements OnInit {
       });
   }
 
+  goBack(){
+    this.router.navigate(['./home']);
+  }
 }
