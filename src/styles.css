@@ -19,7 +19,6 @@ nav li {
 body {
   height: 100%;
   width: 100%;
-  max-width: 1600px;
   background-color: #eee;
 }
 
@@ -144,6 +143,9 @@ nav ul li a {
 
 main {
   height: auto;
+}
+.screen{
+  min-height: 100vh;
 }
 
 table {
