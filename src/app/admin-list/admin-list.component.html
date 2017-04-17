@@ -12,7 +12,7 @@
           <li><a [routerLink]="['/camper-register']">Add Camper</a></li>
           <li><a [routerLink]="['/camper-active']">Active Campers</a></li>
           <li><a [routerLink]="['/camper-list']">List of All Campers</a></li>
-          <li *ngIf="userInfo && (userInfo.role === 'admin')"><a href="../admin-list">Admin List</a></li>
+          <li *ngIf="userInfo && (userInfo.role === 'admin')"><a [routerLink]="['/admin-list']">Admin List</a></li>
           <li><a class="logout" href="#" (click)="logout()">Log Out</a></li>
         </ul>
       </div>
@@ -54,8 +54,8 @@
           <td>{{ staff.lastName }}</td>
           <td>{{ staff.username }}</td>
           <td>{{ staff.role }}</td>
-          <td><a href="/admin-edit/{{ staff._id }}">Edit</a></td>
-          <td><a href="#" (click)="deleteAdmin(staff._id)">Delete</a></td>
+          <td><a [routerLink]="['/admin-edit/'+staff._id]">Edit</a></td>
+          <td><a href="" (click)="deleteAdmin(staff._id)">Delete</a></td>
         </tr>
 
       </tbody>
