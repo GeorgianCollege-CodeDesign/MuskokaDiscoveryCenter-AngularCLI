@@ -83,7 +83,7 @@
     <div class="pickup-list" *ngFor="let picker of camperPickupList; let i = index" >
       <p class="pickup-member">Contact {{ i + 1 }}: </p>
       <div class="form-group">
-        <input type="text" required="required" name="pickup-first-name" id="pickup-first-name" [(ngModel)]="picker.firstName" />
+        <input type="text" required="required" name="pickup-first-name" id="pickup-first-name" [(ngModel)]="picker.firstName"/>
         <label class="control-label" for="pickup-first-name">First Name</label><i class="bar"></i>
       </div>
 
