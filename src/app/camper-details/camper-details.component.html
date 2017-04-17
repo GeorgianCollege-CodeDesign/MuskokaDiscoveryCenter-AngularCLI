@@ -8,12 +8,12 @@
       </div>
       <div class="collapse navbar-collapse navbar-menubuilder">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="../home">Home</a></li>
-          <li><a href="../camper-register">Add Camper</a></li>
-          <li><a href="../camper-active">Active Campers</a></li>
-          <li><a href="../camper-list">List of Campers</a></li>
+          <li><a [routerLink]="['../home']">Home</a></li>
+          <li><a [routerLink]="['../camper-register']">Add Camper</a></li>
+          <li><a [routerLink]="['../camper-active']">Active Campers</a></li>
+          <li><a [routerLink]="['../camper-list']">List of All Campers</a></li>
           <li *ngIf="userInfo && (userInfo.role === 'admin')"><a href="../admin-list">Admin List</a></li>
-          <li><a class="logout" href="" (click)="logout()">Log Out</a></li>
+          <li><a class="logout" href="#" (click)="logout()">Log Out</a></li>
         </ul>
       </div>
     </div>
@@ -22,21 +22,21 @@
 <main role="main">
   <article id="details">
     <section id="detail">
-      
+
       <h1>Camper's Detail</h1>
       <table>
         <tbody>
         <tr>
-          <th>Parent/Guardian First Name</th> 
+          <th>Parent/Guardian First Name</th>
             <td>{{ camper.parentFirstName }}</td>
-           </tr> 
+           </tr>
         <tr>
           <th>Parent/Guardian Last Name</th>
-            <td>{{ camper.parentLastName }}</td>    
+            <td>{{ camper.parentLastName }}</td>
         </tr>
         <tr>
           <th>Camper's First Name</th>
-            <td>{{ camper.camperFirstName }}</td>   
+            <td>{{ camper.camperFirstName }}</td>
         </tr>
         <tr>
           <th>Camper's Last Name</th>
@@ -48,11 +48,11 @@
         </tr>
         <tr>
           <th>Camper's Age</th>
-            <td>{{ camper.camperAge }}</td> 
+            <td>{{ camper.camperAge }}</td>
         </tr>
         <tr>
           <th>Camper's Medical or Other Significant Notes</th>
-            <td>{{ camper.camperNotes }}</td> 
+            <td>{{ camper.camperNotes }}</td>
         </tr>
         </tbody>
       </table>
