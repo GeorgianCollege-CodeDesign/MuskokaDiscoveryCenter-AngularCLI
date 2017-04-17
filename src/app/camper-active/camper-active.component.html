@@ -27,8 +27,8 @@
   <!--for demo wrap-->
   <h2>Active Campers</h2>
   <div class="search">
-  <input class="search-input" placeholder="Search..."/>
-  <button class="fa fa-search search-button"></button>
+  <input class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"/>
+  <button class="fa fa-search search-button" (click)="search()"></button>
 </div>
 
   <div class="tbl-header">

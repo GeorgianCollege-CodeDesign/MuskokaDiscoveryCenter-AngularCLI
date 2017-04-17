@@ -18,13 +18,31 @@ export class CamperListComponent implements OnInit {
   title: 'Home Page';
   campers: Camper[];
   camper: Camper;
+  originalCampers: Camper[];
   errorMessage: any;
   userInfo: Object;
+  searchQuery: string;
 
   constructor(private camperService: CamperService,
               private router: Router,
               private cookieService: CookieService,
               private accountService: AccountService){
+  }
+
+  search(){
+    if (this.searchQuery.length === 0) {
+      this.campers = this.originalCampers;
+    } else {
+      this.campers = [];
+      for (let key = 0; key < this.originalCampers.length; key++) {
+        console.log(key);
+        console.log(this.originalCampers[key]);
+        if (this.originalCampers[key].camperFirstName.toLowerCase().includes(this.searchQuery.toLowerCase())) {
+          this.campers.push(this.originalCampers[key]);
+        }
+      }
+      console.log(this.campers);
+    }
   }
 
   ngOnInit() {
@@ -39,7 +57,7 @@ export class CamperListComponent implements OnInit {
   getCampers() {
     this.camperService.getCampers()
       .subscribe(
-        campers => this.campers = campers,
+        campers => {this.campers = campers; this.originalCampers = campers;},
         error =>  this.errorMessage = <any>error);
   }
 

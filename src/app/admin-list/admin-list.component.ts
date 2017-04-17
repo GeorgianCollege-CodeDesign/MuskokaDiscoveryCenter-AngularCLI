@@ -13,6 +13,8 @@ export class AdminListComponent implements OnInit {
 
   userInfo: any;
   admins: Array<any>;
+  originalAdmin: Array<any>;
+  searchQuery: string;
 
   constructor(private accountService: AccountService,
               private router: Router,
@@ -32,10 +34,27 @@ export class AdminListComponent implements OnInit {
     }
   }
 
+  search(){
+    if (this.searchQuery.length === 0) {
+      this.admins = this.originalAdmin;
+    } else {
+      this.admins = [];
+      for (let key = 0; key < this.originalAdmin.length; key++) {
+        console.log(key);
+        console.log(this.originalAdmin[key]);
+        if (this.originalAdmin[key].camperFirstName.toLowerCase().includes(this.searchQuery.toLowerCase())) {
+          this.admins.push(this.originalAdmin[key]);
+        }
+      }
+      console.log(this.admins);
+    }
+  }
+
   getAdmins(){
     this.accountService.getAccounts()
       .subscribe(data => {
         this.admins = data;
+        this.originalAdmin = data;
       });
   }
 

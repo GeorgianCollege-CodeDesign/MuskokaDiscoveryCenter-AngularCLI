@@ -15,6 +15,8 @@ export class CamperActiveComponent implements OnInit {
   userInfo: Object;
   campers: Array<any>;
   errorMessage: any;
+  searchQuery: string;
+  originalCampers: Array<any>;
 
   constructor(private camperService: CamperService,
               private router: Router,
@@ -30,10 +32,26 @@ export class CamperActiveComponent implements OnInit {
     }
   }
 
+  search(){
+    if (this.searchQuery.length === 0) {
+      this.campers = this.originalCampers;
+    } else {
+      this.campers = [];
+      for (let key = 0; key < this.originalCampers.length; key++) {
+        console.log(key);
+        console.log(this.originalCampers[key]);
+        if (this.originalCampers[key].camperFirstName.toLowerCase().includes(this.searchQuery.toLowerCase())) {
+          this.campers.push(this.originalCampers[key]);
+        }
+      }
+      console.log(this.campers);
+    }
+  }
+
   getActiveCampers() {
     this.camperService.getActiveCampers()
       .subscribe(
-        campers => this.campers = campers,
+        campers => {this.campers = campers; this.originalCampers = campers;},
         error =>  this.errorMessage = <any>error);
   }
 
