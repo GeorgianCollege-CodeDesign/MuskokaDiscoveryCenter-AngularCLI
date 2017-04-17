@@ -19,8 +19,8 @@ export class CamperEditComponent implements OnInit {
   parentPhoneNumber : string = '';
   paymentDays: number = 3;
   camperAge: number = 3;
-  camperNotes : string = '';
-  camperPickupList : Array<any> = [];
+  camperNotes: string = '';
+  camperPickupList: Array<any>;
   startDate: string;
   endDate: string;
   absenceDays: Array<any> = [];
