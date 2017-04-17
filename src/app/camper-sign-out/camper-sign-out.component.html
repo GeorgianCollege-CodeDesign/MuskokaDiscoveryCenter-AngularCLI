@@ -27,7 +27,7 @@
   <form>
     <h1>Sign Out Camper</h1>
     <div class="dropdown">
-      <label class="control-label" for="pickUp">Who Picked Up??</label>
+      <label class="control-label" for="pickUp">Who Picked Up {{ camperFirstName }}?</label>
       <i class="bar"></i>
       <select type="text" required="required" id="pickUp" name="pickUp" [(ngModel)]="selectedValue">
         <option *ngFor="let picker of camperPickupList" [ngValue]="picker.firstName + ' ' + picker.lastName">{{picker.firstName + ' ' + picker.lastName}}</option>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {CamperService} from "../camper.service";
+import {Camper} from '../camper';
 import {CookieService} from "angular2-cookie/core";
 import {AccountService} from "../account.service";
 
@@ -12,6 +13,7 @@ import {AccountService} from "../account.service";
 })
 export class CamperSignOutComponent implements OnInit {
   _id: string;
+  camperFirstName: string;
   camperPickupList: Array<any>;
   selectedValue: string;
   userInfo: Object;
@@ -38,6 +40,7 @@ export class CamperSignOutComponent implements OnInit {
       this._id = camperID;
       this.camperService.getCamper(camperID)
         .subscribe(res => {
+          this.camperFirstName = res.camperFirstName;
           this.camperPickupList = res.camperPickupList;
         });
     });
