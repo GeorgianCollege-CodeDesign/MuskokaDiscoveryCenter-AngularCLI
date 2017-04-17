@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {CamperService} from "../camper.service";
 import {Router} from "@angular/router";
 import {CookieService} from "angular2-cookie/core";
 import {AccountService} from "../account.service";
+import {PageScrollInstance, PageScrollService} from "ng2-page-scroll";
+import {DOCUMENT} from "@angular/platform-browser";
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [ CamperService, CookieService, AccountService ]
+  providers: [ CamperService, CookieService, AccountService, PageScrollService ]
 })
 export class HomeComponent implements OnInit {
 
@@ -20,7 +22,9 @@ export class HomeComponent implements OnInit {
   constructor(private camperService: CamperService,
               private router: Router,
               private cookieService: CookieService,
-              private accountService: AccountService) { }
+              private accountService: AccountService,
+              private pageScrollService: PageScrollService,
+              @Inject(DOCUMENT) private document: any) { }
 
   ngOnInit() {
     this.camperSignInList = null;
@@ -39,12 +43,25 @@ export class HomeComponent implements OnInit {
           this.camperSignInList = data;
           console.log(this.camperSignInList);
           this.camperSignOutList = null;
+          setTimeout(()=>{
+            this.goToSignIn();
+          },500);
         } else {
           this.camperSignInList = null;
           this.camperSignOutList = null;
         }
       });
   }
+
+  public goToSignIn(): void {
+    let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#signin');
+    this.pageScrollService.start(pageScrollInstance);
+  };
+
+  public goToSignOut(): void {
+    let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#signout');
+    this.pageScrollService.start(pageScrollInstance);
+  };
 
   camperSignIn(_id: string){
     this.router.navigate([`/camper-sign-in/${_id}`]);
@@ -55,8 +72,10 @@ export class HomeComponent implements OnInit {
       .subscribe(data => {
         if (data.status === 200){
           this.camperSignOutList = data.camper;
-          console.log(data);
           this.camperSignInList = null;
+          setTimeout(()=>{
+            this.goToSignOut();
+          },500);
         } else {
           this.camperSignInList = null;
           this.camperSignOutList = null;
