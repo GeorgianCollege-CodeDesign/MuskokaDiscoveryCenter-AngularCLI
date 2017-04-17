@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CamperService} from "../camper.service";
 import {Router} from "@angular/router";
 import {CookieService} from "angular2-cookie/core";
-import {userInfo} from "os";
+
 
 @Component({
   selector: 'app-home',
