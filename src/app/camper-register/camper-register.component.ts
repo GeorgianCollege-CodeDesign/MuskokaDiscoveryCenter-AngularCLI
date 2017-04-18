@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CamperService } from '../camper.service';
-import {Router} from "@angular/router";
-import {CookieService} from "angular2-cookie/core";
-import {AccountService} from "../account.service";
-
+import { Router } from "@angular/router";
+import { CookieService } from "angular2-cookie/core";
+import { AccountService } from "../account.service";
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-camper-register',
   templateUrl: './camper-register.component.html',
   styleUrls: ['./camper-register.component.css'],
-  providers: [ CamperService, CookieService, AccountService ]
+  providers: [ CamperService, CookieService, AccountService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy} ]
 })
 
 export class CamperRegisterComponent implements OnInit {
@@ -31,7 +31,8 @@ export class CamperRegisterComponent implements OnInit {
   constructor(private camperService: CamperService,
               private router: Router,
               private cookieService: CookieService,
-              private accountService: AccountService) {
+              private accountService: AccountService,
+              private _location: Location) {
   };
 
   ngOnInit() {
@@ -46,13 +47,6 @@ export class CamperRegisterComponent implements OnInit {
       this.counter = 1;
     }
   }
-
-
-  // get camper
-  getCampers() {
-    this.camperService.getCampers().subscribe(response => {this.campers = response});
-  }
-
 
   addCamper(){
     console.log(this.startDate);
@@ -120,6 +114,10 @@ export class CamperRegisterComponent implements OnInit {
     let index = this.camperPickupList.indexOf(camper);
     this.camperPickupList.splice(index,1);
     this.counter--;
+  }
+
+  goBack(){
+    this._location.back();
   }
 
   logout(){

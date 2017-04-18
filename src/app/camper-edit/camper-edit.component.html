@@ -110,7 +110,7 @@
 
   <div class="button-container">
     <button class="regi-button" type="submit" (click)="updateCamper()"><span>Update</span></button>
-    <a class="regi-button" href="/camper-list"><span>Go Back</span></a>
+    <a class="regi-button" [routerLink]="['/camper-list']"><span>Go Back</span></a>
     <input type="hidden" name="_id" id="_id" [(ngModel)]="_id" />
   </div>
 </div>
