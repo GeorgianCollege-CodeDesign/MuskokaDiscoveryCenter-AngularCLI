@@ -90,21 +90,41 @@
       <input type="text" required="required" name="pickup-last-name{{i}}" id="pickup-last-name{{i}}" [(ngModel)]="pickup.lastName" readonly/>
       <label class="control-label" for="pickup-last-name{{i}}">Last Name</label><i class="bar"></i>
     </div>
-
   </div>
-
-  <!--<p>Add New Pick Up Contact: </p>-->
-  <!--<div class="form-group">-->
-  <!--<input type="text" required="required" name="pickup-first-name" id="pickup-first-name" [(ngModel)]="camperPickupList.firstName" />-->
-  <!--<label class="control-label" for="pickup-first-name">First Name</label><i class="bar"></i>-->
-  <!--</div>-->
-
-  <!--<div class="form-group">-->
-  <!--<input type="text" required="required" name="pickup-last-name" id="pickup-last-name" [(ngModel)]="camperPickupList.lastName" />-->
-  <!--<label class="control-label" for="pickup-last-name">Last Name</label><i class="bar"></i>-->
-  <!--</div>-->
 
   <div class="button-container">
     <button type="button" class="regi-button" (click)="goBack()"><span>Go Back</span></button>
   </div>
 </div>
+
+<section class="signin-table">
+  <div class="signin-card">
+    <!--for demo wrap-->
+
+    <div class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Drop off</th>
+          <th>Pick Up</th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+        <tr *ngFor="let picker of pickupHistory" >
+          <td>{{ picker.date }}</td>
+          <td>{{ picker.dropOff }}</td>
+          <td>{{ picker.pickUp }}</td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--<div class="blue-space"></div>-->
+</section>
+

@@ -45,7 +45,6 @@ export class CamperDetailsComponent implements OnInit {
     } else {
       this.activatedRoute.params.subscribe((params: Params) => {
         let camperID = params['id'];
-        console.log(camperID);
         this._id = camperID;
         this.camperService.getCamper(camperID)
           .subscribe(res => {
@@ -66,6 +65,8 @@ export class CamperDetailsComponent implements OnInit {
             this.endDate = this.ISOtoYYYYMMDD(tempEnd);
             this.absenceDays = res.absenceDays;
             this.isActive  = res.isActive;
+            this.pickupHistory = res.pickupHistory;
+            console.log(res);
           });
       });
     }
