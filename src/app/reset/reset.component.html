@@ -7,30 +7,24 @@
             <div class="right">
               <img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="200">
             </div>
-            <h1>Log In</h1>
-            <form action="" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate class="login-form">
+            <h1>Forgot</h1>
+            <form action="" (ngSubmit)="f.form.valid && resetPassword()" #f="ngForm" novalidate class="login-form">
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                  <input name="username" id="user" class="form-control" placeholder="Username" type="text" [(ngModel)]="username" required
-                  />
-
-
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                  <input name="username" id="password" class="form-control" placeholder="Password" type="text" required [(ngModel)]="password"/>
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                  <input name="password" id="password" class="form-control" placeholder="Password" type="password" [(ngModel)]="password" required/>
+                  <input name="username" id="passwordConfirm" class="form-control" placeholder="Password Confirm" type="text" required [(ngModel)]="passwordConfirm"/>
                 </div>
               </div>
-              <div class="form-group btnn">
-                <button class="btn btn-primary btn-lg btn-block" type="submit" name="action">Login</button>
-              </div>
-              <div class="forget">
-                <p>Forget your password?</p>
-              </div>
 
+              <div class="form-group btnn">
+                <button class="btn btn-primary btn-lg btn-block" type="submit" name="action">Reset password</button>
+              </div>
             </form>
           </div>
           <!--/.login-->

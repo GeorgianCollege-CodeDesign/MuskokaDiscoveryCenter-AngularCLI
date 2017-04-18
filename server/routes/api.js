@@ -690,7 +690,7 @@ router.post('/forgot', function(req, res, next) {
 router.post('/reset/:token', function(req, res) {
   async.waterfall([
     function(done) {
-      User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+      Account.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
           return;
         }
@@ -740,7 +740,7 @@ router.post('/reset/:token', function(req, res) {
         'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
       };
       transporter.sendMail(mailOptions, function(err) {
-        res.json( { message: 'Success! Your password has been changed.'}).status(200);
+        res.json( { message: 'Success! Your password has been changed.' }).status(200);
         done(err);
       });
     }
