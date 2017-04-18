@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
           this.camperSignOutList = null;
           setTimeout(()=>{
             this.goToSignIn();
-          },500);
+          },200);
         } else {
           this.camperSignInList = null;
           this.camperSignOutList = null;
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
           this.camperSignInList = null;
           setTimeout(()=>{
             this.goToSignOut();
-          },500);
+          },200);
         } else {
           this.camperSignInList = null;
           this.camperSignOutList = null;

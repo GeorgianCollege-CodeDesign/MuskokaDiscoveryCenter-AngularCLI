@@ -22,7 +22,7 @@
 <main role="main">
   <article>
 <section class="signin-table">
-    <h1 class="text-center">Sign In</h1>
+    <h1 class="text-center">All Campers</h1>
   <div class="signin-card">
   <!--for demo wrap-->
   <h2>List of All Campers</h2>
@@ -55,7 +55,7 @@
           <td>{{ camper.parentPhoneNumber }}</td>
           <td><a [routerLink]="['/camper-edit/'+camper._id]">Edit</a></td>
           <td><a href="" (click)="deleteCamper(camper._id)">Delete</a></td>
-          <td><a [routerLink]="['/camper-detail/'+camper._id]">Details</a></td>
+          <td><a [routerLink]="['/camper-details/'+camper._id]">Details</a></td>
         </tr>
 
       </tbody>
