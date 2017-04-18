@@ -10,6 +10,9 @@ const passport = require('passport');
 const Account = require('../models/account');
 const Camper = require('../models/camper');
 const DailyAttendance = require('../models/daily-attandance');
+const async = require('async');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 
 // middleware to use for all requests
 router.use((req, res, next) =>{
@@ -609,4 +612,139 @@ router.get('/logout', function (req, res) {
   res.json({message: 'Logging out successful.'}).status(200);
 });
 
+
+/*---------------------------------------------------------------------------*/
+
+
+
+router.post('/forgot', function(req, res, next) {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        let token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      Account.findOne({ email: req.body.email }, function(err, user) {
+        if (!user) {
+         console.log(err)
+        }
+
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+
+       let transporter = nodemailer.createTransport({
+       service: 'gmail',
+         auth: {
+           user: 'muskoka.discovery.center@gmail.com',
+           pass: 'Muskoka2017'
+         }
+       });
+
+
+      // link to follow https://nodemailer.com/usage/using-gmail/
+
+      /*let transporter = nodemailer.createTransport({
+        host: "smtp-mail.outlook.com", // hostname
+        secureConnection: false, // TLS requires secureConnection to be false
+        port: 587, // port for secure SMTP
+        tls: {
+          ciphers:'SSLv3'
+        },
+        auth: {
+          user: '!!!your email address here !!!',
+          pass: '!!!your password here !!!'
+        }
+      });*/
+      let mailOptions = {
+        to: user.email,
+        from: 'passwordreset@demo.com',
+        subject: 'Node.js Password Reset',
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+        'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      };
+      transporter.sendMail(mailOptions, function(err) {
+        res.json({ message: 'An e-mail has been sent to ' + user.email + ' with further instructions.' }).status(200);
+        //done(err, 'done');
+      });
+    }
+  ], function(err) {
+    if (err) return console.log(err);
+  });
+});
+
+
+
+
+
+router.post('/reset/:token', function(req, res) {
+  async.waterfall([
+    function(done) {
+      Account.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+          return;
+        }
+
+        user.password = req.body.password;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+
+        user.save(function(err) {
+          req.logIn(user, function(err) {
+            done(err, user);
+          });
+        });
+      });
+    },
+    function(user, done) {
+
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'muskoka.discovery.center@gmail.com',
+          pass: 'Muskoka2017'
+        }
+      });
+
+
+      // link to follow https://nodemailer.com/usage/using-gmail/
+
+      /*let transporter = nodemailer.createTransport({
+        host: "smtp-mail.outlook.com", // hostname
+        secureConnection: false, // TLS requires secureConnection to be false
+        port: 587, // port for secure SMTP
+        tls: {
+          ciphers:'SSLv3'
+        },
+        auth: {
+          user: '!!!your email address here !!!',
+          pass: '!!!your password here !!!'
+        }
+      });*/
+
+      let mailOptions = {
+        to: user.email,
+        from: 'passwordreset@demo.com',
+        subject: 'Your password has been changed',
+        text: 'Hello,\n\n' +
+        'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+      };
+      transporter.sendMail(mailOptions, function(err) {
+        res.json( { message: 'Success! Your password has been changed.' }).status(200);
+        done(err);
+      });
+    }
+  ], function(err) {
+  });
+});
 module.exports = router;

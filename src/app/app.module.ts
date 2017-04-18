@@ -17,6 +17,8 @@ import { AdminRegisterComponent } from './admin-register/admin-register.componen
 import { CamperSignOutComponent } from './camper-sign-out/camper-sign-out.component';
 import { CamperSignInComponent } from './camper-sign-in/camper-sign-in.component';
 import { CamperActiveComponent } from './camper-active/camper-active.component';
+import { ForgotComponent } from './forgot/forgot.component';
+import { ResetComponent } from './reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { CamperActiveComponent } from './camper-active/camper-active.component';
     AdminRegisterComponent,
     CamperSignOutComponent,
     CamperSignInComponent,
-    CamperActiveComponent
+    CamperActiveComponent,
+    ForgotComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,

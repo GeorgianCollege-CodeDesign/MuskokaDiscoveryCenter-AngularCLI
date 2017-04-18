@@ -9,7 +9,10 @@ export class AccountService {
   private _accounts = '/api/admins';
   private _login = '/api/login';
   private _changePassword = '/api/change-password';
-  private _logOut = '/api//logout';
+  private _logOut = '/api/logout';
+  private _forgot = '/api/forgot';
+  private _reset = '/api/reset';
+
 
   constructor( private http: Http ) { }
 
@@ -80,6 +83,26 @@ export class AccountService {
 
   logOut(){
     return this.http.get(this._logOut)
+      .map(AccountService.extractData)
+      .catch(AccountService.handleError);
+  }
+
+  sendForgotEmail(email: string){
+    let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+    let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+    //swap the body with bodyString parameter
+    return this.http.post(this._forgot, {email: email}, options) // ...using post request
+      .map(AccountService.extractData)
+      .catch(AccountService.handleError);
+  }
+
+  resetPassword(password: string, token: string){
+    let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+    let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+    //swap the body with bodyString parameter
+    return this.http.post(`${this._reset}/${token}`, {password: password}, options) // ...using post request
       .map(AccountService.extractData)
       .catch(AccountService.handleError);
   }
