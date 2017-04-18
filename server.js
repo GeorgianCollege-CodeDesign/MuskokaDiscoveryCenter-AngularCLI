@@ -13,6 +13,9 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const bcrypt = require('bcrypt-nodejs');
+const async = require('async');
+const crypto = require('crypto');
 //const localStrategy = require('passport-local').Strategy;
 
 // Get our API routes

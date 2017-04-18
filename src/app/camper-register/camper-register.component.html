@@ -2,7 +2,7 @@
     <nav id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a href="../home" class="muskoka-logo"><img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="100" /></a>
+        <a [routerLink]="['/home']" class="muskoka-logo"><img src="../../assets/img/muskoka-logo-black.jpg" alt="Muskoka Discovery Centre Logo" height="100" /></a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
             </button>
       </div>
@@ -103,6 +103,6 @@
   <div class="button-container">
     <button class="regi-button" (click)="addCamper()"><span>Add</span></button>
     <button class="regi-button" (click)="clearForm()"><span>Reset</span></button>
-    <button type="button" class="regi-button" (click)="goBack()">Go Back</button>
+    <button type="button" class="regi-button" (click)="goBack()"><span>Go Back</span></button>
   </div>
 </div>

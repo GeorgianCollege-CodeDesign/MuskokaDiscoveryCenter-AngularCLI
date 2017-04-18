@@ -16,7 +16,9 @@ import { AdminRegisterComponent } from "./admin-register/admin-register.componen
 import { AdminEditComponent } from "./admin-edit/admin-edit.component";
 import { CamperSignOutComponent } from "./camper-sign-out/camper-sign-out.component";
 import { CamperSignInComponent } from "./camper-sign-in/camper-sign-in.component";
-import {CamperActiveComponent} from "./camper-active/camper-active.component";
+import { CamperActiveComponent } from "./camper-active/camper-active.component";
+import { ForgotComponent } from "./forgot/forgot.component";
+import { ResetComponent } from "./reset/reset.component";
 
 
 const appRoutes: Routes = [
@@ -33,6 +35,8 @@ const appRoutes: Routes = [
   { path: 'camper-sign-out/:id', component: CamperSignOutComponent },
   { path: 'camper-sign-in/:id', component: CamperSignInComponent },
   { path: 'camper-active', component: CamperActiveComponent },
+  { path: 'forgot', component: ForgotComponent },
+  { path: 'reset/:token', component: ResetComponent },
 
   // default redirect
   { path: '', component: LogInComponent, pathMatch: 'full' }
