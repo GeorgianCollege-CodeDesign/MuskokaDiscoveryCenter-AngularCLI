@@ -25,7 +25,7 @@
     <h1 class="text-center">Sign In</h1>
   <div class="signin-card">
   <!--for demo wrap-->
-  <h2><a href="../admin-register" class="logout">Register New Admin</a></h2>
+  <h2><a [routerLink]="['/admin-register']" class="logout">Register New Admin</a></h2>
   <div class="search">
   <input class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"/>
   <button class="fa fa-search search-button" (click)="search()"></button>
