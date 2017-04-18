@@ -89,15 +89,17 @@ fieldset {
 }
 .register1 .form-group .control-label {
   position: absolute;
-  top: 0.25rem;
   pointer-events: none;
   padding-left: 0.125rem;
   z-index: 1;
   color: #b3b3b3;
-  font-size: 1.7rem;
   font-weight: normal;
   -webkit-transition: all 0.28s ease;
   transition: all 0.28s ease;
+  font-size: 1.3rem;
+  color: gray;
+  top: -1.5rem;
+  left: 0;
 }
 .register1 .form-group .bar {
   position: relative;
