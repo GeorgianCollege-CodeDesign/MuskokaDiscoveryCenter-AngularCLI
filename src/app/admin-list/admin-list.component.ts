@@ -42,7 +42,7 @@ export class AdminListComponent implements OnInit {
       for (let key = 0; key < this.originalAdmin.length; key++) {
         console.log(key);
         console.log(this.originalAdmin[key]);
-        if (this.originalAdmin[key].camperFirstName.toLowerCase().includes(this.searchQuery.toLowerCase())) {
+        if (this.originalAdmin[key].firstName.toLowerCase().includes(this.searchQuery.toLowerCase())) {
           this.admins.push(this.originalAdmin[key]);
         }
       }
