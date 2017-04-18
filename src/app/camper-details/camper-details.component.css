@@ -1,3 +1,7 @@
+/*==========================
+Camper register1 page
+=======================*/
+
 .register1 h1 {
   font-size: 3rem;
   text-align: center;
@@ -8,7 +12,7 @@
   margin-top: 0;
 }
 
-.register1{
+.register1 {
   position: relative;
   max-width: 50%;
   margin: 5rem auto;
@@ -29,19 +33,28 @@
   right: 0;
   bottom: 0;
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
-  /*-webkit-transform: scale(0.98);
+  -webkit-transform: scale(0.98);
   transform: scale(0.98);
   -webkit-transition: -webkit-transform 0.28s ease-in-out;
   transition: -webkit-transform 0.28s ease-in-out;
   transition: transform 0.28s ease-in-out;
-  transition: transform 0.28s ease-in-out, -webkit-transform 0.28s ease-in-out;*/
+  transition: transform 0.28s ease-in-out, -webkit-transform 0.28s ease-in-out;
   z-index: -1;
 }
-/*
 .register1:hover::before {
   -webkit-transform: scale(1);
   transform: scale(1);
-}*/
+}
+
+.button-container {
+  text-align: center;
+}
+
+fieldset {
+  margin: 0 0 3rem;
+  padding: 0;
+  border: none;
+}
 
 
 .register1 .form-group {
@@ -83,6 +96,8 @@
   color: #b3b3b3;
   font-size: 1.7rem;
   font-weight: normal;
+  -webkit-transition: all 0.28s ease;
+  transition: all 0.28s ease;
 }
 .register1 .form-group .bar {
   position: relative;
@@ -97,6 +112,8 @@
   bottom: -0.0625rem;
   position: absolute;
   background: #337ab7;
+  -webkit-transition: left 0.28s ease, width 0.28s ease;
+  transition: left 0.28s ease, width 0.28s ease;
   z-index: 2;
 }
 .register1 .form-group input,
@@ -110,6 +127,8 @@
   line-height: 1.9;
   width: 100%;
   color: transparent;
+  -webkit-transition: all 0.28s ease;
+  transition: all 0.28s ease;
   box-shadow: none;
 }
 .register1 .form-group input[type="file"] {
@@ -119,31 +138,74 @@
   display: none;
 }
 .register1 .form-group select,
-.register1 .form-group input:focus,
-.register1 .form-group input:valid,
-.register1 .form-group input.form-file,
-.register1 .form-group input.has-value,
-.register1 .form-group textarea:focus,
-.register1 .form-group textarea:valid,
-.register1.form-group textarea.form-file,
-.register1 .form-group textarea.has-value {
+.register1 .form-group input,
+.register1 .form-group input,
+.register1 .form-group input,
+.register1 .form-group input,
+.register1 .form-group textarea,
+.register1 .form-group textarea,
+.register1.form-group textarea,
+.register1 .form-group textarea {
   color: #333;
 }
-
-
-.register1 .form-group select:focus,
-.register1 .form-group input:focus,
-.register1 .form-group textarea:focus {
+.form-group select ~ .control-label,
+.form-group select ~ .control-label,
+.form-group select ~ .control-label,
+.form-group input ~ .control-label,
+.form-group input ~ .control-label,
+.form-group input ~ .control-label,
+.form-group input ~ .control-label,
+.form-group textarea ~ .control-label,
+.form-group textarea ~ .control-label,
+.form-group textarea ~ .control-label,
+.form-group textarea ~ .control-label {
+  font-size: 1.3rem;
+  color: gray;
+  top: -1.5rem;
+  left: 0;
+}
+.register1 .form-group select,
+.register1 .form-group input,
+.register1 .form-group textarea {
   outline: none;
 }
-.register1 .form-group select:focus ~ .control-label,
-.register1 .form-group input:focus ~ .control-label,
-.register1 .form-group textarea:focus ~ .control-label {
+.register1 .form-group select ~ .control-label,
+.register1 .form-group input ~ .control-label,
+.register1 .form-group textarea ~ .control-label {
   color: #337ab7;
 }
-.register1 .form-group select:focus ~ .bar::before,
-.register1 .form-group input:focus ~ .bar::before,
-.register1 .form-group textarea:focus ~ .bar::before {
+.register1 .form-group select ~ .bar::before,
+.register1 .form-group input ~ .bar::before,
+.register1 .form-group textarea ~ .bar::before {
   width: 100%;
   left: 0;
+}
+
+@media (max-width: 768px){
+  .register1 {
+    position: relative;
+    max-width: 90%;
+    margin: 5rem auto;
+    background: #fff;
+    width: 100%;
+    padding: 3rem 5rem 0;
+    border-radius: 1px;
+  }
+  .register1 form{
+    max-width: 70%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 558px) {
+  .register1 {
+    max-width: 95%;
+    padding: 3rem 2rem 0;
+    border-radius: 1px;
+  }
+
+  .register1 form {
+    max-width: 90%;
+    margin: 0 auto;
+  }
 }
